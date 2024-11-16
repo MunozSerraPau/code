@@ -11,10 +11,14 @@
      * 
      * @return - Retorna una array amb tots els registres de champs de la base de dades o "null" si hi ha algun porblema.
      */
-    function selectModel(PDO $connexio, int $inici, int $champsPerPagines) {
+    function selectModel(PDO $connexio, int $inici, int $champsPerPagines, string $ordre) {
         
         try {
-            $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM campeones	LIMIT $inici, $champsPerPagines";
+
+            // Determina l'ordre segons la selecció de l'usuari
+            $ordreSQL = ($ordre == "Ascending") ? "ASC" : "DESC";
+
+            $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM campeones ORDER BY name $ordreSQL	LIMIT $inici, $champsPerPagines";
             $campeons = $connexio->prepare($sql);
 
             $campeons->execute();
@@ -61,10 +65,12 @@
      * 
      * @return - Retorna una array amb tots els registres de champs de la base de dades o "null" si hi ha algun porblema.
      */
-    function selectUsuariLogiModel(PDO $connexio, int $inici, int $champsPerPagines, string $usuari) {
+    function selectUsuariLogiModel(PDO $connexio, int $inici, int $champsPerPagines, string $usuari, $ordre) {
         
         try {
-            $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM campeones WHERE creator = :usuari	LIMIT $inici, $champsPerPagines";
+            $ordreSQL = ($ordre == "Ascending") ? "ASC" : "DESC";
+
+            $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM campeones WHERE creator = :usuari ORDER BY nom $ordreSQL LIMIT $inici, $champsPerPagines";
             $campeons = $connexio->prepare($sql);
 
             $campeons->execute(

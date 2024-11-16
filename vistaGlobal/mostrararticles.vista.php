@@ -2,28 +2,6 @@
 
 
 
-<script>
-    // Funcio per guardar el valor de la cookie
-    function setItemsPerPageCookie() {
-        const items = document.getElementById('itemsPerPage').value;
-        document.cookie = `champsPerPagina=${items}; path=/;`;
-        location.reload();
-    }
-
-    // Selecciona el valor desat de la cookie al carregar la pàgina
-    document.addEventListener("DOMContentLoaded", () => {
-        const cookieValue = document.cookie.split('; ')
-            .find(row => row.startsWith('champsPerPagina='))
-            ?.split('=')[1];
-
-        if (cookieValue) {
-            document.getElementById('itemsPerPage').value = cookieValue;
-        }
-    });
-</script>
-
-
-
 <?php if(!empty($nomUsuari)): ?>
     <div class="row my-4 justify-content-center">
         <div class="col-xs-12 col-md-6 col-lg-3 mb-4">
@@ -111,12 +89,14 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <select class="form-control" id="itemsPerPage" onchange="setItemsPerPageCookie()">
-                <option value="8">8</option>
-                <option value="12">12</option>
-                <option value="16">16</option>
-                <option value="20">20</option>
-            </select>
+            <form method="GET" >
+                <select class="form-control" name="champsPerPagina" onchange="this.form.submit()">
+                    <option value="8"  <?php if(isset($_COOKIE['champsPerPagina']) && $_COOKIE['champsPerPagina'] == 8) echo 'selected'; ?>>8</option>
+                    <option value="12" <?php if(isset($_COOKIE['champsPerPagina']) && $_COOKIE['champsPerPagina'] == 12) echo 'selected'; ?>>12</option>
+                    <option value="16" <?php if(isset($_COOKIE['champsPerPagina']) && $_COOKIE['champsPerPagina'] == 16) echo 'selected'; ?>>16</option>
+                    <option value="20" <?php if(isset($_COOKIE['champsPerPagina']) && $_COOKIE['champsPerPagina'] == 20) echo 'selected'; ?>>20</option>
+                </select>
+            </form>
         </div>
         <div class="col-md-4 text-center">
             <nav aria-label="Page navigation example">
@@ -149,10 +129,12 @@
             </nav>
         </div>
         <div class="col-md-4">
-            <select class="form-control">
-                <option>Ascending</option>
-                <option>Descending</option>
-            </select>
+            <form  method="POST">
+                <select class="form-control" name="ordre" onchange="this.form.submit()">
+                    <option value="Ascending" <?php if ($ordre == 'Ascending') echo 'selected'; ?>>Ascending</option>
+                    <option value="Descending" <?php if ($ordre == 'Descending') echo 'selected'; ?>>Descending</option>
+                </select>
+            </form>
         </div>
     </div>
 <?php endif; ?>

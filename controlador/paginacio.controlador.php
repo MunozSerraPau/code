@@ -12,9 +12,35 @@ if(isset($_SESSION['usuari'])) {
     
     $nomUsuari = $_SESSION['usuari'];
     echo "Paginacio" . $nomUsuari;
-    
-    // Definim els champs per pàgina (Per defecte son 8)
-    $champsPerPagina = isset($_COOKIE['champsPerPagina']) ? (int)$_COOKIE['champsPerPagina'] : 8; 
+
+    // Per defecte, l'ordenació serà ascendent
+    $ordre = 'Ascending'; 
+
+    if (isset($_COOKIE['ordre'])) {
+        // Si la cookie existeix, la utilitzem per ordenar
+        $ordre = $_COOKIE['ordre'];
+    }
+
+    // Si l'usuari canvia l'ordre mitjançant el formulari, actualitzem la cookie
+    if (isset($_POST['ordre'])) {
+        $ordre = $_POST['ordre'];
+        // Guardem la selecció a la cookie (expira en 30 dies)
+        setcookie('ordre', $ordre, time() + (30 * 24 * 60 * 60), '/');
+    }
+
+    // Si el formulari ha enviat un valor per 'champsPerPagina', actualitzem la cookie
+    if (isset($_GET['champsPerPagina'])) {
+        $champsPerPagina = (int)$_GET['champsPerPagina'];
+        if(in_array($champsPerPagina, [8, 12, 16, 20])) {
+            setcookie('champsPerPagina', $champsPerPagina, time() + 3600 * 24 * 30, "/"); // Valida la cookie durant 30 dies
+        } else {
+            $champsPerPagina = isset($_COOKIE['champsPerPagina']) ? (int)$_COOKIE['champsPerPagina'] : 8;
+        }
+        
+    } else {
+        // Si no s'ha enviat cap valor, utilitzem la cookie si existeix, o el valor per defecte
+        $champsPerPagina = isset($_COOKIE['champsPerPagina']) ? (int)$_COOKIE['champsPerPagina'] : 8;
+    }
 
     // Mira quina paguina estem situats
     $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
@@ -23,7 +49,7 @@ if(isset($_SESSION['usuari'])) {
     $inici = ($pagina > 1) ? ($pagina * $champsPerPagina - $champsPerPagina) : 0 ;
 
     // Obtenir els champs de la base de dades
-    $campeons = selectUsuariLogiModel($connexio, $inici, $champsPerPagina, $nomUsuari);
+    $campeons = selectUsuariLogiModel($connexio, $inici, $champsPerPagina, $nomUsuari, $ordre);
 
     // Obtenir el numero total de campions
     $totalChamps = (int) contarChampionsUsuariLoginModel($connexio, $nomUsuari);
@@ -33,6 +59,7 @@ if(isset($_SESSION['usuari'])) {
 
     // Comprovar si la pàgina és vàlida
     if ($pagina < 1 || $pagina > $numeroPagines) {
+        $pagina = 1;
         header("Location: ?pagina=1");
         exit;
     }
@@ -41,8 +68,34 @@ if(isset($_SESSION['usuari'])) {
 } else {
     echo "Paginacio de TOTS els CHAMPS";
     
-    // Definim els champs per pàgina (Per defecte son 8)
-    $champsPerPagina = isset($_COOKIE['champsPerPagina']) ? (int)$_COOKIE['champsPerPagina'] : 8; 
+    // Per defecte, l'ordenació serà ascendent
+    $ordre = 'Ascending'; 
+
+    if (isset($_COOKIE['ordre'])) {
+        // Si la cookie existeix, la utilitzem per ordenar
+        $ordre = $_COOKIE['ordre'];
+    }
+    
+    // Si l'usuari canvia l'ordre mitjançant el formulari, actualitzem la cookie
+    if (isset($_POST['ordre'])) {
+        $ordre = $_POST['ordre'];
+        // Guardem la selecció a la cookie (expira en 30 dies)
+        setcookie('ordre', $ordre, time() + (30 * 24 * 60 * 60), '/');
+    }
+
+    // Si el formulari ha enviat un valor per 'champsPerPagina', actualitzem la cookie
+    if (isset($_GET['champsPerPagina'])) {
+        $champsPerPagina = (int)$_GET['champsPerPagina'];
+        if(in_array($champsPerPagina, [8, 12, 16, 20])) {
+            setcookie('champsPerPagina', $champsPerPagina, time() + 3600 * 24 * 30, "/"); // Valida la cookie durant 30 dies
+        } else {
+            $champsPerPagina = isset($_COOKIE['champsPerPagina']) ? (int)$_COOKIE['champsPerPagina'] : 8;
+        }
+        
+    } else {
+        // Si no s'ha enviat cap valor, utilitzem la cookie si existeix, o el valor per defecte
+        $champsPerPagina = isset($_COOKIE['champsPerPagina']) ? (int)$_COOKIE['champsPerPagina'] : 8;
+    }
 
     // Mira quina paguina estem situats
     $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
@@ -51,7 +104,7 @@ if(isset($_SESSION['usuari'])) {
     $inici = ($pagina > 1) ? ($pagina * $champsPerPagina - $champsPerPagina) : 0 ;
     
     // Obtenir els champs de la base de dades
-    $campeons = selectModel($connexio, $inici, $champsPerPagina);
+    $campeons = selectModel($connexio, $inici, $champsPerPagina, $ordre);
 
     // Obtenir el numero total de campions
     $totalChamps = (int) contarChampionsModel($connexio);
@@ -61,6 +114,7 @@ if(isset($_SESSION['usuari'])) {
 
     // Comprovar si la pàgina és vàlida
     if ($pagina < 1 || $pagina > $numeroPagines) {
+        $pagina = 1;
         header("Location: ?pagina=1");
         exit;
     }
