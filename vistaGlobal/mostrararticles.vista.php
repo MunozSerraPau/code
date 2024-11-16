@@ -30,29 +30,52 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <select class="form-control">
-                <option>4</option>
-                <option>8</option>
-                <option>12</option>
-                <option>16</option>
-            </select>
+            <form method="GET" >
+                <select class="form-control" name="champsPerPagina" onchange="this.form.submit()">
+                    <option value="8"  <?php if(isset($_COOKIE['champsPerPagina']) && $_COOKIE['champsPerPagina'] == 8) echo 'selected'; ?>>8</option>
+                    <option value="12" <?php if(isset($_COOKIE['champsPerPagina']) && $_COOKIE['champsPerPagina'] == 12) echo 'selected'; ?>>12</option>
+                    <option value="16" <?php if(isset($_COOKIE['champsPerPagina']) && $_COOKIE['champsPerPagina'] == 16) echo 'selected'; ?>>16</option>
+                    <option value="20" <?php if(isset($_COOKIE['champsPerPagina']) && $_COOKIE['champsPerPagina'] == 20) echo 'selected'; ?>>20</option>
+                </select>
+            </form>
         </div>
         <div class="col-md-4 text-center">
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    <?php if($pagina == 0): ?>
+                        <li class="page-item"><a class="page-link disabled">Enrere</a></li>
+                    <?php elseif($pagina == 1): ?>
+                        <li class="page-item"><a class="page-link disabled">Enrere</a></li>
+                    <?php else: ?>
+                        <li class="page-item"><a class="page-link" href="?pagina=<?php echo $pagina - 1 ?>">Enrere</a></li>
+                    <?php endif; ?>
+
+
+                    <?php for($i = 1; $i <= $numeroPagines; $i++): ?>
+                        <?php if ($pagina === $i): ?>
+                            <li class='page-item disabled'><a class='page-link' href='?pagina=<?php echo $i ?>'><?php echo $i ?></a></li>
+                        <?php else: ?>
+                            <li class='page-item'><a class='page-link' href='?pagina=<?php echo $i ?>'><?php echo $i ?></a></li>
+                        <?php endif ?>
+                    <?php endfor ?>
+
+                    <?php if($pagina == 0): ?>
+                        <li class="page-item"><a class="page-link disabled">Següent</a></li>
+                    <?php elseif($pagina == $numeroPagines): ?>
+                        <li class="page-item"><a class="page-link disabled">Següent</a></li>
+                    <?php else: ?>
+                        <li class="page-item"><a class="page-link" href="?pagina=<?php echo $pagina + 1 ?>">Següent</a></li>
+                    <?php endif; ?>
                 </ul>
             </nav>
         </div>
         <div class="col-md-4">
-            <select class="form-control">
-                <option>Ascending</option>
-                <option>Descending</option>
-            </select>
+            <form  method="POST">
+                <select class="form-control" name="ordre" onchange="this.form.submit()">
+                    <option value="Ascending" <?php if ($ordre == 'Ascending') echo 'selected'; ?>>Ascending</option>
+                    <option value="Descending" <?php if ($ordre == 'Descending') echo 'selected'; ?>>Descending</option>
+                </select>
+            </form>
         </div>
     </div>
 <?php else: ?>
