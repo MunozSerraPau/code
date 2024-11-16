@@ -13,7 +13,13 @@
     <?php require_once '../env.php'; ?>
     <?php require_once BASE_PATH . "/controlador/usuaris.controlador.php" ?>
     <?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
-
+    <?php   /* if (isset($error) && $error == "UsuariConnectat"): ?>
+        <?php
+            // Redirigir a index.php
+            header('Location: ../index.php');
+            exit();
+        ?>
+    <?php endif; */ ?>
 
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
