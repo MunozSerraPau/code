@@ -1,6 +1,5 @@
 <?php
 // Pau Munoz Serrra
-session_start();
 
 require_once BASE_PATH . '/controlador/connexio.php';
 require_once BASE_PATH . "/model/usuaris.model.php";
@@ -35,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $contrasenya = htmlspecialchars($_POST['password']);
 
         $existeixUsuari = comprovarUsuari($connexio, $nickname, $contrasenya);
-        
+
         $error = $existeixUsuari;
 
 
@@ -64,18 +63,25 @@ function comprovarUsuari(PDO $connexio, string $username, string $password) {
     } elseif (empty($password)) {
         $error = "La contrasenya esta BUIDA!";
     } else {
-
+        
         // Obtenim la contrasenya
         $contra = modelNickNameExisteixLogin($connexio, $username);
         //mirem si la contrassenya es igual
         if(password_verify($password, $contra)) {
+            echo "!!!!CONTRASENYA CORRECTA!!!!";
+
             // Creem la session i guardem el nickname del Usuari
             $error = "UsuariConnectat";
-            $_SESSION['usuari'] = $username;
+            session_start();
+            setcookie($_SESSION['usuari'] = $username);
+            echo $_SESSION['usuari'] . "-------------------";
 
             // Si l'Usuari ha seleccionat "r", establecer cookies
             if (isset($_POST['recuerdame'])) {
-                
+                echo" !!!!!!!!!fefsef sefs ef sef sef!!!!!!!!";
+                setcookie('username', $username, time() + (86400 * 30), "/"); // 86400 = 1 día, la cookie durará 30 días
+                $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
+                setcookie('password', $encrypted_password, time() + (86400 * 30), "/"); // 86400 = 1 día, la cookie durará 30 días
             }
 
         } elseif($contra === "NoHiHaUsuari") {

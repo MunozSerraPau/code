@@ -1,7 +1,6 @@
 
 
-<?php if(isset($_SESSION['usuario'])): 
-    $nomUsuari = $_SESSION['usuari'] ?>
+<?php if(isset($_SESSION['usuario'])): ?>
     
     <nav class="navbar bg-body-tertiary fixed-top">
       <div class="container-fluid">

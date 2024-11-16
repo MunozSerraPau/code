@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./style/reset.css">
     <link rel="stylesheet" href="./style/style.css">
 </head>
-<body> 
+<body>
     <?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
     <?php require_once './env.php'; ?>
 

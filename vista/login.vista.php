@@ -32,7 +32,6 @@
 
     <div class="containerr">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
-
         <div class="container d-flex justify-content-center align-items-center min-vh-100">
             <!-- Ventana flotante: usaremos un card de Bootstrap para simular el panel flotante -->
             <!-- Si volem el fosn difuminat hem de ficar en class="bg-transparent" -->
@@ -65,18 +64,21 @@
                     </div>
 
                     <?php if (isset($error)): ?>
+                        <!-- Mirar si va -->
+                        <?php echo $_SESSION['usuari'] . "ççççççççççççççççç" ?>
+
+                        
                         <?php if (!empty($error) && $error != "UsuariConnectat"): ?>
                             <div class="alert alert-danger d-flex align-items-center" role="alert">
                                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                 <div><?php echo $error; ?></div>
                             </div>
-                        <?php elseif ($error == "UsuariConnectat"): ?>
-                            <?php
-                                // Redirigir a index.php
-                                header('Location: ../index.php');
-                                exit();
-                            ?>
-                        <?php endif; ?>
+                        <?php elseif ($error == "UsuariConnectat"): 
+                            // Redirigir a index.php
+                            echo "..." . header('Location: ../index.php');
+                            header('Location: ../index.php');
+                            exit();
+                        endif; ?>
                     <?php endif; ?>
 
                     <div class="d-grid mb-3">
@@ -105,52 +107,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-<?php /* 
-perfecto ara necessito unaltre codi php per guardar en una cooki el nom d'usuari i la contrasenya qeu es fica en aqeust codi "<form <?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>, method="POST">
-                    <h1 class="text-center text-primary mb-4">Iniciar sessió</h1>
-                    
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Usuari</label>
-                        <input 
-                            type="text" 
-                            id="username" 
-                            name="username" 
-                            class="form-control" 
-                            value="<?php if (isset($_POST['username'])) { echo $_POST['username']; } ?>">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Contrasenya</label>
-                        <input type="password" id="password" name="password" class="form-control">
-                    </div>
-
-                    <div class="form-check mb-3">
-                        <input type="checkbox" name="recordam" class="form-check-input" id="recordam">
-                        <label class="form-check-label" for="recordam">Recorda'm</label>
-                    </div>
-
-                    <div class="mb-3">
-                        <p class="form-text">Has oblidat la contrasenya? <a href="#" class="link-primary">Recuperar  </a></p>
-                    </div>
-
-                    <?php if (isset($error)): ?>
-                        <?php if (!empty($error) && $error != "UsuariConnectat"): ?>
-                            <div class="alert alert-danger d-flex align-items-center" role="alert">
-                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                <div><?php echo $error; ?></div>
-                            </div>
-                        <?php elseif ($error == "UsuariConnectat"): ?>
-                            <?php header('Location: ../index.php'); ?>
-                        <?php endif; ?>
-                    <?php endif; ?>
-
-                    <div class="d-grid mb-3">
-                        <button type="submit" class="btn btn-primary" name="login">Iniciar sesión</button>
-                    </div>
-
-                    <p class="text-center">No tens un compte? <a href="./signUp.php" class="link-primary">Registra't</a></p>
-                </form>" nomes si seleccionem l'opció de "Recordem" i ja qeu estas afegeix un camp per insertar una img
-
-*/ ?>

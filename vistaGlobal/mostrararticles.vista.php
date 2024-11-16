@@ -34,7 +34,7 @@
             </div>
         <?php endforeach; ?>
     </div>
-¡¡
+
     <div class="row">
         <div class="col-md-4">
             <form method="GET" >
