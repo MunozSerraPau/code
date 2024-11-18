@@ -46,7 +46,7 @@ function selectModel(PDO $connexio, int $inici, int $champsPerPagines, string $o
  */
 function contarChampionsModel(PDO $connexio) :int{
     try {
-        $sql = "SELECT FOUND_ROWS() as total";
+        $sql = "SELECT FOUND_ROWS() as total FROM campeones";
         $totalCampeons = $connexio->prepare($sql);
         $totalCampeons->execute();
 
@@ -103,7 +103,7 @@ function selectUsuariLogiModel(PDO $connexio, int $inici, int $champsPerPagines,
  */
 function contarChampionsUsuariLoginModel(PDO $connexio, string $usuari) :int{
     try {
-        $sql = "SELECT COUNT(*) as total FROM campeons WHERE creator = :usuari";
+        $sql = "SELECT COUNT(*) as total FROM campeones WHERE creator = :usuari";
         $stmt  = $connexio->prepare($sql);
         $stmt ->execute(
             array(

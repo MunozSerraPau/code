@@ -44,32 +44,24 @@ if(isset($_SESSION['usuari'])) {
         $champsPerPagina = isset($_COOKIE['champsPerPagina']) ? (int)$_COOKIE['champsPerPagina'] : 8;
     }
 
+    // Obtenir el numero total de campions
     $totalChamps = (int) contarChampionsUsuariLoginModel($connexio, $nomUsuari);
-    echo "-----------" . $totalChamps . "-----------";
 
     // Calcular el nombre total de pàgines
     $numeroPagines = ($totalChamps >= 0) ? ceil($totalChamps / $champsPerPagina) : 1;
-    echo "-----------" . $totalChamps . "-----------" . $numeroPagines;
 
     // Mira quina paguina estem situats
-    if (!isset($_GET['pagina']) || $_GET['pagina'] < 1 || $_GET['pagina'] > $numeroPagines) {
+    $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+
+    if ($pagina < 1 || $pagina > $numeroPagines) {
         $pagina = 1;
-    } else {
-        $pagina = $_GET['pagina'];
     }
-
-    echo $pagina . "-----------" . $totalChamps . "-----------" . $numeroPagines;
-
 
     // Calcular l'inici per a la consulta
     $inici = ($pagina > 1) ? ($pagina * $champsPerPagina - $champsPerPagina) : 0 ;
 
     // Obtenir els champs de la base de dades
     $campeons = selectUsuariLogiModel($connexio, $inici, $champsPerPagina, $nomUsuari, $ordre);
-
-
-
-    echo $pagina . "-----------" . $totalChamps . "-----------" . $numeroPagines;
 
 
 } else {

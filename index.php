@@ -12,7 +12,12 @@
 <body>
     <?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
     <?php require_once './env.php'; ?>
-
+    <?php
+        if(isset($_SESSION['usuari'])) {
+            $nomUsuari = $_SESSION['usuari'];
+            echo "HOLAAAAA" . $nomUsuari;
+        }
+    ?>
 
     
     <div class="containerr">
@@ -22,6 +27,8 @@
             <h1 class="text-white text-center"> INDEX </h1>
             <?php include BASE_PATH . "/vistaGlobal/mostrararticles.vista.php" ?>
         </div>
+
+        
 
         <?php include BASE_PATH . "/vistaGlobal/footer.vista.php" ?>
 
