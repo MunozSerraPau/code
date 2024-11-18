@@ -13,13 +13,7 @@
     <?php require_once '../env.php'; ?>
     <?php require_once BASE_PATH . "/controlador/usuaris.controlador.php" ?>
     <?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
-    <?php   /* if (isset($error) && $error == "UsuariConnectat"): ?>
-        <?php
-            // Redirigir a index.php
-            header('Location: ../index.php');
-            exit();
-        ?>
-    <?php endif; */ ?>
+    
 
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -65,7 +59,6 @@
 
                     <?php if (isset($error)): ?>
                         <!-- Mirar si va -->
-                        <?php echo $_SESSION['usuari'] . "!!!!!" ?>
 
                         
                         <?php if (!empty($error) && $error != "UsuariConnectat"): ?>
@@ -73,11 +66,7 @@
                                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                 <div><?php echo $error; ?></div>
                             </div>
-                        <?php elseif ($error == "UsuariConnectat"): 
-                            // Redirigir a index.php
-                            header('Location: ../index.php');
-                            exit();
-                        endif; ?>
+                        <?php endif; ?>
                     <?php endif; ?>
 
                     <div class="d-grid mb-3">

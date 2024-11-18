@@ -1,10 +1,11 @@
 <?php
 // Pau Munoz Serrra
 
-require_once BASE_PATH . '/controlador/connexio.php';
-require_once BASE_PATH . "/model/usuaris.model.php";
 
+require_once BASE_PATH . "/model/usuaris.model.php";
+require_once BASE_PATH . '/controlador/connexio.php';
 $connexio = connexio();
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // mira si ens han passat parametre per afegir un nou usuari
@@ -34,9 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $contrasenya = htmlspecialchars($_POST['password']);
 
         $existeixUsuari = comprovarUsuari($connexio, $nickname, $contrasenya);
-
-        $error = $existeixUsuari;
-
+        if ($existeixUsuari === "UsuariConnectat") {
+            header("Location: ../");
+            exit();
+        } else {
+            $error = $existeixUsuari;
+        }
 
     } else if (isset($_POST['canviContrasenya'])) {
         //guardem les dades i canviem la contrasenye
@@ -73,7 +77,7 @@ function comprovarUsuari(PDO $connexio, string $username, string $password) {
             // Creem la session i guardem el nickname del Usuari
             $error = "UsuariConnectat";
             session_start();
-            setcookie($_SESSION['usuari'] = $username);
+            $_SESSION['usuari'] = $username;
             echo $_SESSION['usuari'] . "-------------------";
 
             // Si l'Usuari ha seleccionat "r", establecer cookies
@@ -81,7 +85,7 @@ function comprovarUsuari(PDO $connexio, string $username, string $password) {
                 setcookie('username', $username, time() + (86400 * 30), "/"); // 86400 = 1 día, la cookie durará 30 días
                 setcookie('password', $password, time() + (86400 * 30), "/"); // 86400 = 1 día, la cookie durará 30 días
             }
-            // header('Location: ../index.php');
+            return $error;
         } elseif($contra === "NoHiHaUsuari") {
             $error = "No hi ha cap Usuari amb aquest NICKNAME";
             unset($_POST['username']);

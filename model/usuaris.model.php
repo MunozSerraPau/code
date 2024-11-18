@@ -1,6 +1,11 @@
 <?php 
 // Pau Muñoz Serra
 
+
+// require_once BASE_PATH . "/controlador/connexio.php";
+// $connexio = connexio();
+
+
 // Comprova si l'Usuari existeix i si es el cas ens retorna la seva contrasenya encriptada
 function modelNickNameExisteixLogin(PDO $connexio, string $username) {
     try {

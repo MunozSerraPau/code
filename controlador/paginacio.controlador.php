@@ -3,10 +3,12 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require_once BASE_PATH . '/controlador/connexio.php';
-require_once BASE_PATH . "/model/paginacio.model.php";
 
+
+require_once BASE_PATH . "/model/paginacio.model.php";
+require_once BASE_PATH . "/controlador/connexio.php";
 $connexio = connexio();
+
 
 if(isset($_SESSION['usuari'])) {
     
@@ -42,8 +44,22 @@ if(isset($_SESSION['usuari'])) {
         $champsPerPagina = isset($_COOKIE['champsPerPagina']) ? (int)$_COOKIE['champsPerPagina'] : 8;
     }
 
+    $totalChamps = (int) contarChampionsUsuariLoginModel($connexio, $nomUsuari);
+    echo "-----------" . $totalChamps . "-----------";
+
+    // Calcular el nombre total de pàgines
+    $numeroPagines = ($totalChamps >= 0) ? ceil($totalChamps / $champsPerPagina) : 1;
+    echo "-----------" . $totalChamps . "-----------" . $numeroPagines;
+
     // Mira quina paguina estem situats
-    $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+    if (!isset($_GET['pagina']) || $_GET['pagina'] < 1 || $_GET['pagina'] > $numeroPagines) {
+        $pagina = 1;
+    } else {
+        $pagina = $_GET['pagina'];
+    }
+
+    echo $pagina . "-----------" . $totalChamps . "-----------" . $numeroPagines;
+
 
     // Calcular l'inici per a la consulta
     $inici = ($pagina > 1) ? ($pagina * $champsPerPagina - $champsPerPagina) : 0 ;
@@ -51,18 +67,9 @@ if(isset($_SESSION['usuari'])) {
     // Obtenir els champs de la base de dades
     $campeons = selectUsuariLogiModel($connexio, $inici, $champsPerPagina, $nomUsuari, $ordre);
 
-    // Obtenir el numero total de campions
-    $totalChamps = (int) contarChampionsUsuariLoginModel($connexio, $nomUsuari);
 
-    // Calcular el nombre total de pàgines
-    $numeroPagines = ($totalChamps >= 0) ? ceil($totalChamps / $champsPerPagina) : 1;
 
-    // Comprovar si la pàgina és vàlida
-    if ($pagina < 1 || $pagina > $numeroPagines) {
-        $pagina = 1;
-        header("Location: ?pagina=1");
-        exit;
-    }
+    echo $pagina . "-----------" . $totalChamps . "-----------" . $numeroPagines;
 
 
 } else {
@@ -115,8 +122,6 @@ if(isset($_SESSION['usuari'])) {
     // Comprovar si la pàgina és vàlida
     if ($pagina < 1 || $pagina > $numeroPagines) {
         $pagina = 1;
-        header("Location: ?pagina=1");
-        exit;
     }
 }
 ?>

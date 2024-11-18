@@ -1,4 +1,4 @@
-<?php require BASE_PATH . '/controlador/paginacio.controlador.php'; ?>
+<?php require_once BASE_PATH . '/controlador/paginacio.controlador.php'; ?>
 
 
 
@@ -12,8 +12,13 @@
                 </div>
             </form>
         </div>
-        
     </div>
+    <div class="row my-4 justify-content-center">
+        <div class="col-xs-12 col-md-6 col-lg-3 mb-4">
+            <a style="height: 50px;" class="btn btn-primary w-100 align-content-center" href="<?php echo BASE_URL; ?>/vista/afegirChamp.vista.php" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
+        </div>
+    </div>
+
     <div class="row">
         <?php foreach ($campeons as $champion): ?>
             <div class="col-xs-12 col-md-6 col-lg-3 mb-4">
@@ -28,6 +33,16 @@
                         </div>
                         <div class="d-flex jus justify-content-between aling-items-center">
                             <p class="card-text"><i> <?php echo $champion['creator']; ?> </i></p>
+                            <!-- en aqeust cas com estem logeats tenim dos buttons per poder editar i modificar els campions ja que nomes es mostren els qeu hem creat nosltres -->
+                            
+                            <div>
+                                <a href="./Controlador/controladorEliminar.php?id=<?php echo $champion['id'] ?>&action=delete" class="btn btn-danger" onclick="return confirmarEliminacion()">
+                                    <i class="bi bi-trash3-fill"></i>
+                                </a>
+                                <a href="./Controlador/controladorEditar.php?id=<?php echo $champion['id'] ?>&action=delete" class="btn btn-warning">
+                                    <i class="bi bi-pen"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -49,15 +64,13 @@
         <div class="col-md-4 text-center">
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
-                    <?php if($pagina == 0): ?>
-                        <li class="page-item"><a class="page-link disabled">Enrere</a></li>
-                    <?php elseif($pagina == 1): ?>
+                    <?php if($pagina == 1): ?>
                         <li class="page-item"><a class="page-link disabled">Enrere</a></li>
                     <?php else: ?>
                         <li class="page-item"><a class="page-link" href="?pagina=<?php echo $pagina - 1 ?>">Enrere</a></li>
                     <?php endif; ?>
 
-
+                    
                     <?php for($i = 1; $i <= $numeroPagines; $i++): ?>
                         <?php if ($pagina === $i): ?>
                             <li class='page-item disabled'><a class='page-link' href='?pagina=<?php echo $i ?>'><?php echo $i ?></a></li>
