@@ -65,7 +65,7 @@
 
                     <?php if (isset($error)): ?>
                         <!-- Mirar si va -->
-                        <?php echo $_SESSION['usuari'] . "ççççççççççççççççç" ?>
+                        <?php echo $_SESSION['usuari'] . "!!!!!" ?>
 
                         
                         <?php if (!empty($error) && $error != "UsuariConnectat"): ?>
@@ -75,7 +75,6 @@
                             </div>
                         <?php elseif ($error == "UsuariConnectat"): 
                             // Redirigir a index.php
-                            echo "..." . header('Location: ../index.php');
                             header('Location: ../index.php');
                             exit();
                         endif; ?>

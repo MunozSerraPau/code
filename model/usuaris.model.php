@@ -53,6 +53,55 @@ function modelContrasenyaIgualLogin(PDO $connexio, string $username, string $pas
     }
 }
 
+function modelCorreuExisteix(PDO $connexio, string $correu) {
+    try {
+        $sql = "SELECT correu FROM usuaris WHERE correu = :correu";
+        $statement = $connexio->prepare($sql);
+        
+        $statement->execute(
+            array(
+                ':correu' => $correu
+            )
+        );
+        
+        $resultat = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($resultat) {
+            return "CorreuExisteix";
+        } else {
+            return "NoHiHaCorreu";
+        }
+
+    } catch (PDOException $e) {
+        $error = "Falla a la connexio a la Base de Dades";
+        return $error;
+    }
+}
+
+function modelNickNameExisteix(PDO $connexio, string $nickname) {
+    try {
+        $sql = "SELECT nickname FROM usuaris WHERE nickname = :nickname";
+        $statement = $connexio->prepare($sql);
+        
+        $statement->execute(
+            array(
+                ':nickname' => $nickname
+            )
+        );
+        
+        $resultat = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($resultat) {
+            return "NicknameExisteix";
+        } else {
+            return "NoHiHaNickname";
+        }
+
+    } catch (PDOException $e) {
+        $error = "Falla a la connexio a la Base de Dades";
+        return $error;
+    }
+}
 
 // Afegim un nou Usari amb totes les dades que li passem
 function modelAfegeixUsuari(PDO $connexio, string $nom, string $cognoms, string $correu, string $nickname, string $contrasenya) {
@@ -73,8 +122,6 @@ function modelAfegeixUsuari(PDO $connexio, string $nom, string $cognoms, string 
     } catch(PDOException $e){
         return $e;
     }
-
-
 }
 
 

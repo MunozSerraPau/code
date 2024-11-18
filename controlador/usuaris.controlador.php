@@ -77,13 +77,11 @@ function comprovarUsuari(PDO $connexio, string $username, string $password) {
             echo $_SESSION['usuari'] . "-------------------";
 
             // Si l'Usuari ha seleccionat "r", establecer cookies
-            if (isset($_POST['recuerdame'])) {
-                echo" !!!!!!!!!fefsef sefs ef sef sef!!!!!!!!";
+            if (isset($_POST['recordam'])) {
                 setcookie('username', $username, time() + (86400 * 30), "/"); // 86400 = 1 día, la cookie durará 30 días
-                $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
-                setcookie('password', $encrypted_password, time() + (86400 * 30), "/"); // 86400 = 1 día, la cookie durará 30 días
+                setcookie('password', $password, time() + (86400 * 30), "/"); // 86400 = 1 día, la cookie durará 30 días
             }
-
+            // header('Location: ../index.php');
         } elseif($contra === "NoHiHaUsuari") {
             $error = "No hi ha cap Usuari amb aquest NICKNAME";
             unset($_POST['username']);
@@ -111,8 +109,12 @@ function afegirUsuari(PDO $connexio, string $nom, string $cognoms, string $corre
         $error .= "Error no has ficat els COGNOMS<br>";
     } else if (empty($correu)) {
         $error .= "Error no has ficat el CORREU<br>";
+    } else if (modelCorreuExisteix($connexio, $correu) == "CorreuExisteix") {
+        $error .= "Error el CORREU ja existeix<br>";
     } else if (empty($nickname)) {
         $error .= "Error no has ficat el NICKNAME<br>";
+    } else if (modelNickNameExisteix($connexio, $nickname) == "NicknameExisteix") {
+        $error .= "Error el NICKNAME ja existeix<br>";
     } else if (empty($contrasenya)) {
         $error .= "Error no has ficat CONTRASENYA<br>";
     } elseif (!preg_match($validarContrasenya, $contrasenya)) {

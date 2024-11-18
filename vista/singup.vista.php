@@ -82,7 +82,7 @@
                     <?php endif; ?>
 
                     <div class="d-grid mb-3">
-                        <button type="submit" class="btn btn-primary" name="signup">CREAR COMPTE</button>
+                        <button type="submit" class="btn btn-primary" name="singup">CREAR COMPTE</button>
                     </div>
 
                     <p class="text-center">Tens un compte? <a href="<?php echo BASE_URL; ?>/vista/login.vista.php" class="link-primary">Inicia Sessió</a></p>
