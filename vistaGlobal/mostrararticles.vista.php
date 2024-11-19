@@ -1,11 +1,19 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 <?php require_once BASE_PATH . '/controlador/paginacio.controlador.php'; ?>
 
 
 
 <?php if(!empty($nomUsuari)): ?>
+    <script>
+        function confirmarEliminacion() {
+            return confirm('Estas segur que vols eliminar aquest campió?');
+        }
+    </script>
     <div class="row my-4 justify-content-center">
         <div class="col-xs-12 col-md-6 col-lg-3 mb-4">
-            <form class="d-flex justify-content-center" action="/buscar" method="GET">
+            <form class="d-flex justify-content-center" action="" method="GET">
                 <div class="input-group" style="max-width: 500px;">
                     <input type="text" class="form-control" name="query" placeholder="Busca..." aria-label="Buscar">
                     <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
@@ -36,12 +44,19 @@
                             <!-- en aqeust cas com estem logeats tenim dos buttons per poder editar i modificar els campions ja que nomes es mostren els qeu hem creat nosltres -->
                             
                             <div>
-                                <a href="./Controlador/controladorEliminar.php?id=<?php echo $champion['id'] ?>&action=delete" class="btn btn-danger" onclick="return confirmarEliminacion()">
+                                <a href="<?php echo BASE_URL; ?>/controlador/eliminarChamp.controlador.php?id=<?php echo $champion['id'] ?>&action=delete" class="btn btn-danger" onclick="return confirmarEliminacion()">
                                     <i class="bi bi-trash3-fill"></i>
                                 </a>
-                                <a href="./Controlador/controladorEditar.php?id=<?php echo $champion['id'] ?>&action=delete" class="btn btn-warning">
-                                    <i class="bi bi-pen"></i>
-                                </a>
+
+
+                                <from action="../controlador/editarChamp.controlador.php" method="POST">
+                                    <input type="hidden" name="idChampEliminar" value="<?php echo htmlspecialchars($champion['id']); ?>">
+                                    <button type="submit" class="btn btn-warning">
+                                        <i class="bi bi-pen"></i>
+                                    </button>
+                                </from>
+                                
+
                             </div>
                         </div>
                     </div>
@@ -101,7 +116,7 @@
 <?php else: ?>
     <div class="row my-4 justify-content-center">
         <div class="col-xs-12 col-md-6 col-lg-3 mb-4">
-            <form class="d-flex justify-content-center" action="/buscar" method="GET">
+            <form class="d-flex justify-content-center" action="" method="GET">
                 <div class="input-group" style="max-width: 500px;">
                     <input type="text" class="form-control" name="query" placeholder="Busca..." aria-label="Buscar">
                     <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
