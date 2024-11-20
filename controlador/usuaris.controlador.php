@@ -1,6 +1,6 @@
 <?php
 // Pau Munoz Serrra
-
+session_start();
 
 require_once BASE_PATH . "/model/usuaris.model.php";
 require_once BASE_PATH . '/controlador/connexio.php';
@@ -76,7 +76,6 @@ function comprovarUsuari(PDO $connexio, string $username, string $password) {
 
             // Creem la session i guardem el nickname del Usuari
             $error = "UsuariConnectat";
-            session_start();
             $_SESSION['usuari'] = $username;
             echo $_SESSION['usuari'] . "-------------------";
 
@@ -174,6 +173,7 @@ function canviarContrasenya (PDO $connexio, string $contraActual, string $contra
 
     } else {
         //obtenim el usuari actual
+        echo $_SESSION['usuari'] . "-------------------";
         $nomUsuari = $_SESSION['usuari'];
         // obtenim la contra actual
         $contra = modelNickNameExisteixLogin($connexio, $nomUsuari);

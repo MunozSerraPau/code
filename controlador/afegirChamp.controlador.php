@@ -1,6 +1,7 @@
 <?php 
 // Pau Muñoz Serra
 
+if (session_status() === PHP_SESSION_NONE) { session_start(); }
 require_once BASE_PATH . "/model/afegirChamp.model.php";
 require_once BASE_PATH . "/controlador/connexio.php";
 $connexio = connexio();
@@ -8,9 +9,10 @@ $connexio = connexio();
 
 // Error per guardar en cas de algun espai buit
 $error = "<br>"; 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" /* && !empty($_SESSION['usuari']) */ ) {
-
+echo "->";
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_SESSION['usuari']) && isset($_POST['insert'])) {
+    echo "0";
+    // obtenim les dades del formulari
     $nom = htmlspecialchars($_POST['nomCampio']);
     $descripcio = htmlspecialchars($_POST['descripcio']);
     $recurs = htmlspecialchars($_POST['resource']);
@@ -32,15 +34,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" /* && !empty($_SESSION['usuari']) */ ) 
 
     if($error === "<br>") {
         // obtenir el nostre NickName
+        echo "1";
         if(isset($_SESSION['usuari'])){  $nomUsuari = $_SESSION['usuari'];  }
-        $nomUsuari = "Pau";
+        echo $nomUsuari;
         // mirem que no estigui duplicat
         if (modelComprovarNom($connexio, $nom) == "ChampNoDuplicat") {
+            echo "2";
             // afegim el nou campio
             $afegirChamp = modelAfegirCampio($connexio, $nom, $descripcio, $recurs, $rol, $nomUsuari);
             if($afegirChamp === "SiCreat") {
-                // salta error si esta duplicat
-                $error = "ChampCreat";
+                echo "3";
+                // OPCIO 1 (treu tot un alert i ja esta)
+                unset($_POST['nomCampio']);
+                unset($_POST['descripcio']);
+                unset($_POST['resource']);
+                unset($_POST['role']);
+               $error = "ChampCreat";
+
+
+                // OPCIO 2 (Alert i retornar a la pagina principal)
+                /* echo '<script> alert("Campio CREAT!!"); window.location.href = "../"; </script>'; */
+                
             }
         } else {
             $error = "Error el NOM del campio ja EXISTEIX<br>";

@@ -63,13 +63,13 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link" href="#">Editar Perfil</a>
+                <a class="nav-link" href="<?php echo BASE_URL; ?>/vista/editarPerfil.vista.php">Editar Perfil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Canvair contasenya</a>
+                <a class="nav-link" href="<?php echo BASE_URL; ?>/vista/canviarContrasenya.vista.php">Canvair contasenya</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="<?php echo BASE_URL; ?>/index.php">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="<?php echo BASE_URL; ?>/controlador/logOut.controlador.php">LogOut</a>
