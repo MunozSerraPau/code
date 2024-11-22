@@ -59,7 +59,6 @@
 
                     <?php if (isset($error)): ?>
                         <!-- Mirar si va -->
-
                         
                         <?php if (!empty($error) && $error != "UsuariConnectat"): ?>
                             <div class="alert alert-danger d-flex align-items-center" role="alert">

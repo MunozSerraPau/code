@@ -1,5 +1,13 @@
 <?php
+// Pau Muñoz Serra
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
+
+require_once BASE_PATH . "/model/paginacio.model.php";
+require_once BASE_PATH . "/controlador/connexio.php";
+$connexio = connexio();
 
 
 if (isset($_POST['buscador'])) {
@@ -8,6 +16,7 @@ if (isset($_POST['buscador'])) {
 
     // Usar el texto para realizar acciones, por ejemplo, imprimirlo
     if (!empty($textPerBuscar)) {
+
         echo "Has buscat: " . $textPerBuscar;
     } else {
         echo "El campo esta buit.";

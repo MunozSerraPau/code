@@ -2,36 +2,46 @@
     // Pau Muñoz Serra
 
 
-
     if (session_status() === PHP_SESSION_NONE) { session_start(); }
-    require_once '../env.php';
     require_once BASE_PATH . "/model/editarChamp.model.php";
     require_once BASE_PATH . "/controlador/connexio.php";
     $connexio = connexio();
 
+    $champ;
 
 
     // Verificar que l'Usuari estigui loguejat
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
-        $idChampion = trim(htmlspecialchars($_POST['id']));
-        $nomUsuari = $_SESSION['username']; // Usuario actual desde la sesión
-        echo $nomUsuari . "ferwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww";
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['updateChamp'])) {
+        $idChampion = trim(htmlspecialchars($_GET['idChampEditar']));
+        $name = htmlspecialchars($_POST['nomCampio']);
+        $description = htmlspecialchars($_POST['descripcio']);
+        $recurce = htmlspecialchars($_POST['resource']);
+        $role = htmlspecialchars($_POST['role']);
+        $nomUsuari = $_SESSION['usuari']; // Usuario actual desde la sesión
+        
 
-        // Verificar que el artículo pertenece al usuario actual
-        if (modelComprovarUsuariId($connexio, $nomUsuari, $idChampion) === "LaCreatEll") {
-            // Permitir la edición
-            header("Location: ./editarForm.php?id=$idChampion");
-            exit();
+        if (modelComprovarChampNickname($connexio, $idChampion, $nomUsuari) === "LaCreatEll") {
+            if(modelModificarCampion($connexio, $name, $description, $recurce, $role, $idChampion) === "Actualitzat") {
+                echo '<script> alert("Champ actualitzat correctament"); window.location.href = "../index.php"; </script>';
+            } else {
+                echo '<script> alert("Error al actualitzar el campió"); window.location.href = "../index.php"; </script>';
+            }
         } else {
-            // Denegar el acceso y mostrar mensaje
-            echo '<div class="alert alert-danger">No tienes permiso para editar este campeón.</div>';
-            header("refresh:3;url=../index.php");
+            // Denegar l'acceso i mostrar un missatge d'error
+            echo '<script> alert("Error NO tens permisos per editar aquest campió"); window.location.href = "../index.php"; </script>';
             exit();
         }
-    } else {
-        // Redirigir si no hay ID válido
-        echo '<div class="alert alert-danger">Petición inválida.</div>';
-        header("refresh:3;url=../index.php");
-        exit();
+    } else if (isset($_GET['idChampEditar'])) {
+        $idChampion = trim(htmlspecialchars($_GET['idChampEditar']));
+        $nomUsuari = $_SESSION['usuari']; // Usuari actual desde la sesión
+
+        if (modelComprovarChampNickname($connexio, $idChampion, $nomUsuari) === "LaCreatEll") {
+            echo "grrrrrrrrrrrrrrrrrrrr";
+            $champ = modelObtenirChamp($connexio, $idChampion);
+            echo $champ;
+        } else {
+            echo '<script> alert("Error NO tens permisos per editar aquest campió"); window.location.href = "../index.php"; </script>';
+            exit();
+        }
     }
 ?>

@@ -1,8 +1,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-<?php require_once BASE_PATH . '/controlador/mostrarChamps.controlador.php'; ?>
+<?php require_once BASE_PATH . '/controlador/paginacio.controlador.php'; ?>
 <?php require_once BASE_PATH . '/controlador/buscarChamps.controlador.php'; ?>
+<?php require_once BASE_PATH . '/controlador/editarChamp.controlador.php'; ?>
 
 
 
@@ -49,14 +50,9 @@
                                     <i class="bi bi-trash3-fill"></i>
                                 </a>
 
-                                <form action="<?php echo BASE_URL; ?>/controlador/editarChamp.controlador.php" method="POST">
-                                    <input type="hidden" name="idChampEliminar" value="<?php echo htmlspecialchars($champion['id']); ?>">
-                                    <button type="submit" class="btn btn-warning">
-                                        <i class="bi bi-pen"></i>
-                                    </button>
-                                </form>
-                                
-
+                                <a href="<?php echo BASE_URL; ?>/vista/editarChamp.vista.php?idChampEditar=<?php echo $champion['id'] ?>" class="me-2 btn btn-warning">
+                                    <i class="bi bi-pen"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

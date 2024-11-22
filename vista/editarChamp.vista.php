@@ -11,10 +11,9 @@
 </head>
 <body>
     <?php require_once '../env.php'; ?>
-    <?php require_once BASE_PATH . "/controlador/usuaris.controlador.php" ?>
+    <?php require BASE_PATH . "/controlador/editarChamp.controlador.php"; ?>
     <?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
     
-
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
@@ -23,13 +22,13 @@
     </svg>
 
 
-
-    <div class="containerr">
+    <div class="containerr pt-0">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
-        
         <div class="container d-flex justify-content-center align-items-center min-vh-100">
+
+        
             <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid black;">
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="row g-3">
+                <form <?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="POST" class="row g-3">
                     <div class="col-12">
                         <label for="nomCampio" class="form-label">Nom del Champion</label>
                         <input 
@@ -39,7 +38,6 @@
                             name="nomCampio" 
                             value="<?php echo $champ['name']; ?>">
                     </div>
-
                     <div class="col-12">
                         <label for="descripcio" class="form-label">Descripció</label>
                         <textarea 
@@ -74,8 +72,6 @@
                             <option value="Specialist">Specialist</option>
                         </select>
                     </div>
-
-                    <?php include_once "../Controlador/controladorEditar.php"; ?>
 
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary" name="updateChamp">UPDATE Champion</button>
