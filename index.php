@@ -20,7 +20,7 @@
 
         <div class="container floating-panel">
             <h1 class="text-white text-center"> INDEX </h1>
-            <?php include BASE_PATH . "/vistaGlobal/mostrararticles.vista.php" ?>
+            <?php include BASE_PATH . "/vistaGlobal/mostrarChamps.vista.php" ?>
         </div>
 
         <?php include BASE_PATH . "/vistaGlobal/footer.vista.php" ?>
