@@ -4,10 +4,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-
 require_once BASE_PATH . "/model/paginacio.model.php";
-// Inicialitzem les variables
+require_once BASE_PATH . "/model/buscarChamp.model.php";
 
+
+// Inicialitzem les variables
 $numeroPagines = 0;     // Nuemro de Pagines
 $ordre = 'Ascending';   // Per defecte, l'ordenació serà ascendent
 $pagina = 1;            // Pagina actual
@@ -15,35 +16,33 @@ $campeons = [];         // Array de campions
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buscador'])) {
-    $paraula = htmlspecialchars(trim($_POST['paraulaBuscador']));
-    if ($paraula !== '') {
-        if (isset($_SESSION['usuari'])) {
-            mostrarBuscaLoguejat($paraula);
-        } else {
-            mostrarBuscaSenseLogin($paraula);
-        }
+    if (isset($_SESSION['usuari'])) {
+        $paraula = htmlspecialchars(trim($_POST['paraulaBuscador']));
+        mostrarChampsLoguejat($paraula);
+
     } else {
-        if (isset($_SESSION['usuari'])) {
-            mostrarTotsChampsLoguejat();
-        } else {
-            mostrarTotsChampsSenseLogin();
-        }
+        $paraula = htmlspecialchars(trim($_POST['paraulaBuscador']));
+        mostrarChampsSenseLogin($paraula);
     }
+
 } else if (isset($_SESSION['usuari'])) {
-    mostrarTotsChampsLoguejat();
+    $paraula = '';
+    mostrarChampsLoguejat($paraula);
+
 } else {
-    mostrarTotsChampsSenseLogin();
+    $paraula = '';
+    mostrarChampsSenseLogin($paraula);
+
 }
 
 
-function mostrarTotsChampsLoguejat() {
+function mostrarChampsLoguejat($paraula) {
     global $campeons;
     global $numeroPagines;
     global $ordre;
     global $pagina;
     $nomUsuari = $_SESSION['usuari'];
-
-    echo "Paginacio" . $nomUsuari;
+    
 
     if (isset($_COOKIE['ordre'])) {
         // Si la cookie existeix, la utilitzem per ordenar
@@ -71,33 +70,56 @@ function mostrarTotsChampsLoguejat() {
         $champsPerPagina = isset($_COOKIE['champsPerPagina']) ? (int)$_COOKIE['champsPerPagina'] : 8;
     }
 
-    // Obtenir el numero total de campions
-    $totalChamps = (int) contarChampionsUsuariLoginModel($nomUsuari);
 
-    // Calcular el nombre total de pàgines
-    $numeroPagines = ($totalChamps >= 0) ? ceil($totalChamps / $champsPerPagina) : 1;
 
-    // Mira quina paguina estem situats
-    $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+    if ($paraula !== '') {
+        // Obtenir el numero total de campions
+        $totalChamps = (int) contarChampionsBuscarLoguejatModel($nomUsuari, $paraula);
 
-    if ($pagina < 1 || $pagina > $numeroPagines) {
-        $pagina = 1;
+        // Calcular el nombre total de pàgines
+        $numeroPagines = ($totalChamps >= 0) ? ceil($totalChamps / $champsPerPagina) : 1;
+
+        // Mira quina paguina estem situats
+        $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+
+        if ($pagina < 1 || $pagina > $numeroPagines) {
+            $pagina = 1;
+        }
+
+        // Calcular l'inici per a la consulta
+        $inici = ($pagina > 1) ? ($pagina * $champsPerPagina - $champsPerPagina) : 0 ;
+
+        // Obtenir els champs de la base de dades
+        $campeons = selectChampsBuscadorAmbLogin($inici, $champsPerPagina, $nomUsuari, $ordre, $paraula);
+    } else {
+        // Obtenir el numero total de campions
+        $totalChamps = (int) contarChampionsUsuariLoginModel($nomUsuari);
+
+        // Calcular el nombre total de pàgines
+        $numeroPagines = ($totalChamps >= 0) ? ceil($totalChamps / $champsPerPagina) : 1;
+
+        // Mira quina paguina estem situats
+        $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+
+        if ($pagina < 1 || $pagina > $numeroPagines) {
+            $pagina = 1;
+        }
+
+        // Calcular l'inici per a la consulta
+        $inici = ($pagina > 1) ? ($pagina * $champsPerPagina - $champsPerPagina) : 0 ;
+
+        // Obtenir els champs de la base de dades
+        $campeons = selectUsuariLogiModel($inici, $champsPerPagina, $nomUsuari, $ordre);
     }
-
-    // Calcular l'inici per a la consulta
-    $inici = ($pagina > 1) ? ($pagina * $champsPerPagina - $champsPerPagina) : 0 ;
-
-    // Obtenir els champs de la base de dades
-    $campeons = selectUsuariLogiModel($inici, $champsPerPagina, $nomUsuari, $ordre);
+    
 }
 
-function mostrarTotsChampsSenseLogin() {
+function mostrarChampsSenseLogin($paraula) {
     global $campeons;
     global $numeroPagines;
     global $ordre;
     global $pagina;
 
-    echo "Paginacio de TOTS els CHAMPS";
 
     if (isset($_COOKIE['ordre'])) {
         // Si la cookie existeix, la utilitzem per ordenar
@@ -131,41 +153,35 @@ function mostrarTotsChampsSenseLogin() {
     // Calcular l'inici per a la consulta
     $inici = ($pagina > 1) ? ($pagina * $champsPerPagina - $champsPerPagina) : 0 ;
     
-    // Obtenir els champs de la base de dades
-    $campeons = selectModel($inici, $champsPerPagina, $ordre);
+    if ($paraula !== '') {
+        echo "                Paginacio de la cerca Loguejat" . $paraula;
+        $campeons = selectChampsBuscadorSenseLogin($inici, $champsPerPagina, $ordre, $paraula);
 
-    // Obtenir el numero total de campions
-    $totalChamps = (int) contarChampionsModel();
+        $totalChamps = (int) contarChampionsBuscarSenseLoguejarModel($paraula);
 
-    // Calcular el nombre total de pàgines
-    $numeroPagines = ($totalChamps >= 0) ? ceil($totalChamps / $champsPerPagina) : 1;
+        // Calcular el nombre total de pàgines
+        $numeroPagines = ($totalChamps >= 0) ? ceil($totalChamps / $champsPerPagina) : 1;
 
-    // Comprovar si la pàgina és vàlida
-    if ($pagina < 1 || $pagina > $numeroPagines) {
-        $pagina = 1;
-    }
-}
+        // Comprovar si la pàgina és vàlida
+        if ($pagina < 1 || $pagina > $numeroPagines) {
+            $pagina = 1;
+        }
 
-function mostrarBuscaLoguejat($paraulaCerca) {
-    global $campeons;
-    global $numeroPagines;
-    global $ordre;
-    global $pagina;
+    } else {
+        // Obtenir els champs de la base de dades
+        $campeons = selectModel($inici, $champsPerPagina, $ordre);
 
+        // Obtenir el numero total de campions
+        $totalChamps = (int) contarChampionsModel();
 
+        // Calcular el nombre total de pàgines
+        $numeroPagines = ($totalChamps >= 0) ? ceil($totalChamps / $champsPerPagina) : 1;
 
-    echo "Paginacio de la cerca Loguejat" . $paraulaCerca;
-}
-
-function mostrarBuscaSenseLogin($paraulaCerca) {
-    global $campeons;
-    global $numeroPagines;
-    global $ordre;
-    global $pagina;
-
-
-
-    echo "Paginacio de la cerca Sense Loguejar" . $paraulaCerca;
+        // Comprovar si la pàgina és vàlida
+        if ($pagina < 1 || $pagina > $numeroPagines) {
+            $pagina = 1;
+        }
+    }    
 }
 
 ?>
