@@ -3,6 +3,9 @@
   if(isset($_SESSION['usuari'])) {
     $nomUsuari = $_SESSION['usuari'];
   }
+  if (isset($_SESSION['admin'])) {
+    $admin = $_SESSION['admin'];
+  }
 ?>
 
 <?php if(!empty($nomUsuari)): ?>
@@ -68,9 +71,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="<?php echo BASE_URL; ?>/vista/canviarContrasenya.vista.php">Canvair contasenya</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo BASE_URL; ?>/index.php">Home</a>
-              </li>
+              <?php if(!empty($admin)): ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="<?php echo BASE_URL; ?>/vista/modificarAdmin.vista.php">Editar Comptes</a>
+                </li>
+              <?php endif; ?>
               <li class="nav-item">
                 <a class="nav-link" href="<?php echo BASE_URL; ?>/controlador/logOut.controlador.php">LogOut</a>
               </li>

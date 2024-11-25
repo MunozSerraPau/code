@@ -34,10 +34,55 @@
             <!-- Si volem el fosn difuminat hem de ficar en class="bg-transparent" -->
             <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid black;">
 
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                    <h2 class="text-center text-primary mb-4">Editar Perfil</h2>
 
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label">Nom</label>
+                        <input type="text" id="firstname" name="firstname" class="form-control" value="<?php if (isset($_POST['firstname'])) { echo $_POST['firstname']; } ?>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Cognoms</label>
+                        <input type="text" id="lastname" name="lastname" class="form-control" value="<?php if (isset($_POST['lastname'])) { echo $_POST['lastname']; } ?>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correu</label>
+                        <input type="email" id="email" name="email" class="form-control" value="<?php if (isset($_POST['email'])) { echo $_POST['email']; } ?>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nickname" class="form-label">Nom d'Usuari</label>
+                        <input type="text" id="nickname" name="nickname" class="form-control" value="<?php if (isset($_POST['nickname'])) { echo $_POST['nickname']; } ?>">
+                    </div>
+
+
+                    <?php if (isset($error)): ?>
+                        <?php if (!empty($error) && $error != "S'ha creat Correctament"): ?>
+                            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" style="width: 50px; height: auto;" role="img" aria-label="Danger:">
+                                    <use xlink:href="#exclamation-triangle-fill"/>
+                                </svg> 
+                                <div><?php echo $error; ?></div>
+                            </div>
+                        <?php elseif ($error === "S'ha creat Correctament"): ?>
+                            <div class="alert alert-primary d-flex align-items-center" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" style="width: 50px; height: auto;" role="img" aria-label="Success:">
+                                    <use xlink:href="#check-circle-fill"/>
+                                </svg>
+                                <div><p>S'ha creat l'Usuari correctament!</p></div>
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
+
+                    <div class="d-grid mb-3">
+                        <button type="submit" class="btn btn-primary" name="singup">CREAR COMPTE</button>
+                    </div>
+
+                    <p class="text-center">Tens un compte? <a href="<?php echo BASE_URL; ?>/vista/login.vista.php" class="link-primary">Inicia Sessió</a></p>
+                </form>
             
-
-
             </div>
         </div>
 

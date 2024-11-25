@@ -22,8 +22,8 @@
         </div>
     </div>
     <div class="row my-4 justify-content-center">
-        <div class="col-xs-12 col-md-6 col-lg-3 mb-4">
-            <a style="height: 50px;" class="btn btn-primary w-100 align-content-center" href="<?php echo BASE_URL; ?>/vista/afegirChamp.vista.php" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
+        <div class="col-xs-12 col-md-6 col-lg-3 mb-4 justify-content-center d-flex">
+            <a style="height: 50px;" class="btn btn-primary w-25 align-content-center" href="<?php echo BASE_URL; ?>/vista/afegirChamp.vista.php" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
         </div>
     </div>
 

@@ -58,6 +58,7 @@ function modelContrasenyaIgualLogin($username, $password) {
     }
 }
 
+
 function modelCorreuExisteix($correu) {
     try {
         global $connexio;
@@ -84,6 +85,7 @@ function modelCorreuExisteix($correu) {
     }
 }
 
+
 function modelNickNameExisteix($nickname) {
     try {
         global $connexio;
@@ -109,6 +111,7 @@ function modelNickNameExisteix($nickname) {
         return $error;
     }
 }
+
 
 // Afegim un nou Usari amb totes les dades que li passem
 function modelAfegeixUsuari($nom, $cognoms, $correu, $nickname, $contrasenya) {
@@ -147,6 +150,29 @@ function modelCanviContrasenya($nickName, $contraNovaV1) {
         );
 
         return "ContrasenyaCanviada";
+    } catch(PDOException $e) {
+        return "Error amb la connexio o el Nom d'Usuari";
+    }
+}
+
+
+// Fuunció per veure si l'Usuari es administrador o no
+function modelComprovarUsuariAdministrador ($nickName) {
+    try {
+        global $connexio;
+        $sql = "SELECT * FROM usuaris WHERE nickname = :nickname AND administrador = '1'";
+        $statement = $connexio->prepare($sql);
+        $statement->execute( 
+            array(
+                ':nickname' => $nickName
+            )
+        );
+
+        if ($statement->rowCount() > 0) {
+            return "EsAdmin";
+        } else {
+            return "NoEsAdmin";
+        }
     } catch(PDOException $e) {
         return "Error amb la connexio o el Nom d'Usuari";
     }

@@ -7,9 +7,6 @@
     require_once BASE_PATH . "/model/editarChamp.model.php";
 
 
-    $champ;
-
-
     // Verificar que l'Usuari estigui loguejat
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['updateChamp'])) {
         $idChampion = trim(htmlspecialchars($_GET['idChampEditar']));

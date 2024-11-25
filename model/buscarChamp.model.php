@@ -22,10 +22,8 @@ function contarChampionsBuscarLoguejatModel($usuari, $paraulaCerca) {
                 ':paraulaCerca' => $paraulaCerca
             )
         );
-        $stmt ->execute( );
         
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            
         return $result ? (int)$result['total'] : 0;
 
     } catch(PDOException $e) {
@@ -44,18 +42,16 @@ function contarChampionsBuscarSenseLoguejarModel($paraulaCerca) {
         global $connexio;
         $paraulaCerca= "%$paraulaCerca%";
 
-        $sql = "SELECT FOUND_ROWS() as total FROM campeones WHERE name LIKE :paraulaCerca";
+        $sql = "SELECT COUNT(*) as total FROM campeones WHERE name LIKE :paraulaCerca";
         $totalCampeons = $connexio->prepare($sql);
         $totalCampeons ->execute(
             array(
                 ':paraulaCerca' => $paraulaCerca
             )
         );
-        $totalCampeons->execute();
 
-        $totalCampeons = $totalCampeons->fetch()['total'];
-            
-        return $totalCampeons;
+        $totalCampeons = $totalCampeons->fetch(PDO::FETCH_ASSOC);
+        return $totalCampeons ? (int)$totalCampeons['total'] : 0;
 
     } catch(PDOException $e) {
         return 0;
@@ -112,7 +108,6 @@ function selectChampsBuscadorSenseLogin($inici, $champsPerPagines, $ordre, $para
                 ":paraulaCerca" => $paraulaCerca
             )
         );
-        $campeons->execute();
 
         $champs = $campeons->fetchAll();
         return $champs;

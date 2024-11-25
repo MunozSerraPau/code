@@ -72,12 +72,17 @@ function comprovarUsuari(string $username, string $password) {
         $contra = modelNickNameExisteixLogin($username);
         //mirem si la contrassenya es igual
         if(password_verify($password, $contra)) {
-            echo "!!!!CONTRASENYA CORRECTA!!!!";
+
 
             // Creem la session i guardem el nickname del Usuari
             $error = "UsuariConnectat";
             $_SESSION['usuari'] = $username;
-            echo $_SESSION['usuari'] . "-------------------";
+            if (modelComprovarUsuariAdministrador($username) == "EsAdmin") {
+                $_SESSION['admin'] = "true";
+            } else {
+                $_SESSION['admin'] = false;
+            }
+            
 
             // Si l'Usuari ha seleccionat "r", establecer cookies
             if (isset($_POST['recordam'])) {
@@ -173,7 +178,6 @@ function canviarContrasenya (string $contraActual, string $contraNovaV1, string 
 
     } else {
         //obtenim el usuari actual
-        echo $_SESSION['usuari'] . "-------------------";
         $nomUsuari = $_SESSION['usuari'];
         // obtenim la contra actual
         $contra = modelNickNameExisteixLogin($nomUsuari);
