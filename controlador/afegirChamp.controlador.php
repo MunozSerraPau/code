@@ -1,10 +1,10 @@
 <?php 
 // Pau Muñoz Serra
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
 require_once BASE_PATH . "/model/afegirChamp.model.php";
-require_once BASE_PATH . "/controlador/connexio.php";
-$connexio = connexio();
 
 
 // Error per guardar en cas de algun espai buit
@@ -38,10 +38,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_SESSION['usuari']) && isset
         if(isset($_SESSION['usuari'])){  $nomUsuari = $_SESSION['usuari'];  }
         echo $nomUsuari;
         // mirem que no estigui duplicat
-        if (modelComprovarNom($connexio, $nom) == "ChampNoDuplicat") {
+        if (modelComprovarNom($nom) == "ChampNoDuplicat") {
             echo "2";
             // afegim el nou campio
-            $afegirChamp = modelAfegirCampio($connexio, $nom, $descripcio, $recurs, $rol, $nomUsuari);
+            $afegirChamp = modelAfegirCampio($nom, $descripcio, $recurs, $rol, $nomUsuari);
             if($afegirChamp === "SiCreat") {
                 echo "3";
                 // OPCIO 1 (treu tot un alert i ja esta)

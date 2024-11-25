@@ -6,17 +6,44 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 require_once BASE_PATH . "/model/paginacio.model.php";
-require_once BASE_PATH . "/controlador/connexio.php";
-$connexio = connexio();
+// Inicialitzem les variables
+
+$numeroPagines = 0;     // Nuemro de Pagines
+$ordre = 'Ascending';   // Per defecte, l'ordenació serà ascendent
+$pagina = 1;            // Pagina actual
+$campeons = [];         // Array de campions
 
 
-if(isset($_SESSION['usuari'])) {
-    
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buscador'])) {
+    $paraula = htmlspecialchars(trim($_POST['paraulaBuscador']));
+    if ($paraula !== '') {
+        if (isset($_SESSION['usuari'])) {
+            mostrarBuscaLoguejat($paraula);
+        } else {
+            mostrarBuscaSenseLogin($paraula);
+        }
+    } else {
+        if (isset($_SESSION['usuari'])) {
+            mostrarTotsChampsLoguejat();
+        } else {
+            mostrarTotsChampsSenseLogin();
+        }
+    }
+} else if (isset($_SESSION['usuari'])) {
+    mostrarTotsChampsLoguejat();
+} else {
+    mostrarTotsChampsSenseLogin();
+}
+
+
+function mostrarTotsChampsLoguejat() {
+    global $campeons;
+    global $numeroPagines;
+    global $ordre;
+    global $pagina;
     $nomUsuari = $_SESSION['usuari'];
-    echo "Paginacio" . $nomUsuari;
 
-    // Per defecte, l'ordenació serà ascendent
-    $ordre = 'Ascending'; 
+    echo "Paginacio" . $nomUsuari;
 
     if (isset($_COOKIE['ordre'])) {
         // Si la cookie existeix, la utilitzem per ordenar
@@ -45,7 +72,7 @@ if(isset($_SESSION['usuari'])) {
     }
 
     // Obtenir el numero total de campions
-    $totalChamps = (int) contarChampionsUsuariLoginModel($connexio, $nomUsuari);
+    $totalChamps = (int) contarChampionsUsuariLoginModel($nomUsuari);
 
     // Calcular el nombre total de pàgines
     $numeroPagines = ($totalChamps >= 0) ? ceil($totalChamps / $champsPerPagina) : 1;
@@ -61,14 +88,16 @@ if(isset($_SESSION['usuari'])) {
     $inici = ($pagina > 1) ? ($pagina * $champsPerPagina - $champsPerPagina) : 0 ;
 
     // Obtenir els champs de la base de dades
-    $campeons = selectUsuariLogiModel($connexio, $inici, $champsPerPagina, $nomUsuari, $ordre);
+    $campeons = selectUsuariLogiModel($inici, $champsPerPagina, $nomUsuari, $ordre);
+}
 
+function mostrarTotsChampsSenseLogin() {
+    global $campeons;
+    global $numeroPagines;
+    global $ordre;
+    global $pagina;
 
-} else {
     echo "Paginacio de TOTS els CHAMPS";
-    
-    // Per defecte, l'ordenació serà ascendent
-    $ordre = 'Ascending'; 
 
     if (isset($_COOKIE['ordre'])) {
         // Si la cookie existeix, la utilitzem per ordenar
@@ -103,10 +132,10 @@ if(isset($_SESSION['usuari'])) {
     $inici = ($pagina > 1) ? ($pagina * $champsPerPagina - $champsPerPagina) : 0 ;
     
     // Obtenir els champs de la base de dades
-    $campeons = selectModel($connexio, $inici, $champsPerPagina, $ordre);
+    $campeons = selectModel($inici, $champsPerPagina, $ordre);
 
     // Obtenir el numero total de campions
-    $totalChamps = (int) contarChampionsModel($connexio);
+    $totalChamps = (int) contarChampionsModel();
 
     // Calcular el nombre total de pàgines
     $numeroPagines = ($totalChamps >= 0) ? ceil($totalChamps / $champsPerPagina) : 1;
@@ -116,4 +145,27 @@ if(isset($_SESSION['usuari'])) {
         $pagina = 1;
     }
 }
+
+function mostrarBuscaLoguejat($paraulaCerca) {
+    global $campeons;
+    global $numeroPagines;
+    global $ordre;
+    global $pagina;
+
+
+
+    echo "Paginacio de la cerca Loguejat" . $paraulaCerca;
+}
+
+function mostrarBuscaSenseLogin($paraulaCerca) {
+    global $campeons;
+    global $numeroPagines;
+    global $ordre;
+    global $pagina;
+
+
+
+    echo "Paginacio de la cerca Sense Loguejar" . $paraulaCerca;
+}
+
 ?>

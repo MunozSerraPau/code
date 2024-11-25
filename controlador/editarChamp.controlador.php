@@ -1,11 +1,11 @@
 <?php
     // Pau Muñoz Serra
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-
-    if (session_status() === PHP_SESSION_NONE) { session_start(); }
     require_once BASE_PATH . "/model/editarChamp.model.php";
-    require_once BASE_PATH . "/controlador/connexio.php";
-    $connexio = connexio();
+
 
     $champ;
 
@@ -20,8 +20,8 @@
         $nomUsuari = $_SESSION['usuari']; // Usuario actual desde la sesión
         
 
-        if (modelComprovarChampNickname($connexio, $idChampion, $nomUsuari) === "LaCreatEll") {
-            if(modelModificarCampion($connexio, $name, $description, $recurce, $role, $idChampion) === "Actualitzat") {
+        if (modelComprovarChampNickname($idChampion, $nomUsuari) === "LaCreatEll") {
+            if(modelModificarCampion($name, $description, $recurce, $role, $idChampion) === "Actualitzat") {
                 echo '<script> alert("Champ actualitzat correctament"); window.location.href = "../index.php"; </script>';
             } else {
                 echo '<script> alert("Error al actualitzar el campió"); window.location.href = "../index.php"; </script>';
@@ -35,10 +35,8 @@
         $idChampion = trim(htmlspecialchars($_GET['idChampEditar']));
         $nomUsuari = $_SESSION['usuari']; // Usuari actual desde la sesión
 
-        if (modelComprovarChampNickname($connexio, $idChampion, $nomUsuari) === "LaCreatEll") {
-            echo "grrrrrrrrrrrrrrrrrrrr";
-            $champ = modelObtenirChamp($connexio, $idChampion);
-            echo $champ;
+        if (modelComprovarChampNickname($idChampion, $nomUsuari) === "LaCreatEll") {
+            $champ = modelObtenirChamp($idChampion);
         } else {
             echo '<script> alert("Error NO tens permisos per editar aquest campió"); window.location.href = "../index.php"; </script>';
             exit();

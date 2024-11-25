@@ -1,14 +1,13 @@
 <?php 
 // Pau Muñoz Serra
-
-
-// require_once BASE_PATH . "/controlador/connexio.php";
-// $connexio = connexio();
+require_once BASE_PATH . "/controlador/connexio.php";
+$connexio = connexio();
 
 
 // Comprova si l'Usuari existeix i si es el cas ens retorna la seva contrasenya encriptada
-function modelNickNameExisteixLogin(PDO $connexio, string $username) {
+function modelNickNameExisteixLogin($username) {
     try {
+        global $connexio;
         $sql = "SELECT contrasenya FROM usuaris WHERE nickname = :username";
         $statement = $connexio->prepare($sql);
         
@@ -34,8 +33,9 @@ function modelNickNameExisteixLogin(PDO $connexio, string $username) {
 
 
 // 
-function modelContrasenyaIgualLogin(PDO $connexio, string $username, string $password) {
+function modelContrasenyaIgualLogin($username, $password) {
     try {
+        global $connexio;
         $sql = "SELECT * FROM usuaris WHERE nickname = :username AND contrasenya = :contra";
         $statement = $connexio->prepare($sql);
         
@@ -58,8 +58,9 @@ function modelContrasenyaIgualLogin(PDO $connexio, string $username, string $pas
     }
 }
 
-function modelCorreuExisteix(PDO $connexio, string $correu) {
+function modelCorreuExisteix($correu) {
     try {
+        global $connexio;
         $sql = "SELECT correu FROM usuaris WHERE correu = :correu";
         $statement = $connexio->prepare($sql);
         
@@ -83,8 +84,9 @@ function modelCorreuExisteix(PDO $connexio, string $correu) {
     }
 }
 
-function modelNickNameExisteix(PDO $connexio, string $nickname) {
+function modelNickNameExisteix($nickname) {
     try {
+        global $connexio;
         $sql = "SELECT nickname FROM usuaris WHERE nickname = :nickname";
         $statement = $connexio->prepare($sql);
         
@@ -109,8 +111,9 @@ function modelNickNameExisteix(PDO $connexio, string $nickname) {
 }
 
 // Afegim un nou Usari amb totes les dades que li passem
-function modelAfegeixUsuari(PDO $connexio, string $nom, string $cognoms, string $correu, string $nickname, string $contrasenya) {
+function modelAfegeixUsuari($nom, $cognoms, $correu, $nickname, $contrasenya) {
     try {
+        global $connexio;
         $sql = "INSERT INTO usuaris (nom, cognoms, correu, nickname, contrasenya) VALUES (:nom, :cognoms, :correu, :nickname, :contrasenya)";
         $statement = $connexio->prepare($sql);
         $statement->execute( 
@@ -131,8 +134,9 @@ function modelAfegeixUsuari(PDO $connexio, string $nom, string $cognoms, string 
 
 
 // Funció per actualitzar una nova contrasenya segosn el nickname que li passem (la contrasenya esta iencriptada quan la guardem)
-function modelCanviContrasenya(PDO $connexio, string $nickName, string $contraNovaV1) {
+function modelCanviContrasenya($nickName, $contraNovaV1) {
     try {
+        global $connexio;
         $sql = "UPDATE usuaris  SET contrasenya = :contrasenya WHERE nickname = :nom";
         $statement = $connexio->prepare($sql);
         $statement->execute( 

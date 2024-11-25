@@ -2,8 +2,7 @@
 
 
 <?php require_once BASE_PATH . '/controlador/paginacio.controlador.php'; ?>
-<?php require_once BASE_PATH . '/controlador/buscarChamps.controlador.php'; ?>
-<?php require_once BASE_PATH . '/controlador/editarChamp.controlador.php'; ?>
+<?php //require_once BASE_PATH . '/controlador/buscarChamps.controlador.php'; ?>
 
 
 
@@ -17,8 +16,8 @@
         <div class="col-xs-12 col-md-6 col-lg-3 mb-4">
             <form class="d-flex justify-content-center" method="POST">
                 <div class="input-group" style="max-width: 500px;">
-                    <input type="text" class="form-control" name="buscador" placeholder="Busca..." aria-label="Buscar">
-                    <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                    <input type="text" class="form-control" id="buscador" placeholder="Busca..." aria-label="Buscar">
+                    <button class="btn btn-primary" type="submit" name="buscador"><i class="bi bi-search"></i></button>
                 </div>
             </form>
         </div>
@@ -112,10 +111,10 @@
 <?php else: ?>
     <div class="row my-4 justify-content-center">
         <div class="col-xs-12 col-md-6 col-lg-3 mb-4">
-            <form class="d-flex justify-content-center" action="" method="GET">
+            <form class="d-flex justify-content-center" method="POST">
                 <div class="input-group" style="max-width: 500px;">
-                    <input type="text" class="form-control" name="query" placeholder="Busca..." aria-label="Buscar">
-                    <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                    <input type="text" class="form-control" name="paraulaBuscador" placeholder="Busca..." aria-label="Buscar">
+                    <button class="btn btn-primary" type="submit" name="buscador"><i class="bi bi-search"></i></button>
                 </div>
             </form>
         </div>

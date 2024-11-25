@@ -1,9 +1,12 @@
 <?php 
 // Pau Muñoz Serra
+require_once BASE_PATH . "/controlador/connexio.php";
+$connexio = connexio();
 
 // Comprovació de si el campio amb un nom contret l'ha afegir l'usuari que li passem
-function modelComprovarUsuariId (PDO $connexio, string $nom, string $id) {
+function modelComprovarUsuariId ($nom, $id) {
     try {
+        global $connexio;
         $sql = "SELECT * FROM campeones WHERE id = :idChamp AND creator = :nomCreator";
             $statement = $connexio->prepare($sql);
             $statement->execute( 
@@ -26,8 +29,9 @@ function modelComprovarUsuariId (PDO $connexio, string $nom, string $id) {
 
 
 // Elimina un campio de la base de dades segons el seu ID
-function modelEliminarCampion(PDO $connexio, string $id) {
+function modelEliminarCampion($id) {
     try {
+        global $connexio;
         $sql = "DELETE FROM campeones WHERE id = :idChamp";
         $statement = $connexio->prepare($sql);
         $statement->execute( 

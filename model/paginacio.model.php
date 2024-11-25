@@ -1,9 +1,7 @@
 <?php 
 // Pau Muñoz Serra
-
-
-// require_once BASE_PATH . "/controlador/connexio.php";
-// $connexio = connexio();
+require_once BASE_PATH . "/controlador/connexio.php";
+$connexio = connexio();
 
 
 /**
@@ -16,10 +14,10 @@
  * 
  * @return - Retorna una array amb tots els registres de champs de la base de dades o "null" si hi ha algun porblema.
  */
-function selectModel(PDO $connexio, int $inici, int $champsPerPagines, string $ordre) {
+function selectModel($inici, $champsPerPagines, $ordre) {
     
     try {
-
+        global $connexio;
         // Determina l'ordre segons la selecció de l'usuari
         $ordreSQL = ($ordre == "Ascending") ? "ASC" : "DESC";
 
@@ -44,8 +42,9 @@ function selectModel(PDO $connexio, int $inici, int $champsPerPagines, string $o
  * 
  * @return - Retorna un numero amb el total de champs que hi ha.
  */
-function contarChampionsModel(PDO $connexio) :int{
+function contarChampionsModel() {
     try {
+        global $connexio;
         $sql = "SELECT FOUND_ROWS() as total FROM campeones";
         $totalCampeons = $connexio->prepare($sql);
         $totalCampeons->execute();
@@ -70,9 +69,9 @@ function contarChampionsModel(PDO $connexio) :int{
  * 
  * @return - Retorna una array amb tots els registres de champs de la base de dades o "null" si hi ha algun porblema.
  */
-function selectUsuariLogiModel(PDO $connexio, int $inici, int $champsPerPagines, string $usuari, $ordre) {
-    
+function selectUsuariLogiModel($inici, $champsPerPagines, $usuari, $ordre) {
     try {
+        global $connexio;
         $ordreSQL = ($ordre == "Ascending") ? "ASC" : "DESC";
 
         $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM campeones WHERE creator = :usuari ORDER BY name $ordreSQL LIMIT $inici, $champsPerPagines";
@@ -101,8 +100,9 @@ function selectUsuariLogiModel(PDO $connexio, int $inici, int $champsPerPagines,
  * 
  * @return - Retorna un numero amb el total de champs que hi ha.
  */
-function contarChampionsUsuariLoginModel(PDO $connexio, string $usuari) :int{
+function contarChampionsUsuariLoginModel($usuari) {
     try {
+        global $connexio;
         $sql = "SELECT COUNT(*) as total FROM campeones WHERE creator = :usuari";
         $stmt  = $connexio->prepare($sql);
         $stmt ->execute(

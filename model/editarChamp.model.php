@@ -1,7 +1,10 @@
 <?php
 // Pau Muñoz Serra
+require_once BASE_PATH . "/controlador/connexio.php";
+$connexio = connexio();
 
-function modelObtenirChamp($connexio, $idChampion) {
+function modelObtenirChamp($idChampion) {
+    global $connexio;
     $sql = "SELECT * FROM campeones WHERE id = :idChampion";
     $stmt = $connexio->prepare($sql);
 
@@ -16,7 +19,8 @@ function modelObtenirChamp($connexio, $idChampion) {
 }
 
 
-function modelComprovarChampNickname($connexio, $idChampion, $username) {
+function modelComprovarChampNickname($idChampion, $username) {
+    global $connexio;
     $sql = "SELECT * FROM campeones WHERE id = :idChampion AND creator = :username";
     $stmt = $connexio->prepare($sql);
 
@@ -38,8 +42,9 @@ function modelComprovarChampNickname($connexio, $idChampion, $username) {
 
 
 // Actualitzar un campió segons al seva ID amb parametres nous
-function modelModificarCampion(PDO $connexio, string $nom, string $descripcio, string $recurs, string $rol, string $id) {
+function modelModificarCampion($nom, $descripcio, $recurs, $rol, $id) {
     try {
+        global $connexio;
         $sql = "UPDATE campeones SET name = :namee, description = :descriptionn, resource = :resourcee, role = :rolee WHERE id = :id";
         $statement = $connexio->prepare($sql);
         $statement->execute( 

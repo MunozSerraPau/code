@@ -6,8 +6,6 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 require_once BASE_PATH . "/model/paginacio.model.php";
-require_once BASE_PATH . "/controlador/connexio.php";
-$connexio = connexio();
 
 
 if (isset($_POST['buscador'])) {

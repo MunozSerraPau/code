@@ -1,15 +1,15 @@
 <?php
 // Pau Munoz Serrra
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 require_once BASE_PATH . "/model/usuaris.model.php";
-require_once BASE_PATH . '/controlador/connexio.php';
-$connexio = connexio();
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // mira si ens han passat parametre per afegir un nou usuari
-    if(isset($_POST['singup'])) {
+    if (isset($_POST['singup'])) {
         // Guardem les dades
         $nom = htmlspecialchars($_POST['firstname']);
         $cognoms = htmlspecialchars($_POST['lastname']);
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $confirmPassword = htmlspecialchars($_POST['confirm-password']);
 
         // Creem l'Usuari
-        $shaCreat = afegirUsuari($connexio, $nom, $cognoms, $correu, $nickname, $contrasenya, $confirmPassword);
+        $shaCreat = afegirUsuari($nom, $cognoms, $correu, $nickname, $contrasenya, $confirmPassword);
 
         // Fem la comprovació
         if($shaCreat === "SiCreat") {
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nickname = htmlspecialchars($_POST['username']);
         $contrasenya = htmlspecialchars($_POST['password']);
 
-        $existeixUsuari = comprovarUsuari($connexio, $nickname, $contrasenya);
+        $existeixUsuari = comprovarUsuari($nickname, $contrasenya);
         if ($existeixUsuari === "UsuariConnectat") {
             header("Location: ../");
             exit();
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $contraNovaV1 = htmlspecialchars($_POST['contrasenyaNova1']);
         $contraNovaV2 = htmlspecialchars($_POST['contrasenyaNova2']);
 
-        $canviContrasenya = canviarContrasenya($connexio, $contraActual, $contraNovaV1, $contraNovaV2);
+        $canviContrasenya = canviarContrasenya($contraActual, $contraNovaV1, $contraNovaV2);
         $error = $canviContrasenya;
 
     }
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-function comprovarUsuari(PDO $connexio, string $username, string $password) {
+function comprovarUsuari(string $username, string $password) {
 
     //mirem si hi halgun camp buit
     if (empty($username) && empty($password)) {
@@ -69,7 +69,7 @@ function comprovarUsuari(PDO $connexio, string $username, string $password) {
     } else {
         
         // Obtenim la contrasenya
-        $contra = modelNickNameExisteixLogin($connexio, $username);
+        $contra = modelNickNameExisteixLogin($username);
         //mirem si la contrassenya es igual
         if(password_verify($password, $contra)) {
             echo "!!!!CONTRASENYA CORRECTA!!!!";
@@ -99,7 +99,7 @@ function comprovarUsuari(PDO $connexio, string $username, string $password) {
     return $error;
 }
 
-function afegirUsuari(PDO $connexio, string $nom, string $cognoms, string $correu, string $nickname, string $contrasenya, string $confirmPassword) {    
+function afegirUsuari(string $nom, string $cognoms, string $correu, string $nickname, string $contrasenya, string $confirmPassword) {    
     // El regex per fer la comprovació de seguretat de la contrasenya
     $validarContrasenya = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};:,.<>?])[A-Za-z\d!@#$%^&*()_\-+=\[\]{};:,.<>?]{8,}$/';
 
@@ -112,11 +112,11 @@ function afegirUsuari(PDO $connexio, string $nom, string $cognoms, string $corre
         $error .= "Error no has ficat els COGNOMS<br>";
     } else if (empty($correu)) {
         $error .= "Error no has ficat el CORREU<br>";
-    } else if (modelCorreuExisteix($connexio, $correu) == "CorreuExisteix") {
+    } else if (modelCorreuExisteix($correu) == "CorreuExisteix") {
         $error .= "Error el CORREU ja existeix<br>";
     } else if (empty($nickname)) {
         $error .= "Error no has ficat el NICKNAME<br>";
-    } else if (modelNickNameExisteix($connexio, $nickname) == "NicknameExisteix") {
+    } else if (modelNickNameExisteix($nickname) == "NicknameExisteix") {
         $error .= "Error el NICKNAME ja existeix<br>";
     } else if (empty($contrasenya)) {
         $error .= "Error no has ficat CONTRASENYA<br>";
@@ -133,7 +133,7 @@ function afegirUsuari(PDO $connexio, string $nom, string $cognoms, string $corre
     // si no s'ha afegit res a error encriptem la contrasenya i creem l'Uusari
     if($error === "<br>") {
         $hashPassword = password_hash($contrasenya, PASSWORD_DEFAULT);
-        $crearUsuari = modelAfegeixUsuari($connexio, $nom, $cognoms, $correu, $nickname, $hashPassword);
+        $crearUsuari = modelAfegeixUsuari($nom, $cognoms, $correu, $nickname, $hashPassword);
         unset($_POST['firstname']);
         unset($_POST['lastname']);
         unset($_POST['email']);
@@ -146,7 +146,7 @@ function afegirUsuari(PDO $connexio, string $nom, string $cognoms, string $corre
     }
 }
 
-function canviarContrasenya (PDO $connexio, string $contraActual, string $contraNovaV1, string $contraNovaV2) {
+function canviarContrasenya (string $contraActual, string $contraNovaV1, string $contraNovaV2) {
     // El regex per fer la comprovació de seguretat de la contrasenya
     $validarContrasenya = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};:,.<>?])[A-Za-z\d!@#$%^&*()_\-+=\[\]{};:,.<>?]{8,}$/';
 
@@ -176,14 +176,14 @@ function canviarContrasenya (PDO $connexio, string $contraActual, string $contra
         echo $_SESSION['usuari'] . "-------------------";
         $nomUsuari = $_SESSION['usuari'];
         // obtenim la contra actual
-        $contra = modelNickNameExisteixLogin($connexio, $nomUsuari);
+        $contra = modelNickNameExisteixLogin($nomUsuari);
         
         //mirem que sigui igual
         if(password_verify($contraActual, $contra)) {
             // encriptem la nova contrasenya
             $hashPassword = password_hash($contraNovaV1, PASSWORD_DEFAULT);
             // i la canviem amb la noova contrasenya encriptada
-            $canviContrasenya = modelCanviContrasenya($connexio, $nomUsuari, $hashPassword);
+            $canviContrasenya = modelCanviContrasenya($nomUsuari, $hashPassword);
             // aquí verifiquem que s'ha actualitzat
             if ($canviContrasenya === "ContrasenyaCanviada"){
                 $error = "Contrasenya Actualitzada";
