@@ -29,9 +29,10 @@
 
         <div class="container d-flex justify-content-center align-items-center min-vh-100 my-5">
             <!-- Ventana flotante: usaremos un card de Bootstrap para simular el panel flotante -->
-            <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid black;">
+            <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
+                
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-                    <h2 class="text-center text-primary mb-4">Crea un compte</h2>
+                    <h1 class="text-center text-primary mb-4">Crea un compte</h1>
 
                     <div class="mb-3">
                         <label for="firstname" class="form-label">Nom</label>
@@ -87,6 +88,7 @@
 
                     <p class="text-center">Tens un compte? <a href="<?php echo BASE_URL; ?>/vista/login.vista.php" class="link-primary">Inicia Sessió</a></p>
                 </form>
+
             </div>
         </div>
 

@@ -27,7 +27,7 @@
         <div class="container d-flex justify-content-center align-items-center min-vh-100">
 
         
-            <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid black;">
+            <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
                 <form <?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="POST" class="row g-3">
                     <div class="col-12">
                         <label for="nomCampio" class="form-label">Nom del Champion</label>

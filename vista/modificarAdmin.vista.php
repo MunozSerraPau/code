@@ -40,7 +40,7 @@
             <!-- Ventana flotante: usaremos un card de Bootstrap para simular el panel flotante -->
             <!-- Si volem el fosn difuminat hem de ficar en class="bg-transparent" -->
             <div class="card shadow p-4 bg-light" style="max-width: auto; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid black;">
-                <h1 class="text-center text-primary mb-4">Iniciar sessió</h1>
+                <h1 class="text-center mb-4">Iniciar sessió</h1>
 
                 <div class="table-responsive">
                     <table class="table table-bordered">

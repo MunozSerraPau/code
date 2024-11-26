@@ -30,10 +30,11 @@
     <div class="row">
         <?php foreach ($campeons as $champion): ?>
             <div class="col-xs-12 col-md-6 col-lg-3 mb-4">
-                <div class="card">
-                    <img src="" class="card-img-top" alt="...">
+                <div class="card bg-card">
+                    <img src="" class="card-img-top m-2 w-auto h-auto" alt="...">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $champion['name']; ?></h5>
+                        <hr>
                         <p class="card-text"><?php echo $champion['description']; ?></p>
                         <div class="d-flex jus justify-content-between aling-items-center">
                             <p><?php echo $champion['resource']; ?></p>
@@ -121,10 +122,11 @@
     <div class="row">
         <?php foreach ($campeons as $champion): ?>
             <div class="col-xs-12 col-md-6 col-lg-3 mb-4">
-                <div class="card">
+                <div class="card bg-card">
                     <img src="" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $champion['name']; ?></h5>
+                        <hr>
                         <p class="card-text"><?php echo $champion['description']; ?></p>
                         <div class="d-flex jus justify-content-between aling-items-center">
                             <p><?php echo $champion['resource']; ?></p>

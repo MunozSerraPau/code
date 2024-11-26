@@ -1,9 +1,12 @@
 
 
 :root {
-  --bs-primary: #ff5733;
-  --bs-secondary: #333333;
+  --bs-primary: #343a40;
+  --bs-secondary: #191B24;
+  --bs-triary: #493185;
+  --bs-backgroundCard: #EBF1FF;
   --bs-success: #28a745;
+  --bs-dark: #191B24;
 }
 
 
@@ -27,10 +30,29 @@
   border-radius: 25px;
 }
 
-body p{
-  color: #191B24;
-}
+
+
 body h1{
-  color: #191B24;
+  color: var(--bs-primary) !important;
+}
+body h5 {
+  color: var(--bs-triary) !important;
+  /* text-decoration: underline; */
+  font-weight: bold;
 }
 
+body p{
+  color: var(--bs-secondary) !important;
+}
+
+.text-primary {
+  color: var(--bs-primary) !important;
+}
+
+.text-secondary {
+  color: var(--bs-secondary) !important;
+}
+
+.bg-card {
+  background-color: var(--bs-backgroundCard) !important;
+}
