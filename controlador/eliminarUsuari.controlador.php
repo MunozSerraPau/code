@@ -21,24 +21,24 @@ if (isset($_GET["nickname"]) && isset($_GET["action"])) {
         if (modelEliminarUsuari($numUsuari) === "ELIMINAT") {
 
             // Alerta de que s'ha eliminat l'Usuari
-            echo '<script> alert("USUARI ELIMINAT!!"); window.location.href = "../index.php"; </script>';
+            echo '<script> alert("USUARI ELIMINAT!!"); </script>';
+            header("Location: " . BASE_URL . "/vista/modificarAdmin.vista.php");
             exit();
 
         } else {
             //  Sino ens envia directement al index despres de 3 segons
-            echo '<script> alert("ERROR no s\'ha eliminar el Usuari"); window.location.href = "../index.php"; </script>';
+            echo '<script> alert("ERROR no s\'ha eliminar el Usuari"); </script>';
+            header("Location: " . BASE_URL . "/index.php");
             exit();
 
         }
 
     } else {
-        echo '<script> alert("Error"); window.location.href = "../index.php"; </script>';
+        echo '<script> alert("Error 2"); </script>';
+        header("Location: " . BASE_URL . "/index.php");
         exit();
     }
 
-} else {
-    echo '<script> alert("Error"); window.location.href = "../index.php"; </script>';
-    exit();
 }
 
 

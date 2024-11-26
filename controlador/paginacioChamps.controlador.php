@@ -4,8 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once BASE_PATH . "/model/paginacio.model.php";
-require_once BASE_PATH . "/model/buscarChamp.model.php";
+require_once BASE_PATH . "/model/paginacioChamps.model.php";
 
 
 // Inicialitzem les variables
@@ -154,7 +153,6 @@ function mostrarChampsSenseLogin($paraula) {
     $inici = ($pagina > 1) ? ($pagina * $champsPerPagina - $champsPerPagina) : 0 ;
     
     if ($paraula !== '') {
-        echo "                Paginacio de la cerca Loguejat" . $paraula;
         $campeons = selectChampsBuscadorSenseLogin($inici, $champsPerPagina, $ordre, $paraula);
 
         $totalChamps = (int) contarChampionsBuscarSenseLoguejarModel($paraula);

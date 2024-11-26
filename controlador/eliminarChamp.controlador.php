@@ -26,28 +26,33 @@
                 if (modelEliminarCampion($idChampion) === "ELIMINAT") {
 
                     // esperem 3 segons i ens redirigeix al index.php
-                    echo '<script> alert("Campio ELIMINAT!!"); window.location.href = "../index.php"; </script>';
+                    echo '<script> alert("Campio ELIMINAT!!"); </script>';
+                    header("Location: " . BASE_URL . "/index.php");
                     exit();
 
                 } else {
                     //  Sino ens envia directement al index despres de 3 segons
-                    echo '<script> alert("Error al eliminar el campio"); window.location.href = "../index.php"; </script>';
+                    echo '<script> alert("Error al eliminar el campio"); </script>';
+                    header("Location: " . BASE_URL . "/index.php");
                     exit();
 
                 }
             } else {
-                echo '<script> alert("Error al eliminar el campio"); window.location.href = "../index.php"; </script>';
+                echo '<script> alert("Error al eliminar el campio"); </script>';
+                header("Location: " . BASE_URL . "/index.php");
                 exit();
 
             }
 
         } else {
-            echo '<script> alert("Error al eliminar el campio"); window.location.href = "../index.php"; </script>';
+            echo '<script> alert("Error al eliminar el campio"); </script>';
+            header("Location: " . BASE_URL . "/index.php");
             exit();
         }
 
     } else {
-        echo '<script> alert("Error al eliminar el campio"); window.location.href = "../index.php"; </script>';
+        echo '<script> alert("Error al eliminar el campio"); </script>';
+        header("Location: " . BASE_URL . "/index.php");
         exit();
     }
 

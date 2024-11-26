@@ -12,13 +12,14 @@
 <body>
     <?php require_once '../env.php'; ?>
     <?php require_once BASE_PATH . '/controlador/eliminarUsuari.controlador.php'; ?>
+    <?php require_once BASE_PATH . '/controlador/paginacioUsuaris.controlador.php'; ?>
+
     <?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
     <script>
         function confirmarEliminacion() {
-            return confirm('Estas segur que vols eliminar aquest campió?');
+            return confirm('Estas segur que vols eliminar aquest USUARI?');
         }
     </script>
-
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
@@ -31,13 +32,15 @@
 
 
 
+    <!-- CODI DE LA WEB -->
+
     <div class="containerr">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
         <div class="container d-flex justify-content-center align-items-center min-vh-100">
             <!-- Ventana flotante: usaremos un card de Bootstrap para simular el panel flotante -->
             <!-- Si volem el fosn difuminat hem de ficar en class="bg-transparent" -->
             <div class="card shadow p-4 bg-light" style="max-width: auto; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid black;">
-                <h2 class="text-center">Modificar Administrador</h2>
+                <h1 class="text-center text-primary mb-4">Iniciar sessió</h1>
 
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -48,19 +51,19 @@
                                 <th scope="col">Nom</th>
                                 <th scope="col">Cognoms</th>
                                 <th scope="col">Correu</th>
-                                <th scope="col">Accions</th>
+                                <th scope="col" class="d-flex justify-content-center">Accions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($llistaUsuaris as $usuari): ?>
                                 <tr>
                                     <td><img src="" alt="Imagen de usuario" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;"></td>
-                                    <td><?php echo $champion['nickname']; ?></td>
-                                    <td><?php echo $champion['nom']; ?></td>
-                                    <td><?php echo $champion['cognoms']; ?></td>
-                                    <td><?php echo $champion['correu']; ?></td>
-                                    <td>
-                                        <a href="<?php echo BASE_URL; ?>/controlador/eliminarUsuari.controlador.php?id=<?php echo $usuari['nickname'] ?>&action=delete" class="me-2 btn btn-danger" onclick="return confirmarEliminacion()">
+                                    <td><?php echo $usuari['nickname']; ?></td>
+                                    <td><?php echo $usuari['nom']; ?></td>
+                                    <td><?php echo $usuari['cognoms']; ?></td>
+                                    <td><?php echo $usuari['correu']; ?></td>
+                                    <td class="d-flex justify-content-center">
+                                        <a href="<?php echo BASE_URL; ?>/controlador/eliminarUsuari.controlador.php?nickname=<?php echo $usuari['nickname'] ?>&action=delete" class="me-2 btn btn-danger" onclick="return confirmarEliminacion()">
                                             <i class="bi bi-trash3-fill"></i>
                                         </a>
                                     </td>
