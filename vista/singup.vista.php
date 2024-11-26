@@ -64,6 +64,11 @@
                         <input type="password" id="confirm-password" name="confirm-password" class="form-control">
                     </div>
 
+                    <div class="mb-3">
+                        <label for="championImage" class="form-label">Img Perfil</label>
+                        <input type="file" class="form-control" id="championImage" name="championImage" accept="image/*">
+                    </div>
+
                     <?php if (isset($error)): ?>
                         <?php if (!empty($error) && $error != "S'ha creat Correctament"): ?>
                             <div class="alert alert-danger d-flex align-items-center" role="alert">

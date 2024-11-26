@@ -56,3 +56,13 @@ body p{
 .bg-card {
   background-color: var(--bs-backgroundCard) !important;
 }
+
+
+
+/* CLASSES ESPECIFIQUES */
+.h-min-content {
+  height: min-content;
+}
+.border-radius-10 {
+  border-radius: 10px;
+}

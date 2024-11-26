@@ -18,8 +18,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $contrasenya = htmlspecialchars($_POST['password']);
         $confirmPassword = htmlspecialchars($_POST['confirm-password']);
 
+        if($_FILES['championImage']["name"] != "" && $_FILES['championImage']['error'] == 0) {
+            $nomGenericImatge = $_FILES['championImage']['tmp_name'];
+            $shaCreat = $nomGenericImatge;
+            $nomImg = basename($_FILES['championImage']['name']);
+            $shaCreat += $nomImg;
+            $rutaDestino = BASE_URL . "/vistaGlobal/imgPerfil/" . $nomImg;
+            $shaCreat += $rutaDestino;
+        } else {
+            $nomImg = "default.png";
+            $rutaDestino = BASE_URL . "/vistaGlobal/imgPerfil/default.png";
+            $shaCreat = $rutaDestino . "NoImatge   ";
+        }
+        
+
         // Creem l'Usuari
-        $shaCreat = afegirUsuari($nom, $cognoms, $correu, $nickname, $contrasenya, $confirmPassword);
+        $shaCreat .= afegirUsuari($nom, $cognoms, $correu, $nickname, $contrasenya, $confirmPassword, $nomImg, $rutaDestino);
 
         // Fem la comprovació
         if($shaCreat === "SiCreat") {
@@ -57,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-function comprovarUsuari(string $username, string $password) {
+function comprovarUsuari($username, $password) {
 
     //mirem si hi halgun camp buit
     if (empty($username) && empty($password)) {
@@ -104,7 +118,7 @@ function comprovarUsuari(string $username, string $password) {
     return $error;
 }
 
-function afegirUsuari(string $nom, string $cognoms, string $correu, string $nickname, string $contrasenya, string $confirmPassword) {    
+function afegirUsuari($nom, $cognoms, $correu, $nickname, $contrasenya, $confirmPassword, $nomImg, $rutaDestino) {    
     // El regex per fer la comprovació de seguretat de la contrasenya
     $validarContrasenya = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};:,.<>?])[A-Za-z\d!@#$%^&*()_\-+=\[\]{};:,.<>?]{8,}$/';
 
@@ -138,20 +152,27 @@ function afegirUsuari(string $nom, string $cognoms, string $correu, string $nick
     // si no s'ha afegit res a error encriptem la contrasenya i creem l'Uusari
     if($error === "<br>") {
         $hashPassword = password_hash($contrasenya, PASSWORD_DEFAULT);
-        $crearUsuari = modelAfegeixUsuari($nom, $cognoms, $correu, $nickname, $hashPassword);
-        unset($_POST['firstname']);
-        unset($_POST['lastname']);
-        unset($_POST['email']);
-        unset($_POST['nickname']);
-        unset($_POST['password']);
-        unset($_POST['confirm-password']);
-        return $crearUsuari;
+        if (move_uploaded_file($nomImg, $rutaDestino)) {
+            $crearUsuari = modelAfegeixUsuari($nom, $cognoms, $correu, $nickname, $hashPassword, $rutaDestino);
+
+            unset($_POST['firstname']);
+            unset($_POST['lastname']);
+            unset($_POST['email']);
+            unset($_POST['nickname']);
+            unset($_POST['password']);
+            unset($_POST['confirm-password']);
+
+            return $crearUsuari;
+        } else {
+            $error = "Error al pujar l'arxiu<br>";
+            return $error;
+        }
     } else {
         return $error;
     }
 }
 
-function canviarContrasenya (string $contraActual, string $contraNovaV1, string $contraNovaV2) {
+function canviarContrasenya ($contraActual, $contraNovaV1, $contraNovaV2) {
     // El regex per fer la comprovació de seguretat de la contrasenya
     $validarContrasenya = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};:,.<>?])[A-Za-z\d!@#$%^&*()_\-+=\[\]{};:,.<>?]{8,}$/';
 

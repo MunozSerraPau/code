@@ -114,10 +114,10 @@ function modelNickNameExisteix($nickname) {
 
 
 // Afegim un nou Usari amb totes les dades que li passem
-function modelAfegeixUsuari($nom, $cognoms, $correu, $nickname, $contrasenya) {
+function modelAfegeixUsuari($nom, $cognoms, $correu, $nickname, $contrasenya, $rutaDestino) {
     try {
         global $connexio;
-        $sql = "INSERT INTO usuaris (nom, cognoms, correu, nickname, contrasenya) VALUES (:nom, :cognoms, :correu, :nickname, :contrasenya)";
+        $sql = "INSERT INTO usuaris (nom, cognoms, correu, nickname, contrasenya, imgPerfil) VALUES (:nom, :cognoms, :correu, :nickname, :contrasenya, :imgPerfil)";
         $statement = $connexio->prepare($sql);
         $statement->execute( 
             array(
@@ -125,7 +125,9 @@ function modelAfegeixUsuari($nom, $cognoms, $correu, $nickname, $contrasenya) {
             ':cognoms' => $cognoms,
             ':correu' => $correu,
             ':nickname' => $nickname, 
-            ':contrasenya' => $contrasenya )
+            ':contrasenya' => $contrasenya,
+            ':imgPerfil' => $rutaDestino
+            )
         );
 
         return "SiCreat";

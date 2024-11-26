@@ -39,7 +39,7 @@
             </span>
         </button>
         <div
-          class="offcanvas offcanvas-end"
+          class="offcanvas offcanvas-end h-min-content border-radius-10"
           tabindex="-1"
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
@@ -62,8 +62,8 @@
               aria-label="Close"
             ></button>
           </div>
-
-          <div class="offcanvas-body">
+          <hr>
+          <div class="offcanvas-body  h-min-content">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
                 <a class="nav-link" href="<?php echo BASE_URL; ?>/vista/editarPerfil.vista.php">Editar Perfil</a>
@@ -115,7 +115,7 @@
             </span>
         </button>
         <div
-          class="offcanvas offcanvas-end"
+          class="offcanvas offcanvas-end h-min-content border-radius-10"
           tabindex="-1"
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
@@ -138,8 +138,8 @@
               aria-label="Close"
             ></button>
           </div>
-
-          <div class="offcanvas-body">
+          <hr>
+          <div class="offcanvas-body h-min-content">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
                 <a class="nav-link" href="<?php echo BASE_URL; ?>/vista/login.vista.php">LOGIN</a>
