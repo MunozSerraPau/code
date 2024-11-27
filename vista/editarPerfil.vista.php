@@ -11,10 +11,8 @@
 </head>
 <body>
     <?php require_once '../env.php'; ?>
-    <?php require_once BASE_PATH . "/controlador/usuaris.controlador.php" ?>
-    <?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
+    <?php require BASE_PATH . "/controlador/editarUsuari.controlador.php" ?>
     
-
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
@@ -25,62 +23,52 @@
         </symbol>
     </svg>
 
+    <?php var_dump($usuariInfo); ?>
 
 
     <div class="containerr">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
-        <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="container d-flex justify-content-center align-items-center min-vh-100 mt-5 pb-5">
             <!-- Ventana flotante: usaremos un card de Bootstrap para simular el panel flotante -->
             <!-- Si volem el fosn difuminat hem de ficar en class="bg-transparent" -->
             <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
 
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
                     <h2 class="text-center text-primary mb-4">Editar Perfil</h2>
+
+                    <div class="d-flex justify-content-center mb-4">
+                        <img src="<?php echo BASE_URL . $usuariInfo['imgPerfil']; ?>" alt="Imagen de perfil" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover; border: 3px solid #454962;">
+                    </div>
 
                     <div class="mb-3">
                         <label for="firstname" class="form-label">Nom</label>
-                        <input type="text" id="firstname" name="firstname" class="form-control" value="<?php if (isset($_POST['firstname'])) { echo $_POST['firstname']; } ?>">
+                        <input type="text" id="firstname" name="firstname" class="form-control" value="<?php echo $usuariInfo['nom']; ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="lastname" class="form-label">Cognoms</label>
-                        <input type="text" id="lastname" name="lastname" class="form-control" value="<?php if (isset($_POST['lastname'])) { echo $_POST['lastname']; } ?>">
+                        <input type="text" id="lastname" name="lastname" class="form-control" value="<?php echo $usuariInfo['cognoms']; ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Correu</label>
-                        <input type="email" id="email" name="email" class="form-control" value="<?php if (isset($_POST['email'])) { echo $_POST['email']; } ?>">
+                        <input type="email" id="email" name="email" class="form-control" value="<?php echo $usuariInfo['correu']; ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="nickname" class="form-label">Nom d'Usuari</label>
-                        <input type="text" id="nickname" name="nickname" class="form-control" value="<?php if (isset($_POST['nickname'])) { echo $_POST['nickname']; } ?>">
+                        <input type="text" id="nickname" name="nickname" class="form-control" value="<?php echo $usuariInfo['nickname']; ?>">
                     </div>
 
-
-                    <?php if (isset($error)): ?>
-                        <?php if (!empty($error) && $error != "S'ha creat Correctament"): ?>
-                            <div class="alert alert-danger d-flex align-items-center" role="alert">
-                                <svg class="bi flex-shrink-0 me-2" style="width: 50px; height: auto;" role="img" aria-label="Danger:">
-                                    <use xlink:href="#exclamation-triangle-fill"/>
-                                </svg> 
-                                <div><?php echo $error; ?></div>
-                            </div>
-                        <?php elseif ($error === "S'ha creat Correctament"): ?>
-                            <div class="alert alert-primary d-flex align-items-center" role="alert">
-                                <svg class="bi flex-shrink-0 me-2" style="width: 50px; height: auto;" role="img" aria-label="Success:">
-                                    <use xlink:href="#check-circle-fill"/>
-                                </svg>
-                                <div><p>S'ha creat l'Usuari correctament!</p></div>
-                            </div>
-                        <?php endif; ?>
-                    <?php endif; ?>
+                    <div class="mb-3">
+                        <label for="userImg" class="form-label">Img Perfil</label>
+                        <input type="file" class="form-control" id="userImg" name="userImg" accept="image/*">
+                    </div>
 
                     <div class="d-grid mb-3">
-                        <button type="submit" class="btn btn-primary" name="singup">CREAR COMPTE</button>
+                        <button type="submit" class="btn btn-primary" name="updateUsuari">CREAR COMPTE</button>
                     </div>
 
-                    <p class="text-center">Tens un compte? <a href="<?php echo BASE_URL; ?>/vista/login.vista.php" class="link-primary">Inicia Sessió</a></p>
                 </form>
             
             </div>

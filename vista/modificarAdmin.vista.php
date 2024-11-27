@@ -57,7 +57,7 @@
                         <tbody>
                             <?php foreach ($llistaUsuaris as $usuari): ?>
                                 <tr>
-                                    <td><img src="" alt="Imagen de usuario" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;"></td>
+                                    <td><img src="<?php echo BASE_URL . $usuari['imgPerfil'] ?>" alt="Imagen de usuario" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;"></td>
                                     <td><?php echo $usuari['nickname']; ?></td>
                                     <td><?php echo $usuari['nom']; ?></td>
                                     <td><?php echo $usuari['cognoms']; ?></td>

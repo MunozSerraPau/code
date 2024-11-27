@@ -19,18 +19,15 @@
 
         if (modelComprovarChampNickname($idChampion, $nomUsuari) === "LaCreatEll") {
             if(modelModificarCampion($name, $description, $recurce, $role, $idChampion) === "Actualitzat") {
-                echo '<script> alert("Champ actualitzat correctament"); </script>';
-                header("Location: " . BASE_URL . "/index.php");
+                echo '<script> alert("Champ actualitzat correctament"); window.location.href = "' . BASE_URL . '/index.php"; </script>';
                 exit();
             } else {
-                echo '<script> alert("Error al actualitzar el campió"); </script>';
-                header("Location: " . BASE_URL . "/index.php");
+                echo '<script> alert("Error al actualitzar el campió"); window.location.href = "' . BASE_URL . '/index.php"; </script>';
                 exit();
             }
         } else {
             // Denegar l'acceso i mostrar un missatge d'error
-            echo '<script> alert("Error NO tens permisos per editar aquest campió"); </script>';
-            header("Location: " . BASE_URL . "/index.php");
+            echo '<script> alert("Error NO tens permisos per editar aquest campió"); window.location.href = "' . BASE_URL . '/index.php"; </script>';
             exit();
         }
     } else if (isset($_GET['idChampEditar'])) {
@@ -40,8 +37,7 @@
         if (modelComprovarChampNickname($idChampion, $nomUsuari) === "LaCreatEll") {
             $champ = modelObtenirChamp($idChampion);
         } else {
-            echo '<script> alert("Error NO tens permisos per editar aquest campió"); </script>';
-            header("Location: " . BASE_URL . "/index.php");
+            echo '<script> alert("Error NO tens permisos per editar aquest campió"); window.location.href = "' . BASE_URL . '/index.php"; </script>';
             exit();
         }
     }
