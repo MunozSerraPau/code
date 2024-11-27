@@ -15,7 +15,7 @@
         <div class="col-xs-12 col-md-6 col-lg-3 mb-4">
             <form class="d-flex justify-content-center" method="POST">
                 <div class="input-group" style="max-width: 500px;">
-                    <input type="text" class="form-control" name="paraulaBuscador" placeholder="Busca..." aria-label="Buscar">
+                    <input type="text" class="form-control" name="paraulaBuscador" placeholder="Busca..." aria-label="Buscar" value="<?php echo $paraulaBuscar; ?>">
                     <button class="btn btn-primary" type="submit" name="buscador"><i class="bi bi-search"></i></button>
                 </div>
             </form>
@@ -26,6 +26,8 @@
             <a style="height: 50px;" class="btn btn-primary w-25 align-content-center" href="<?php echo BASE_URL; ?>/vista/afegirChamp.vista.php" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
         </div>
     </div>
+
+    <?php echo "------" . $paraulaBuscar . "------"; ?>
 
     <div class="row">
         <?php foreach ($campeons as $champion): ?>
@@ -113,7 +115,7 @@
         <div class="col-xs-12 col-md-6 col-lg-3 mb-4">
             <form class="d-flex justify-content-center" method="POST">
                 <div class="input-group" style="max-width: 500px;">
-                    <input type="text" class="form-control" name="paraulaBuscador" placeholder="Busca..." aria-label="Buscar">
+                    <input type="text" class="form-control" name="paraulaBuscador" placeholder="Busca..." aria-label="Buscar" value="<?php echo $paraulaBuscar; ?>">
                     <button class="btn btn-primary" type="submit" name="buscador"><i class="bi bi-search"></i></button>
                 </div>
             </form>

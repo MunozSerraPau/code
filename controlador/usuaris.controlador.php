@@ -18,31 +18,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $contrasenya = htmlspecialchars($_POST['password']);
         $confirmPassword = htmlspecialchars($_POST['confirm-password']);
 
-        echo '<pre>';
-        print_r($_FILES);
-        echo '</pre>';
-
         if (isset($_FILES['championImage']) && $_FILES['championImage']['error'] !== UPLOAD_ERR_NO_FILE) {
             if ($_FILES['championImage']['error'] === UPLOAD_ERR_OK) {
-                $nomGenericImatge = $_FILES['championImage']['tmp_name'];
-                $nomImg = basename($_FILES['championImage']['name']);
-                $rutaDestino = BASE_PATH . "/vistaGlobal/imgPerfil/" . $nomImg;
+                $nomGenericImatge = $_FILES['championImage']['tmp_name'];   
+                echo "Nom genèric de la imatge: " . $nomGenericImatge . "<br>"; 
+                $nomImg = uniqid(prefix:"img") . basename($_FILES['championImage']['name']); 
+                $rutaDestino = "/vistaGlobal/imgPerfil/" . $nomImg;
+
             }else {
                 echo "Error al subir el archivo: " . $_FILES['championImage']['error'];
+                
             }
         } else {
-            echo "No se subió ningún archivo.";
-            $nomImg = "default.png";
-            $rutaDestino = BASE_URL . "/vistaGlobal/imgPerfil/default.png";
-            $shaCreat = $rutaDestino . "NoImatge   ";
-        }
-        echo $nomImg;
-        echo $rutaDestino;
+            $nomGenericImatge = $_FILES[uniqid()]['tmp_name'];
+            $rutaDestino = "/vistaGlobal/imgPerfil/default.png";
 
-        
+        }
+
 
         // Creem l'Usuari
-        $shaCreat = afegirUsuari($nom, $cognoms, $correu, $nickname, $contrasenya, $confirmPassword, $nomImg, $rutaDestino);
+        $shaCreat = afegirUsuari($nom, $cognoms, $correu, $nickname, $contrasenya, $confirmPassword, $rutaDestino, $nomGenericImatge);
+        
 
         // Fem la comprovació
         if($shaCreat === "SiCreat") {
@@ -100,6 +96,7 @@ function comprovarUsuari($username, $password) {
             // Creem la session i guardem el nickname del Usuari
             $error = "UsuariConnectat";
             $_SESSION['usuari'] = $username;
+            $_SESSION['fotoPerfil'] = modelObtenirUrlImgPerfil($username);
             if (modelComprovarUsuariAdministrador($username) == "EsAdmin") {
                 $_SESSION['admin'] = "true";
             } else {
@@ -127,7 +124,7 @@ function comprovarUsuari($username, $password) {
     return $error;
 }
 
-function afegirUsuari($nom, $cognoms, $correu, $nickname, $contrasenya, $confirmPassword, $nomImg, $rutaDestino) {    
+function afegirUsuari($nom, $cognoms, $correu, $nickname, $contrasenya, $confirmPassword, $rutaDestino, $nomGenericImatge) {    
     // El regex per fer la comprovació de seguretat de la contrasenya
     $validarContrasenya = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};:,.<>?])[A-Za-z\d!@#$%^&*()_\-+=\[\]{};:,.<>?]{8,}$/';
 
@@ -161,9 +158,12 @@ function afegirUsuari($nom, $cognoms, $correu, $nickname, $contrasenya, $confirm
     // si no s'ha afegit res a error encriptem la contrasenya i creem l'Uusari
     if($error === "<br>") {
         $hashPassword = password_hash($contrasenya, PASSWORD_DEFAULT);
-        var_dump($nomImg);
-        var_dump($rutaDestino);
-        if (move_uploaded_file($nomImg, $rutaDestino)) {
+
+        echo "<br>" . $nomGenericImatge . "XXXXXXXXXXXXXX";
+        echo "<br>XXXXXXXXXXXXXXX" . BASE_PATH . $rutaDestino . "XXXXXXXXXXXXXXX";
+
+        
+        if (move_uploaded_file($nomGenericImatge, BASE_PATH . $rutaDestino)) {
             $crearUsuari = modelAfegeixUsuari($nom, $cognoms, $correu, $nickname, $hashPassword, $rutaDestino);
 
             unset($_POST['firstname']);

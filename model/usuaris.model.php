@@ -59,6 +59,34 @@ function modelContrasenyaIgualLogin($username, $password) {
 }
 
 
+// Retorna la ruta de la img de perfil
+function modelObtenirUrlImgPerfil($username) {
+    try {
+        global $connexio;
+        $sql = "SELECT imgPerfil FROM usuaris WHERE nickname = :username";
+        $statement = $connexio->prepare($sql);
+        
+        $statement->execute( 
+            array(
+            ':username' => $username
+            )
+        );
+        
+        $resultat = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($resultat) {
+            return $resultat['imgPerfil'];
+        } else {
+            return "NoHiHaUsuari";
+        }
+
+    } catch (PDOException $e) {
+        $error = "Falla a la connexio a la Base de Dades";
+        return $error;
+    }
+}
+
+
 function modelCorreuExisteix($correu) {
     try {
         global $connexio;

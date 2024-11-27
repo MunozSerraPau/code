@@ -16,24 +16,46 @@ $campeons = [];         // Array de campions
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buscador'])) {
+
     if (isset($_SESSION['usuari'])) {
-        $paraula = htmlspecialchars(trim($_POST['paraulaBuscador']));
-        mostrarChampsLoguejat($paraula);
-
+        $paraulaBuscar = htmlspecialchars(trim($_POST['paraulaBuscador']));
+        setcookie('paraulaBuscador', $paraulaBuscar, time() + 3600 * 24 * 30, "/");
+        
+        mostrarChampsLoguejat($paraulaBuscar);
     } else {
-        $paraula = htmlspecialchars(trim($_POST['paraulaBuscador']));
-        mostrarChampsSenseLogin($paraula);
+        $paraulaBuscar = htmlspecialchars(trim($_POST['paraulaBuscador']));
+        setcookie('paraulaBuscador', $paraulaBuscar, time() + 3600 * 24 * 30, "/");
+        mostrarChampsSenseLogin($paraulaBuscar);
     }
-
-} else if (isset($_SESSION['usuari'])) {
-    $paraula = '';
-    mostrarChampsLoguejat($paraula);
-
 } else {
-    $paraula = '';
-    mostrarChampsSenseLogin($paraula);
-
+    if (isset($_SESSION['usuari'])) {
+        $paraulaBuscar = isset($_COOKIE['paraulaBuscador']) ? htmlspecialchars($_COOKIE['paraulaBuscador']) : '';
+        mostrarChampsLoguejat($paraulaBuscar);
+    } else {
+        $paraulaBuscar = isset($_COOKIE['paraulaBuscador']) ? htmlspecialchars($_COOKIE['paraulaBuscador']) : '';
+        mostrarChampsSenseLogin($paraulaBuscar);
+    }
 }
+
+// if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buscador'])) {
+//     if (isset($_SESSION['usuari'])) {
+//         $paraulaBuscar = htmlspecialchars(trim($_POST['paraulaBuscador']));
+//         mostrarChampsLoguejat($paraulaBuscar);
+
+//     } else {
+//         $paraulaBuscar = htmlspecialchars(trim($_POST['paraulaBuscador']));
+//         mostrarChampsSenseLogin($paraulaBuscar);
+//     }
+
+// } else if (isset($_SESSION['usuari'])) {
+//     $paraulaBuscar = '';
+//     mostrarChampsLoguejat($paraula);
+
+// } else {
+//     $paraulaBuscar = '';
+//     mostrarChampsSenseLogin($paraula);
+
+// }
 
 
 function mostrarChampsLoguejat($paraula) {

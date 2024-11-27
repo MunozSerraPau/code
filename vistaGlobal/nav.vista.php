@@ -6,6 +6,11 @@
   if (isset($_SESSION['admin'])) {
     $admin = $_SESSION['admin'];
   }
+  if (isset($_SESSION['fotoPerfil'])) {
+    $urlFotoPerfil = BASE_URL . $_SESSION['fotoPerfil'];
+  } else {
+    $urlFotoPerfil = "https://i.pinimg.com/236x/2f/97/f0/2f97f05b32547f54ef1bdf99cd207c90.jpg";
+  }
 ?>
 
 <?php if(!empty($nomUsuari)): ?>
@@ -29,7 +34,7 @@
         >
             <span class="d-flex">
                 <img
-                 src="https://i.pinimg.com/236x/2f/97/f0/2f97f05b32547f54ef1bdf99cd207c90.jpg"
+                 src="<?php echo $urlFotoPerfil ?>"
                  alt="Foto de perfil"
                  class="rounded-circle"
                  width="40"
@@ -46,7 +51,7 @@
         >
           <div class="offcanvas-header">
             <img
-              src="https://i.pinimg.com/236x/2f/97/f0/2f97f05b32547f54ef1bdf99cd207c90.jpg"
+              src="<?php echo $urlFotoPerfil ?>"
               alt="Foto de perfil"
               class="rounded-circle"
               width="50"
@@ -105,7 +110,7 @@
         >
             <span>
                 <img
-                 src="https://i.pinimg.com/236x/2f/97/f0/2f97f05b32547f54ef1bdf99cd207c90.jpg"
+                 src="<?php echo $urlFotoPerfil ?>"
                  alt="Foto de perfil"
                  class="rounded-circle"
                  width="40"
