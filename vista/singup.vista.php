@@ -31,7 +31,7 @@
             <!-- Ventana flotante: usaremos un card de Bootstrap para simular el panel flotante -->
             <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
                 
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
                     <h1 class="text-center text-primary mb-4">Crea un compte</h1>
 
                     <div class="mb-3">

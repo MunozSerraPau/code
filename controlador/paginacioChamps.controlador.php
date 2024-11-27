@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 require_once BASE_PATH . "/model/paginacioChamps.model.php";
+require_once BASE_PATH . "/model/buscarChamp.model.php";
 
 
 // Inicialitzem les variables
@@ -149,11 +150,9 @@ function mostrarChampsSenseLogin($paraula) {
     // Mira quina paguina estem situats
     $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
     
-    // Calcular l'inici per a la consulta
-    $inici = ($pagina > 1) ? ($pagina * $champsPerPagina - $champsPerPagina) : 0 ;
+    
     
     if ($paraula !== '') {
-        $campeons = selectChampsBuscadorSenseLogin($inici, $champsPerPagina, $ordre, $paraula);
 
         $totalChamps = (int) contarChampionsBuscarSenseLoguejarModel($paraula);
 
@@ -165,7 +164,16 @@ function mostrarChampsSenseLogin($paraula) {
             $pagina = 1;
         }
 
+        // Calcular l'inici per a la consulta
+        $inici = ($pagina > 1) ? ($pagina * $champsPerPagina - $champsPerPagina) : 0 ;
+
+        $campeons = selectChampsBuscadorSenseLogin($inici, $champsPerPagina, $ordre, $paraula);
+
+
     } else {
+        // Calcular l'inici per a la consulta
+        $inici = ($pagina > 1) ? ($pagina * $champsPerPagina - $champsPerPagina) : 0 ;
+        
         // Obtenir els champs de la base de dades
         $campeons = selectModel($inici, $champsPerPagina, $ordre);
 
