@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_SESSION['usuari']) && isset
                 unset($_POST['descripcio']);
                 unset($_POST['resource']);
                 unset($_POST['role']);
-               $error = "ChampCreat";
+                $error = "ChampCreat";
 
 
                 // OPCIO 2 (Alert i retornar a la pagina principal)

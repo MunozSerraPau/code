@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
             }
         } else {
-            $nomGenericImatge = $_FILES[uniqid()]['tmp_name'];
+            $nomGenericImatge = "";
             $rutaDestino = "/vistaGlobal/imgPerfil/default.png";
 
         }
@@ -162,8 +162,18 @@ function afegirUsuari($nom, $cognoms, $correu, $nickname, $contrasenya, $confirm
         echo "<br>" . $nomGenericImatge . "XXXXXXXXXXXXXX";
         echo "<br>XXXXXXXXXXXXXXX" . BASE_PATH . $rutaDestino . "XXXXXXXXXXXXXXX";
 
-        
-        if (move_uploaded_file($nomGenericImatge, BASE_PATH . $rutaDestino)) {
+        if ($nomGenericImatge === "") {
+            $crearUsuari = modelAfegeixUsuari($nom, $cognoms, $correu, $nickname, $hashPassword, $rutaDestino);
+
+            unset($_POST['firstname']);
+            unset($_POST['lastname']);
+            unset($_POST['email']);
+            unset($_POST['nickname']);
+            unset($_POST['password']);
+            unset($_POST['confirm-password']);
+
+            return $crearUsuari;
+        } else if (move_uploaded_file($nomGenericImatge, BASE_PATH . $rutaDestino)) {
             $crearUsuari = modelAfegeixUsuari($nom, $cognoms, $correu, $nickname, $hashPassword, $rutaDestino);
 
             unset($_POST['firstname']);

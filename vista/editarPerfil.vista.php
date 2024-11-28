@@ -23,8 +23,6 @@
         </symbol>
     </svg>
 
-    <?php var_dump($usuariInfo); ?>
-
 
     <div class="containerr">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
@@ -64,6 +62,31 @@
                         <label for="userImg" class="form-label">Img Perfil</label>
                         <input type="file" class="form-control" id="userImg" name="userImg" accept="image/*">
                     </div>
+
+                    <?php if (isset($error)): ?>
+                        <?php if (!empty($error) && $error != "Usuari ACTUALITZAT CORRECTAMENT!" && $error != "ATENCIO, no s'ha fet cap canvi!" && $error != "<br>"): ?>
+                            <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                                    <use xlink:href="#exclamation-triangle-fill"></use>
+                                </svg>
+                                <div><?php echo $error ?></div>
+                            </div>
+                        <?php elseif ($error == "ATENCIO, no s'ha fet cap canvi!"): ?>
+                            <div class="alert alert-warning d-flex align-items-center mt-3" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                                    <use xlink:href="#exclamation-triangle-fill"></use>
+                                </svg>
+                                <div>ATENCIO, no s'ha fet cap canvi!</div>
+                            </div>
+                        <?php elseif ($error == "Usuari ACTUALITZAT CORRECTAMENT!"): ?>
+                            <div class="alert alert-success d-flex align-items-center mt-3" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                                    <use xlink:href="#check-circle-fill"></use>
+                                </svg>
+                                <div>Champion Creat!</div>
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
 
                     <div class="d-grid mb-3">
                         <button type="submit" class="btn btn-primary" name="updateUsuari">CREAR COMPTE</button>

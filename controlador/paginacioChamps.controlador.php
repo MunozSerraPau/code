@@ -37,25 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buscador'])) {
     }
 }
 
-// if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buscador'])) {
-//     if (isset($_SESSION['usuari'])) {
-//         $paraulaBuscar = htmlspecialchars(trim($_POST['paraulaBuscador']));
-//         mostrarChampsLoguejat($paraulaBuscar);
-
-//     } else {
-//         $paraulaBuscar = htmlspecialchars(trim($_POST['paraulaBuscador']));
-//         mostrarChampsSenseLogin($paraulaBuscar);
-//     }
-
-// } else if (isset($_SESSION['usuari'])) {
-//     $paraulaBuscar = '';
-//     mostrarChampsLoguejat($paraula);
-
-// } else {
-//     $paraulaBuscar = '';
-//     mostrarChampsSenseLogin($paraula);
-
-// }
 
 
 function mostrarChampsLoguejat($paraula) {
@@ -99,7 +80,7 @@ function mostrarChampsLoguejat($paraula) {
         $totalChamps = (int) contarChampionsBuscarLoguejatModel($nomUsuari, $paraula);
 
         // Calcular el nombre total de pàgines
-        $numeroPagines = ($totalChamps >= 0) ? ceil($totalChamps / $champsPerPagina) : 1;
+        $numeroPagines = ($totalChamps >= 1) ? ceil($totalChamps / $champsPerPagina) : 1;
 
         // Mira quina paguina estem situats
         $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
@@ -118,7 +99,7 @@ function mostrarChampsLoguejat($paraula) {
         $totalChamps = (int) contarChampionsUsuariLoginModel($nomUsuari);
 
         // Calcular el nombre total de pàgines
-        $numeroPagines = ($totalChamps >= 0) ? ceil($totalChamps / $champsPerPagina) : 1;
+        $numeroPagines = ($totalChamps >= 1) ? ceil($totalChamps / $champsPerPagina) : 1;
 
         // Mira quina paguina estem situats
         $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
@@ -179,7 +160,7 @@ function mostrarChampsSenseLogin($paraula) {
         $totalChamps = (int) contarChampionsBuscarSenseLoguejarModel($paraula);
 
         // Calcular el nombre total de pàgines
-        $numeroPagines = ($totalChamps >= 0) ? ceil($totalChamps / $champsPerPagina) : 1;
+        $numeroPagines = ($totalChamps >= 1) ? ceil($totalChamps / $champsPerPagina) : 1;
 
         // Comprovar si la pàgina és vàlida
         if ($pagina < 1 || $pagina > $numeroPagines) {
@@ -203,7 +184,7 @@ function mostrarChampsSenseLogin($paraula) {
         $totalChamps = (int) contarChampionsModel();
 
         // Calcular el nombre total de pàgines
-        $numeroPagines = ($totalChamps >= 0) ? ceil($totalChamps / $champsPerPagina) : 1;
+        $numeroPagines = ($totalChamps >= 1) ? ceil($totalChamps / $champsPerPagina) : 1;
 
         // Comprovar si la pàgina és vàlida
         if ($pagina < 1 || $pagina > $numeroPagines) {
