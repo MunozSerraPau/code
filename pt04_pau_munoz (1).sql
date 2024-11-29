@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2024 a las 14:08:19
+-- Tiempo de generación: 29-11-2024 a las 19:25:39
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -58,7 +58,7 @@ INSERT INTO `campeones` (`id`, `name`, `description`, `resource`, `role`, `creat
 (13, 'Ekko', 'Ekko es un asesino con la habilidad única de retroceder en el tiempo para corregir errores y recuperar vida. Su capacidad de burst y su movilidad lo hacen mortal en situaciones de emboscada y peleas en equipo.', 'Mana', 'Assassin', 'XinLu'),
 (14, 'Kai’Sa', 'Kai’Sa es una tiradora híbrida que escala fuertemente en el late game. Con su capacidad para evolucionar sus habilidades, puede adaptarse a diferentes estilos de juego y maximizar su daño en peleas prolongadas.', 'Mana', 'Marksman', 'XinLu'),
 (15, 'Vayne', 'Vayne es una tiradora de alta movilidad que destaca en el late game. Con su Rollo y su habilidad de derribar enemigos tanques gracias a sus golpes plateados, es una amenaza constante en las peleas largas.', 'Mana', 'Marksman', 'XinLu'),
-(17, 'Shenl9k87j6hg5oimunybtvrcexwq', 'Shen es un tanque con capacidad de proteger a sus aliados en todo el mapa gracias a su definitiva. Con su habilidad para bloquear ataques y su presencia global, Shen es una pieza clave en las composiciones de equipo.', 'Energyfeef', '', 'PauMunozSerra'),
+(17, 'Shen', 'Shen es un tanque con capacidad de proteger a sus aliados en todo el mapa gracias a su definitiva. Con su habilidad para bloquear ataques y su presencia global, Shen es una pieza clave en las composiciones de equipo.', 'Energy', 'Tank', 'PauMunozSerra'),
 (18, 'Miss Fortune', 'Miss Fortune es una tiradora con habilidades de gran dañogr en área. Su definitiva es devastadora en peleas en equipo, especialmente cuando consigue alinear a varios enemigos con su lluvia de balas.', 'Mana', '', 'PauMunozSerra'),
 (19, 'Nautilus', '', 'Mana', '', 'PauMunozSerra'),
 (20, 'Rengar', 'Rengar es un asesino feroz que caza a sus presas saltando desde la maleza. Acumula ferocidad y puede volverse invisible con su definitiva, lo que lo convierte en una amenaza constante para los tiradores enemigos.', 'Ferocity', 'Assassin', 'PauMunozSerra'),
@@ -66,15 +66,16 @@ INSERT INTO `campeones` (`id`, `name`, `description`, `resource`, `role`, `creat
 (22, 'Ezreal', 'Ezreal es un tirador con gran movilidad y habilidades de poke. Su capacidad de moverse rápidamente y lanzar habilidades desde la distancia lo convierte en un campeón seguro pero altamente letal en peleas largas.', 'Mana', 'Marksman', 'PauMunozSerra'),
 (23, 'Morgana', 'Morgana es una maga y support que destaca por su capacidad de controlar a los enemigos y proteger a sus aliados con su escudo antihechizos. Su definitiva puede ser devastadora en peleas en equipo bien coordinadas.', 'Mana', 'Mage', 'PauMunozSerra'),
 (24, 'Olaf', 'Olaf es un luchador que se vuelve imparable en medio de las peleas, capaz de lanzarse hacia los enemigos sin preocuparse por el control de masas. Su capacidad de curación y daño sostenido lo hacen muy resistente.', 'Mana', 'Fighter', 'PauMunozSerra'),
-(25, 'Cassiopeia', 'Cassiopeia es una maga especializada en infligir daño por segundo a sus enemigos. Su capacidad de envenenar y lanzar hechizos repetidamente la convierte en una amenaza constante, especialmente en peleas prolongadas.', 'Mana', 'Mage', 'PauMunozSerra'),
+(25, 'Cassiopeia', 'Cassiopeia es una maga especializada en infligir daño por segundo a sus enemigos. Su capacidad de envenenar y lanzar hechizos repetidamente la convierte en una amenaza constante, especialmente en peleas prolongadas.', 'Mana', '', 'PauMunozSerra'),
 (26, 'Kha’Zix', 'Kha’Zix es un asesino que evoluciona sus habilidades conforme asesina enemigos. Con su capacidad de camuflaje y saltos, es una amenaza constante para los campeones que se quedan aislados o en el backline enemigo.', 'Mana', 'Assassin', 'PauMunozSerra'),
-(27, 'Sejuani', 'Sejuani es una tanque con gran capacidad de iniciación, gracias a su definitiva que congela a los enemigos en un área grande. Es ideal para iniciar peleas en equipo y mantener a los enemigos bajo control.', 'Mana', 'Tank', 'PauMunozSerra'),
-(28, 'Aatrox', 'Aatrox es un luchador que brilla en peleas prolongadas gracias a su gran capacidad de curación y daño. Su definitiva le permite resucitar tras la muerte, lo que lo convierte en un oponente difícil de eliminar.', 'None', 'Fighter', 'PauMunozSerra'),
+(27, 'Sejuani', 'Sejuani es una tanque con gran capacidad de iniciación, gracias a su definitiva que congela a los enemigos en un área grande. Es ideal para iniciar peleas en equipo y mantener a los enemigos bajo control.', 'Mana', '', 'PauMunozSerra'),
+(28, 'Aatrox', 'Aatrox es un luchador que brilla en peleas prolongadas gracias a su gran capacidad de curación y daño. Su definitiva le permite resucitar tras la muerte, lo que lo convierte en un oponente difícil de eliminar.', 'None', '', 'PauMunozSerra'),
 (29, 'Veigar', 'Veigar es un mago que escala infinitamente con su habilidad pasiva, acumulando poder de habilidad a lo largo del juego. Su capacidad de burst y su jaula de aturdimiento lo hacen letal en el late game.', 'Mana', 'Mage', 'PauMunozSerra'),
 (30, 'Tristana', 'Tristana es una tiradora con gran capacidad de asedio y movilidad. Su salto y su definitiva la convierten en una campeona segura en peleas, mientras destruye torretas y enemigos con su rango creciente.', 'Mana', 'Marksman', 'PauMunozSerra'),
 (31, 'Zac', 'Zac es el resultado de un vertido tóxico que recorría una veta tecnoquímica y fue a parar a una profunda caverna apartada en el sumidero de Zaun. A pesar de sus humildes orígenes, Zac ha pasado de ser un flujo primitivo a un ser pensante que habita en las cañerías de la ciudad y que, de vez en cuando, abandona su morada para ayudar a los más desvalidos o reconstruir las infraestructuras destruidas de Zaun.', 'vida', 'Tank', 'PauMunozSerra'),
-(39, 'Zoei', 'Dona espacial', 'Mana', 'Mage', 'PauMunozSerra'),
-(50, 'yjhrtg', 'uytjrhge', 'Mana', 'Assassin', 'PauMunozSerra');
+(39, 'Zoei', 'Dona espacial', 'Mana', '', 'PauMunozSerra'),
+(50, 'yjhrtg', 'uytjrhge', 'Mana', 'Assassin', 'PauMunozSerra'),
+(51, '`-OPIÑLIK', '`-OPI.OUI', 'p`-OP.IO', 'Fighter', 'PauMunozSerra');
 
 -- --------------------------------------------------------
 
@@ -89,16 +90,31 @@ CREATE TABLE `usuaris` (
   `correu` varchar(150) NOT NULL COMMENT 'Correu del Usuari',
   `nickname` varchar(50) NOT NULL COMMENT 'NickName del Usuari (Identificador del Uusari i per el que filtrarem la gran majoria de vegadas)',
   `contrasenya` text NOT NULL COMMENT 'Contrasneya del Usuari encriptada',
-  `xarxa_social` varchar(25) NOT NULL
+  `xarxa_social` varchar(25) NOT NULL COMMENT 'Per quan inicis secció amb una xarxa social',
+  `administrador` tinyint(1) NOT NULL COMMENT 'Unicamnet per diferenciar l''usuari administrador de la resta',
+  `imgPerfil` varchar(255) NOT NULL COMMENT 'Ruta on es guarda la foto de perfil'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuaris`
 --
 
-INSERT INTO `usuaris` (`nom`, `cognoms`, `correu`, `nickname`, `contrasenya`, `xarxa_social`) VALUES
-('Pau', 'Munoz Serra ', 'munozserrap@gmail.com', 'PauMunozSerra', '$2y$10$Jx4FTdn.7us4v65IYx/ireTLUV8.0KlfuQxKmj7tsKFPIltoJc.6q', ''),
-('Pau', 'Muñoz', 'p.munoz3@sapalomera.cat', 'XinLu', '$2y$10$/Bp5RiTDAaBGf1RzkiAoXuSIWlFUuiYWpjmmG3.tKQPF1Q7UMv7eO', '');
+INSERT INTO `usuaris` (`nom`, `cognoms`, `correu`, `nickname`, `contrasenya`, `xarxa_social`, `administrador`, `imgPerfil`) VALUES
+('Elena', 'Ruiz Morales', 'elena.ruiz@example.com', 'ElenaR', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'LinkedIn', 0, '/vistaGlobal/imgPerfil/img674738fc2b5acbackground.webpimg674738fc2b5acbackground.webp	'),
+('Isabel', 'Castro Jiménez', 'isabel.castro@example.com', 'IsabelC', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'Instagram', 0, '/vistaGlobal/imgPerfil/img674738fc2b5acbackground.webpimg674738fc2b5acbackground.webp	'),
+('Joan', 'Martínez López', 'joan.martinez@example.com', 'JoanM', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'Twitter', 1, '/vistaGlobal/imgPerfil/img674738fc2b5acbackground.webpimg674738fc2b5acbackground.webp	'),
+('Laura', 'López Gómez', 'laura.lopez@example.com', 'LauraL', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'LinkedIn', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg'),
+('Luis', 'Gómez Torres', 'luis.gomez@example.com', 'LuisG', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'Facebook', 0, '/vistaGlobal/imgPerfil/default.png'),
+('Marta', 'Sánchez Fernández', 'marta.sanchez@example.com', 'MartaS', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'Instagram', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg'),
+('Miguel', 'Díaz García', 'miguel.diaz@example.com', 'MiguelD', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'Twitter', 0, '/vistaGlobal/imgPerfil/default.png'),
+('Pablo', 'Hernández Ruiz', 'pablo.hernandez@example.com', 'PabloH', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'Instagram', 0, '/vistaGlobal/imgPerfil/default.png'),
+('Pau', 'Muñoz', 'p.muhh6h6hnoz3@sapalomera.cat', 'Pau', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', '', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg'),
+('Pau', 'Muñoz', 'paui@gmail.com', 'Pauii', '$2y$10$0CtOOe75TgLmc.IouHMX/uGWt3aglFlOUq7hFxkOQPJPidtAQVxyW', '', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg'),
+('Pau', 'Munoz Serra ', 'munozserrap@gmail.com', 'PauMunozSerra', '$2y$10$Jx4FTdn.7us4v65IYx/ireTLUV8.0KlfuQxKmj7tsKFPIltoJc.6q', '', 1, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg'),
+('Pol', 'Roig', 'progi@gamil.com', 'proig', '$2y$10$MmJCvMDebg/m2LiCvWvaSeGrVaoocJGXumqZ22/DlWIjq9ohiOona', '', 0, '/vistaGlobal/imgPerfil/default.png'),
+('Pol', 'Roig', 'progi@gamil.comgr', 'proigr', '$2y$10$7jgeD9Qe8yLkZwq9AVtQIuPfTYdA0sugR4QFOXbLPOX7bh9WT201e', '', 0, '/vistaGlobal/imgPerfil/default.png'),
+('Pol', 'Roig', 'progi@gamil.comgrtg', 'proigrtg', '$2y$10$s0ZxRfidwVdQxDmU6.XIiOpCGUh4ZkRJ33puFHi6a/KIgQ1VNsQAy', '', 0, '/vistaGlobal/imgPerfil/default.png'),
+('Pau', 'Muñoz', 'p.munoz3@sapalomera.cat', 'XinLu', '$2y$10$/Bp5RiTDAaBGf1RzkiAoXuSIWlFUuiYWpjmmG3.tKQPF1Q7UMv7eO', '', 0, '/vistaGlobal/imgPerfil/default.png');
 
 --
 -- Índices para tablas volcadas
@@ -127,7 +143,7 @@ ALTER TABLE `usuaris`
 -- AUTO_INCREMENT de la tabla `campeones`
 --
 ALTER TABLE `campeones`
-  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT COMMENT 'Id del Campio', AUTO_INCREMENT=51;
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT COMMENT 'Id del Campio', AUTO_INCREMENT=52;
 
 --
 -- Restricciones para tablas volcadas
