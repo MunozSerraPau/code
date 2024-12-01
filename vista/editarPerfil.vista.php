@@ -55,7 +55,7 @@
 
                     <div class="mb-3">
                         <label for="nickname" class="form-label">Nom d'Usuari</label>
-                        <input type="text" id="nickname" name="nickname" class="form-control" value="<?php echo $usuariInfo['nickname']; ?>">
+                        <input type="text" id="nickname" name="nickname" disabled class="form-control" value="<?php echo $usuariInfo['nickname']; ?>">
                     </div>
 
                     <div class="mb-3">
@@ -83,13 +83,13 @@
                                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
                                     <use xlink:href="#check-circle-fill"></use>
                                 </svg>
-                                <div>Champion Creat!</div>
+                                <div>Perfil Actualitzat!</div>
                             </div>
                         <?php endif; ?>
                     <?php endif; ?>
 
                     <div class="d-grid mb-3">
-                        <button type="submit" class="btn btn-primary" name="updateUsuari">CREAR COMPTE</button>
+                        <button type="submit" class="btn btn-primary" name="updateUsuari">EDITAR PERFIL</button>
                     </div>
 
                 </form>

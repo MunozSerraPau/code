@@ -51,14 +51,13 @@ function modelUpdateDadesUsuari( $name, $cognoms, $correu, $nickname, $urlImg ) 
 function modelUpdateDadesUsuariNoImg ( $name, $cognoms, $correu, $nickname ) {
     try {
         global $connexio;
-        $sql = "UPDATE usuaris SET nom = :nom, cognoms = :cognoms, correu = :correu, nickname = :username WHERE nickname = :nickname";
+        $sql = "UPDATE usuaris SET nom = :nom, cognoms = :cognoms, correu = :correu WHERE nickname = :nickname";
         $statement = $connexio->prepare($sql);
         $statement->execute(
             array(
             ':nom' => $name,
             ':cognoms' => $cognoms,
             ':correu' => $correu,
-            ':username' => $nickname,
             ':nickname' => $nickname
             )
         );

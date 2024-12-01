@@ -13,9 +13,12 @@
         $name = htmlspecialchars($_POST['firstname']);
         $cognoms = htmlspecialchars($_POST['lastname']);
         $correu = htmlspecialchars($_POST['email']);
-        $nickname = htmlspecialchars($_POST['nickname']);
+        $nickname =  $_SESSION['usuari'];
                         
         $nomUsuari = $_SESSION['usuari']; // Usuario actual desde la sesión
+
+        echo  "Nom: " . $name . "Cognoms: " . $cognoms . "correo: " . $correu . "nickname: " . $nickname . "<br>" . "Nom Usuari: " . $nomUsuari;
+
 
         if (isset($_FILES['userImg']) && $_FILES['userImg']['error'] !== UPLOAD_ERR_NO_FILE) {
             if ($_FILES['userImg']['error'] === UPLOAD_ERR_OK) {
@@ -24,10 +27,10 @@
                 $nomImg = uniqid(prefix:"img") . basename($_FILES['userImg']['name']); 
                 $rutaDestino = "/vistaGlobal/imgPerfil/" . $nomImg;
 
-                if (modelNomUsuariRepetit($nickname, $nomUsuari) === "NoRepetit") {
+                //if (modelNomUsuariRepetit($nickname, $nomUsuari) === "NoRepetit") {
                     if (modelCorreuRepetit($correu) === "NoRepetit") {
                         if (move_uploaded_file($nomGenericImatge, BASE_PATH . $rutaDestino)){
-                            if(modelUpdateDadesUsuari( $name, $cognoms, $correu, $nickname, $urlImg ) === "Actualitzat") {
+                            if(modelUpdateDadesUsuari( $name, $cognoms, $correu, $nickname, $rutaDestino ) === "Actualitzat") {
                                 $usuariInfo = modelObtenirInfoUsuari($nomUsuari);
                                 $_SESSION['fotoPerfil'] = modelObtenirUrlImgPerfilv2($nomUsuari);
                                 $error = "Usuari ACTUALITZAT CORRECTAMENT!";
@@ -43,18 +46,18 @@
                         $usuariInfo = modelObtenirInfoUsuari($nomUsuari);
                         $error = "ERROR, el Correu ja existeix amb IMG!";
                     }
-                } else {
-                    $usuariInfo = modelObtenirInfoUsuari($nomUsuari);
-                    // Denegar l'acceso i mostrar un missatge d'error
-                    $error = "ERROR, el nom d'Usuari ja existeix amb IMG!";
-                }
+                // } else {
+                //     $usuariInfo = modelObtenirInfoUsuari($nomUsuari);
+                //     // Denegar l'acceso i mostrar un missatge d'error
+                //     $error = "ERROR, el nom d'Usuari ja existeix amb IMG!";
+                // }
 
             }else {
                 $usuariInfo = modelObtenirInfoUsuari($nomUsuari);
                 $error = "Error al subir el archivo: " . $_FILES['userImg']['error']; 
             }
         } else {
-            if (modelNomUsuariRepetit($nickname, $nomUsuari) === "NoRepetit") {
+            // if (modelNomUsuariRepetit($nickname, $nomUsuari) === "NoRepetit") {
                 if (modelCorreuRepetit($correu) === "NoRepetit") {
                     if(modelUpdateDadesUsuariNoImg( $name, $cognoms, $correu, $nickname ) === "Actualitzat") {
                         $usuariInfo = modelObtenirInfoUsuari($nomUsuari);
@@ -68,11 +71,11 @@
                     $usuariInfo = modelObtenirInfoUsuari($nomUsuari);
                     $error = "ERROR, el Correu ja existeix sense IMG!";
                 }
-            } else {
-                $usuariInfo = modelObtenirInfoUsuari($nomUsuari);
-                // Denegar l'acceso i mostrar un missatge d'error
-                $error = "ERROR, el nom d'Usuari ja existeix sense IMG!";
-            }
+            // } else {
+            //     $usuariInfo = modelObtenirInfoUsuari($nomUsuari);
+            //     // Denegar l'acceso i mostrar un missatge d'error
+            //     $error = "ERROR, el nom d'Usuari ja existeix sense IMG!";
+            // }
         }
     } else {
         $nomUsuari = $_SESSION['usuari']; // Usuari actual desde la sesión
