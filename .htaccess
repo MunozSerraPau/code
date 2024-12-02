@@ -1,0 +1,3 @@
+# Configurar de les pag d'error
+ErrorDocument 404 /vistaGlobal/error/404.php
+ErrorDocument 403 /vistaGlobal/error/403.php

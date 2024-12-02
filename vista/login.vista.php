@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <p class="form-text">Has oblidat la contrasenya? <a href="<?php echo BASE_URL; ?>/vista/canviarContrasenya.vista.php" class="link-primary">Recuperar  </a></p>
+                        <p class="form-text">Has oblidat la contrasenya? <a href="<?php echo BASE_URL; ?>/vista/recuperarContrasenya.vista.php" class="link-primary">Recuperar  </a></p>
                     </div>
 
                     <?php if (isset($error)): ?>

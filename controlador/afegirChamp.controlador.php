@@ -9,7 +9,7 @@ require_once BASE_PATH . "/model/afegirChamp.model.php";
 
 // Error per guardar en cas de algun espai buit
 $error = "<br>"; 
-echo "->";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_SESSION['usuari']) && isset($_POST['insert'])) {
     echo "0";
     // obtenim les dades del formulari

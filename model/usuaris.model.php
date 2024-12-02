@@ -32,7 +32,7 @@ function modelNickNameExisteixLogin($username) {
 }
 
 
-// 
+// Mira si al contrasenya es igual a la de la base de dades
 function modelContrasenyaIgualLogin($username, $password) {
     try {
         global $connexio;
@@ -87,6 +87,7 @@ function modelObtenirUrlImgPerfil($username) {
 }
 
 
+// Mirar si el correu existeix
 function modelCorreuExisteix($correu) {
     try {
         global $connexio;
@@ -114,6 +115,7 @@ function modelCorreuExisteix($correu) {
 }
 
 
+// Mira si el Nickname existeix
 function modelNickNameExisteix($nickname) {
     try {
         global $connexio;
