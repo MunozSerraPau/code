@@ -24,7 +24,7 @@ function modelCorreuExisteixEnviar($correu) {
         }
 
     } catch (PDOException $e) {
-        $error = "Falla a la connexio a la Base de Dades";
+        $error = "Falla a la connexio a la Base de Dades EXISTEIX";
         return $error;
     }
 }
@@ -40,10 +40,15 @@ function afegirTokenContraRecuperacio( $email, $token, $expiration ) {
                 ':email' => $email
             )
         );
-
+        
+        if ($stmt->rowCount() > 0) {
+            return "TokenAfegit";
+        } else {
+            return "NoS'haAfegitToken";
+        }
 
     } catch (PDOException $e) {
-        $error = "Falla a la connexio a la Base de Dades";
+        $error = "Falla a la connexio a la Base de Dades AFEGIR";
         return $error;
     }
 }
@@ -63,11 +68,11 @@ function actualitzarContrasenya($token, $novaContrasenya) {
         if ($stmt->rowCount() > 0) {
             return "ContrasenyaActualitzada";
         } else {
-            return "Token Invalid o ha Expirat";
+            return "La contrasenya es la mateixa o el token ha expirat";
         }
 
     } catch (PDOException $e) {
-        $error = "Falla a la connexio a la Base de Dades";
+        $error = "Falla a la connexio a la Base de Dades ACTUALITZAR";
         return $error;
     }
 }

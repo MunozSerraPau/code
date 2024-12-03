@@ -19,7 +19,10 @@ use PHPMailer\PHPMailer\Exception;
             // Generar token único
             $token = bin2hex(random_bytes(32));
             $expiration = date('Y-m-d H:i:s', strtotime('+1 hour'));
-            afegirTokenContraRecuperacio($email, $token, $expiration);
+            echo $expiration;
+            if( afegirTokenContraRecuperacio($email, $token, $expiration)==='TokenAfegit' ) {
+                $error = 'Error a la Base de Dades';
+            } 
 
 
             $textCorreu = "<div style='font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;'>
@@ -72,7 +75,7 @@ use PHPMailer\PHPMailer\Exception;
             $mail->Subject = 'Recuperació de contrasenya';
             $mail->Body = $textCorreu;
 
-            $mail->send();
+            
             if ($mail->send()) {
                 // eliminem els valors de les tres variables
                 unset($_POST['correuRecuperacio']);
