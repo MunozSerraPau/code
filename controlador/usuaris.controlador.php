@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 require_once BASE_PATH . "/model/usuaris.model.php";
+$error = "";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -52,14 +53,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // guardem les dades i iniciem sessió comprobant si tenim un user i password en la nostra bd
         $nickname = htmlspecialchars($_POST['username']);
         $contrasenya = htmlspecialchars($_POST['password']);
+        $clauPrivadaRecaptcha = "6LeC3owqAAAAAAL_IGKWdgmxt_FtfXkLLhzFGas8";
+        $recaptchaResponse = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : null;
 
-        $existeixUsuari = comprovarUsuari($nickname, $contrasenya);
-        if ($existeixUsuari === "UsuariConnectat") {
-            header("Location: ../");
-            exit();
-        } else {
-            $error = $existeixUsuari;
+
+        // Inicciem el reCAPTCHA amb 0 intents
+        if(!isset($_SESSION['loginRecaptcha'])) {
+            $_SESSION['loginRecaptcha'] = 0;
         }
+
+        // Si els intents son >=3, validar el reCAPTCHA
+        if ($_SESSION['loginRecaptcha'] >= 3) {
+            // Realitzar la peticó a la API de reCAPTCHA
+            $recaptchaVerify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$clauPrivadaRecaptcha&response=$recaptchaResponse");
+            $recaptchaResult = json_decode($recaptchaVerify, true);
+
+            if (!$recaptchaResult["success"]) {
+                $error = "ERROR amb el reCAPTCHA";
+            }
+        }
+
+        if ($error === "") {
+            $existeixUsuari = comprovarUsuari($nickname, $contrasenya);
+
+            if ($existeixUsuari === "UsuariConnectat") {
+                $_SESSION['loginRecaptcha'] = 0;
+                header("Location: ../");
+                exit();
+            } else {
+                $_SESSION['loginRecaptcha']++;
+                $error .= $existeixUsuari;
+            }
+        }
+        
 
     } else if (isset($_POST['canviContrasenya'])) {
         //guardem les dades i canviem la contrasenye
