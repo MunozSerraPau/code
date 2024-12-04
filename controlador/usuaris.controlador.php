@@ -77,6 +77,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $existeixUsuari = comprovarUsuari($nickname, $contrasenya);
 
             if ($existeixUsuari === "UsuariConnectat") {
+                
+
                 $_SESSION['loginRecaptcha'] = 0;
                 header("Location: ../");
                 exit();
@@ -129,12 +131,11 @@ function comprovarUsuari($username, $password) {
                 $_SESSION['admin'] = false;
             }
             
-
-            // Si l'Usuari ha seleccionat "r", establecer cookies
+            // Si l'Usuari ha seleccionat "Remember-me", establecer guardem uan cokkies amb el nom d'Usuari
             if (isset($_POST['recordam'])) {
-                setcookie('username', $username, time() + (86400 * 30), "/"); // 86400 = 1 día, la cookie durará 30 días
-                setcookie('password', $password, time() + (86400 * 30), "/"); // 86400 = 1 día, la cookie durará 30 días
+                setcookie('rememberMeUser', $username, time() + (86400 * 7), "/"); // 86400 = 1 dia, la cookie durara 7 dies
             }
+            
             return $error;
         } elseif($contra === "NoHiHaUsuari") {
             $error = "No hi ha cap Usuari amb aquest NICKNAME";
