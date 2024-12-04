@@ -15,6 +15,7 @@
 <body>
     <?php require_once '../env.php'; ?>
     <?php require_once BASE_PATH . "/controlador/usuaris.controlador.php" ?>
+
     <?php {isset($_COOKIE['rememberMeUser']) ? $recordamUsuari = $_COOKIE['rememberMeUser'] : $recordamUsuari = ""; } ?>
     <?php if (session_status() === PHP_SESSION_NONE) {
         session_start();
@@ -83,6 +84,12 @@
 
                     <div class="d-grid mb-3">
                         <button type="submit" class="btn btn-primary" name="login">Iniciar sesión</button>
+                    </div>
+
+                    <div>
+                        <a href="<?php echo BASE_URL; ?>/controlador/HybridAuthReddit.controlador.php" class="btn border-0 p-0 d-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                            <i class="bi bi-reddit fs-1"></i>
+                        </a>
                     </div>
 
                     <p class="text-center">No tens un compte? <a href="<?php echo BASE_URL; ?>/vista/singup.vista.php" class="link-primary">Registra't</a></p>

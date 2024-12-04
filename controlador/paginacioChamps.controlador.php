@@ -19,12 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buscador'])) {
 
     if (isset($_SESSION['usuari'])) {
         $paraulaBuscar = htmlspecialchars(trim($_POST['paraulaBuscador']));
-        setcookie('paraulaBuscador', $paraulaBuscar, time() + 3600 * 24 * 30, "/");
+        setcookie('paraulaBuscador', $paraulaBuscar, time() + 3600, "/");
         
         mostrarChampsLoguejat($paraulaBuscar);
     } else {
         $paraulaBuscar = htmlspecialchars(trim($_POST['paraulaBuscador']));
-        setcookie('paraulaBuscador', $paraulaBuscar, time() + 3600 * 24 * 30, "/");
+        setcookie('paraulaBuscador', $paraulaBuscar, time() + 3600, "/");
         mostrarChampsSenseLogin($paraulaBuscar);
     }
 } else {
@@ -56,14 +56,14 @@ function mostrarChampsLoguejat($paraula) {
     if (isset($_POST['ordre'])) {
         $ordre = $_POST['ordre'];
         // Guardem la selecció a la cookie (expira en 30 dies)
-        setcookie('ordre', $ordre, time() + (30 * 24 * 60 * 60), '/');
+        setcookie('ordre', $ordre, time() + 3600, "/");
     }
 
     // Si el formulari ha enviat un valor per 'champsPerPagina', actualitzem la cookie
     if (isset($_GET['champsPerPagina'])) {
         $champsPerPagina = (int)$_GET['champsPerPagina'];
         if(in_array($champsPerPagina, [8, 12, 16, 20])) {
-            setcookie('champsPerPagina', $champsPerPagina, time() + 3600 * 24 * 30, "/"); // Valida la cookie durant 30 dies
+            setcookie('champsPerPagina', $champsPerPagina, time() + 3600, "/"); // Valida la cookie durant 30 dies
         } else {
             $champsPerPagina = isset($_COOKIE['champsPerPagina']) ? (int)$_COOKIE['champsPerPagina'] : 8;
         }
@@ -133,14 +133,14 @@ function mostrarChampsSenseLogin($paraula) {
     if (isset($_POST['ordre'])) {
         $ordre = $_POST['ordre'];
         // Guardem la selecció a la cookie (expira en 30 dies)
-        setcookie('ordre', $ordre, time() + (30 * 24 * 60 * 60), '/');
+        setcookie('ordre', $ordre, time() + 3600, "/");
     }
 
     // Si el formulari ha enviat un valor per 'champsPerPagina', actualitzem la cookie
     if (isset($_GET['champsPerPagina'])) {
         $champsPerPagina = (int)$_GET['champsPerPagina'];
         if(in_array($champsPerPagina, [8, 12, 16, 20])) {
-            setcookie('champsPerPagina', $champsPerPagina, time() + 3600 * 24 * 30, "/"); // Valida la cookie durant 30 dies
+            setcookie('champsPerPagina', $champsPerPagina, time() + 3600, "/"); // Valida la cookie durant 30 dies
         } else {
             $champsPerPagina = isset($_COOKIE['champsPerPagina']) ? (int)$_COOKIE['champsPerPagina'] : 8;
         }

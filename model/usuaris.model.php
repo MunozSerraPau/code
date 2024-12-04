@@ -211,4 +211,51 @@ function modelComprovarUsuariAdministrador ($nickName) {
 }
 
 
+// Funció per afegir usuari segons el HybridAuth
+function afegirUsuariHybridAuth($username, $email, $firstName, $administrador, $urlImg) {
+    try {
+        global $connexio;
+
+        // Preparamos la consulta SQL
+        $sql = "INSERT INTO usuaris (nom, cognoms, correu, nickname, contrasenya, xarxa_social, administrador, imgPerfil) 
+                VALUES (:nom, :cognoms, :correu, :nickname, :contrasenya, :xarxa_social, :administrador, :imgPerfil)";
+
+        $statement = $connexio->prepare($sql);
+        
+        // Depuración: Mostramos la consulta SQL que se va a ejecutar
+        echo "<script> alert('Ejecutando consulta: " . addslashes($sql) . "'); </script>";
+        
+        // Ejecutamos la consulta
+        $statement->execute(
+            array(
+                ':nom' => $firstName,
+                ':cognoms' => '',
+                ':correu' => $email,
+                ':nickname' => $username,
+                ':contrasenya' => null,  // NULL para contrasenya
+                ':xarxa_social' => 'Reddit',  // Red social usada
+                ':administrador' => $administrador,
+                ':imgPerfil' => $urlImg
+            )
+        );
+
+        // Depuración: Verificamos cuántas filas fueron afectadas
+        echo "<script> alert('Filas afectadas: " . $statement->rowCount() . "'); </script>";
+
+        // Verificamos si la fila fue insertada correctamente
+        if ($statement->rowCount() > 0) {
+            return "UsuariCreat";
+        } else {
+            // Si no se creó el usuario
+            echo "<script> alert('Error al crear l\'usuari: La consulta no afectó filas.'); </script>";
+            return "ErrorCrearUsuari";
+        }
+
+    } catch(PDOException $e) {
+        // Si hay algún error en la ejecución, lo mostramos
+        echo "<script> alert('Error en la consulta SQL: " . addslashes($e->getMessage()) . "'); </script>";
+        return $e;
+    }
+}
+
 ?>
