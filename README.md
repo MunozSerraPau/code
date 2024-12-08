@@ -1,7 +1,7 @@
 # Web - Pau Munoz Serra
 
 User: PauMunozSerra
-Password: P@ssword
+Password: P@ssw0rd
 
 ## Descripció del Projecte
 
