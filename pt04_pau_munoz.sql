@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2024 a las 19:25:39
+-- Tiempo de generación: 08-12-2024 a las 20:07:36
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -75,7 +75,8 @@ INSERT INTO `campeones` (`id`, `name`, `description`, `resource`, `role`, `creat
 (31, 'Zac', 'Zac es el resultado de un vertido tóxico que recorría una veta tecnoquímica y fue a parar a una profunda caverna apartada en el sumidero de Zaun. A pesar de sus humildes orígenes, Zac ha pasado de ser un flujo primitivo a un ser pensante que habita en las cañerías de la ciudad y que, de vez en cuando, abandona su morada para ayudar a los más desvalidos o reconstruir las infraestructuras destruidas de Zaun.', 'vida', 'Tank', 'PauMunozSerra'),
 (39, 'Zoei', 'Dona espacial', 'Mana', '', 'PauMunozSerra'),
 (50, 'yjhrtg', 'uytjrhge', 'Mana', 'Assassin', 'PauMunozSerra'),
-(51, '`-OPIÑLIK', '`-OPI.OUI', 'p`-OP.IO', 'Fighter', 'PauMunozSerra');
+(51, '`-OPIÑLIK', '`-OPI.OUI', 'p`-OP.IO', 'Fighter', 'PauMunozSerra'),
+(52, 'fwe', 'fwe', 'fwe', 'Mage', 'LuisG');
 
 -- --------------------------------------------------------
 
@@ -85,36 +86,39 @@ INSERT INTO `campeones` (`id`, `name`, `description`, `resource`, `role`, `creat
 
 DROP TABLE IF EXISTS `usuaris`;
 CREATE TABLE `usuaris` (
-  `nom` varchar(50) NOT NULL COMMENT 'Nom del Usuari',
+  `nom` varchar(50) DEFAULT NULL COMMENT 'Nom del Usuari',
   `cognoms` varchar(100) NOT NULL COMMENT 'Cognoms del Usuari',
   `correu` varchar(150) NOT NULL COMMENT 'Correu del Usuari',
   `nickname` varchar(50) NOT NULL COMMENT 'NickName del Usuari (Identificador del Uusari i per el que filtrarem la gran majoria de vegadas)',
-  `contrasenya` text NOT NULL COMMENT 'Contrasneya del Usuari encriptada',
+  `contrasenya` text DEFAULT NULL COMMENT 'Contrasneya del Usuari encriptada',
   `xarxa_social` varchar(25) NOT NULL COMMENT 'Per quan inicis secció amb una xarxa social',
   `administrador` tinyint(1) NOT NULL COMMENT 'Unicamnet per diferenciar l''usuari administrador de la resta',
-  `imgPerfil` varchar(255) NOT NULL COMMENT 'Ruta on es guarda la foto de perfil'
+  `imgPerfil` varchar(255) NOT NULL COMMENT 'Ruta on es guarda la foto de perfil',
+  `token_recuperar` varchar(64) DEFAULT NULL COMMENT 'Token per recuperar la contrasenya',
+  `token_expiration` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuaris`
 --
 
-INSERT INTO `usuaris` (`nom`, `cognoms`, `correu`, `nickname`, `contrasenya`, `xarxa_social`, `administrador`, `imgPerfil`) VALUES
-('Elena', 'Ruiz Morales', 'elena.ruiz@example.com', 'ElenaR', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'LinkedIn', 0, '/vistaGlobal/imgPerfil/img674738fc2b5acbackground.webpimg674738fc2b5acbackground.webp	'),
-('Isabel', 'Castro Jiménez', 'isabel.castro@example.com', 'IsabelC', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'Instagram', 0, '/vistaGlobal/imgPerfil/img674738fc2b5acbackground.webpimg674738fc2b5acbackground.webp	'),
-('Joan', 'Martínez López', 'joan.martinez@example.com', 'JoanM', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'Twitter', 1, '/vistaGlobal/imgPerfil/img674738fc2b5acbackground.webpimg674738fc2b5acbackground.webp	'),
-('Laura', 'López Gómez', 'laura.lopez@example.com', 'LauraL', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'LinkedIn', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg'),
-('Luis', 'Gómez Torres', 'luis.gomez@example.com', 'LuisG', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'Facebook', 0, '/vistaGlobal/imgPerfil/default.png'),
-('Marta', 'Sánchez Fernández', 'marta.sanchez@example.com', 'MartaS', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'Instagram', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg'),
-('Miguel', 'Díaz García', 'miguel.diaz@example.com', 'MiguelD', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'Twitter', 0, '/vistaGlobal/imgPerfil/default.png'),
-('Pablo', 'Hernández Ruiz', 'pablo.hernandez@example.com', 'PabloH', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', 'Instagram', 0, '/vistaGlobal/imgPerfil/default.png'),
-('Pau', 'Muñoz', 'p.muhh6h6hnoz3@sapalomera.cat', 'Pau', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', '', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg'),
-('Pau', 'Muñoz', 'paui@gmail.com', 'Pauii', '$2y$10$0CtOOe75TgLmc.IouHMX/uGWt3aglFlOUq7hFxkOQPJPidtAQVxyW', '', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg'),
-('Pau', 'Munoz Serra ', 'munozserrap@gmail.com', 'PauMunozSerra', '$2y$10$Jx4FTdn.7us4v65IYx/ireTLUV8.0KlfuQxKmj7tsKFPIltoJc.6q', '', 1, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg'),
-('Pol', 'Roig', 'progi@gamil.com', 'proig', '$2y$10$MmJCvMDebg/m2LiCvWvaSeGrVaoocJGXumqZ22/DlWIjq9ohiOona', '', 0, '/vistaGlobal/imgPerfil/default.png'),
-('Pol', 'Roig', 'progi@gamil.comgr', 'proigr', '$2y$10$7jgeD9Qe8yLkZwq9AVtQIuPfTYdA0sugR4QFOXbLPOX7bh9WT201e', '', 0, '/vistaGlobal/imgPerfil/default.png'),
-('Pol', 'Roig', 'progi@gamil.comgrtg', 'proigrtg', '$2y$10$s0ZxRfidwVdQxDmU6.XIiOpCGUh4ZkRJ33puFHi6a/KIgQ1VNsQAy', '', 0, '/vistaGlobal/imgPerfil/default.png'),
-('Pau', 'Muñoz', 'p.munoz3@sapalomera.cat', 'XinLu', '$2y$10$/Bp5RiTDAaBGf1RzkiAoXuSIWlFUuiYWpjmmG3.tKQPF1Q7UMv7eO', '', 0, '/vistaGlobal/imgPerfil/default.png');
+INSERT INTO `usuaris` (`nom`, `cognoms`, `correu`, `nickname`, `contrasenya`, `xarxa_social`, `administrador`, `imgPerfil`, `token_recuperar`, `token_expiration`) VALUES
+('efnir', 'kognr', 'Agile-Dig82246750ab95863c8@gmail.com', 'Agile-Dig8224', NULL, 'Reddit', 0, '/vistaGlobal/imgPerfil/img6750abaf064d6Fons Pau Muñoz Serra.png', NULL, NULL),
+('Elena', 'Ruiz Morales', 'elena.ruiz@example.com', 'ElenaR', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', '', 0, '/vistaGlobal/imgPerfil/img674738fc2b5acbackground.webpimg674738fc2b5acbackground.webp	', NULL, NULL),
+('Isabel', 'Castro Jiménez', 'isabel.castro@example.com', 'IsabelC', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', '', 0, '/vistaGlobal/imgPerfil/img674738fc2b5acbackground.webpimg674738fc2b5acbackground.webp	', NULL, NULL),
+('Joan', 'Martínez López', 'joan.martinez@example.com', 'JoanM', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', '', 1, '/vistaGlobal/imgPerfil/img674738fc2b5acbackground.webpimg674738fc2b5acbackground.webp	', NULL, NULL),
+('Laura', 'López Gómez', 'laura.lopez@example.com', 'LauraL', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', '', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg', NULL, NULL),
+('Luis', 'Gómez Torres', 'luis.gomez@example.com', 'LuisG', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', '', 0, '/vistaGlobal/imgPerfil/default.png', NULL, NULL),
+('Marta', 'Sánchez Fernández', 'marta.sanchez@example.com', 'MartaS', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', '', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg', NULL, NULL),
+('Miguel', 'Díaz García', 'miguel.diaz@example.com', 'MiguelD', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', '', 0, '/vistaGlobal/imgPerfil/default.png', NULL, NULL),
+('Pablo', 'Hernández Ruiz', 'pablo.hernandez@example.com', 'PabloH', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', '', 0, '/vistaGlobal/imgPerfil/default.png', NULL, NULL),
+('Pau', 'Muñoz', 'p.muhh6h6hnoz3@sapalomera.cat', 'Pau', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', '', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg', NULL, NULL),
+('Pau', 'Muñoz', 'paui@gmail.com', 'Pauii', '$2y$10$0CtOOe75TgLmc.IouHMX/uGWt3aglFlOUq7hFxkOQPJPidtAQVxyW', '', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg', NULL, NULL),
+('Pau', 'Munoz Serra ', 'munozserrap@gmail.com', 'PauMunozSerra', '$2y$10$qBFYJv9ffHJjpdlZH97x1elZYPPWmBERke.wu.e7l34AaV2dkUyU6', '', 1, '/vistaGlobal/imgPerfil/img674f443574170Fons Pau Muñoz Serra.png', 'cf5d80c17508a35e2c13a91551d26bc9323935b3034fdd5effe0abf8ccc11208', '2024-12-02 20:46:38'),
+('Pol', 'Roig', 'progi@gamil.com', 'proig', '$2y$10$MmJCvMDebg/m2LiCvWvaSeGrVaoocJGXumqZ22/DlWIjq9ohiOona', '', 0, '/vistaGlobal/imgPerfil/default.png', NULL, NULL),
+('Pol', 'Roig', 'progi@gamil.comgr', 'proigr', '$2y$10$7jgeD9Qe8yLkZwq9AVtQIuPfTYdA0sugR4QFOXbLPOX7bh9WT201e', '', 0, '/vistaGlobal/imgPerfil/default.png', NULL, NULL),
+('Pol', 'Roig', 'progi@gamil.comgrtg', 'proigrtg', '$2y$10$s0ZxRfidwVdQxDmU6.XIiOpCGUh4ZkRJ33puFHi6a/KIgQ1VNsQAy', '', 0, '/vistaGlobal/imgPerfil/default.png', NULL, NULL),
+('Pau', 'Muñoz', 'p.munoz3@sapalomera.cat', 'XinLu', '$2y$10$/Bp5RiTDAaBGf1RzkiAoXuSIWlFUuiYWpjmmG3.tKQPF1Q7UMv7eO', '', 0, '/vistaGlobal/imgPerfil/default.png', NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -143,7 +147,7 @@ ALTER TABLE `usuaris`
 -- AUTO_INCREMENT de la tabla `campeones`
 --
 ALTER TABLE `campeones`
-  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT COMMENT 'Id del Campio', AUTO_INCREMENT=52;
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT COMMENT 'Id del Campio', AUTO_INCREMENT=53;
 
 --
 -- Restricciones para tablas volcadas

@@ -34,8 +34,8 @@ function canviarContrasenya ($contraNovaV1, $contraNovaV2, $token) {
         $error .= "La nova CONTRASENYA no compleix els requisits. <br>(1 majúscula, 1 minúscula, 1 caràcter especial, 1 número i 8 caracters mínim.)<br>";
 
     } elseif ($contraNovaV1 != $contraNovaV2) {
-        unset($_POST['contraNovaV1']);
-        unset($_POST['contraNovaV2']);
+        unset($_POST['contrasenyaNova1']);
+        unset($_POST['contrasenyaNova2']);
         $error .= "Error les CONTRASENYAS novas NO COINSIDEIX";
 
     } else {

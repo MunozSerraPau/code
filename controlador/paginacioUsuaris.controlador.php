@@ -12,7 +12,7 @@ require_once BASE_PATH . "/model/paginacioUsuaris.model.php";
 if (mirarUsuariAdmin($nomUsuari) == "EsAdmin") {
     $llistaUsuaris = selectObtenirTotsUsuaris();
 } else {
-    header("Location: " . BASE_URL . "/vistaGlobal/error/404.php");
+    header("Location: " . BASE_URL . "/vistaGlobal/error/403.php");
 }
 
 

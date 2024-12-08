@@ -6,5 +6,10 @@
         session_start();
     }
     session_destroy();
+
+    setcookie('paraulaBuscador', '', time() - 3600, "/");
+    setcookie('ordre', '', time() - 3600, "/");
+    setcookie('champsPerPagina', '', time() - 3600, "/");
+
     header('Location: ../index.php');
 ?>

@@ -258,4 +258,33 @@ function afegirUsuariHybridAuth($username, $email, $firstName, $administrador, $
     }
 }
 
+
+// Comprova si l'Usuari existeix registrar amb Reddit
+function modelNickNameExisteixReddit($nickname) {
+    try {
+        global $connexio;
+        $sql = "SELECT nickname FROM usuaris WHERE nickname = :nickname AND xarxa_social = :xarxa_social";
+        $statement = $connexio->prepare($sql);
+        
+        $statement->execute(
+            array(
+                ':nickname' => $nickname,
+                ':xarxa_social' => 'Reddit'
+            )
+        );
+        
+        $resultat = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($resultat) {
+            return "NicknameExisteix";
+        } else {
+            return "NoHiHaNickname";
+        }
+
+    } catch (PDOException $e) {
+        $error = "Falla a la connexio a la Base de Dades";
+        return $error;
+    }
+}
+
 ?>

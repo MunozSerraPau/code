@@ -130,7 +130,9 @@ function comprovarUsuari($username, $password) {
             } else {
                 $_SESSION['admin'] = false;
             }
-            
+            setcookie('paraulaBuscador', '', time() - 3600, "/");
+            setcookie('ordre', '', time() - 3600, "/");
+            setcookie('champsPerPagina', '', time() - 3600, "/");
             // Si l'Usuari ha seleccionat "Remember-me", establecer guardem uan cokkies amb el nom d'Usuari
             if (isset($_POST['recordam'])) {
                 setcookie('rememberMeUser', $username, time() + (86400 * 7), "/"); // 86400 = 1 dia, la cookie durara 7 dies

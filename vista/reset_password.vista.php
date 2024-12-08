@@ -40,16 +40,16 @@
                     <div class="mb-3">
                         <label for="contrasenyaNova1" class="form-label">Contrasenya Nova</label>
                         <input type="password" id="contrasenyaNova1" name="contrasenyaNova1" class="form-control"
-                            value="<?php echo isset($_POST['contrasenyaNova1']) ? htmlspecialchars($_POST['contrasenyaNova1']) : ''; ?>" 
-                            required>
+                            <?php echo ($error == "Contrasenya Actualitzada") ? "disabled" : "required"; ?>
+                            value="<?php echo isset($_POST['contrasenyaNova1']) ? htmlspecialchars($_POST['contrasenyaNova1']) : ''; ?>" >
                     </div>
 
                     <!-- Repetir Contrasenya -->
                     <div class="mb-3">
                         <label for="contrasenyaNova2" class="form-label">Repeteix Contrasenya</label>
                         <input type="password" id="contrasenyaNova2" name="contrasenyaNova2" class="form-control"
-                            value="<?php echo isset($_POST['contrasenyaNova2']) ? htmlspecialchars($_POST['contrasenyaNova2']) : ''; ?>" 
-                            required>
+                            <?php echo ($error == "Contrasenya Actualitzada") ? "disabled" : "required"; ?>
+                            value="<?php echo isset($_POST['contrasenyaNova2']) ? htmlspecialchars($_POST['contrasenyaNova2']) : ''; ?>" >
                     </div>
 
                     <!-- Mostrar Missatges -->
@@ -73,7 +73,7 @@
 
                     <!-- Botó Actualitzar -->
                     <div class="form-group text-center">
-                        <button type="submit" class="btn btn-primary" name="canviContrasenyaRecuperacio">Actualitzar Contrasenyas</button>
+                        <button type="submit" class="btn btn-primary <?php echo ($error == "Contrasenya Actualitzada") ? "d-none" : ""; ?>" name="canviContrasenyaRecuperacio">Actualitzar Contrasenyas</button>
                     </div>
                 </form>
             </div>
