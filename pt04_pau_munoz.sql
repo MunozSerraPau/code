@@ -114,7 +114,7 @@ INSERT INTO `usuaris` (`nom`, `cognoms`, `correu`, `nickname`, `contrasenya`, `x
 ('Pablo', 'Hernández Ruiz', 'pablo.hernandez@example.com', 'PabloH', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', '', 0, '/vistaGlobal/imgPerfil/default.png', NULL, NULL),
 ('Pau', 'Muñoz', 'p.muhh6h6hnoz3@sapalomera.cat', 'Pau', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', '', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg', NULL, NULL),
 ('Pau', 'Muñoz', 'paui@gmail.com', 'Pauii', '$2y$10$0CtOOe75TgLmc.IouHMX/uGWt3aglFlOUq7hFxkOQPJPidtAQVxyW', '', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg', NULL, NULL),
-('Pau', 'Munoz Serra ', 'munozserrap@gmail.com', 'PauMunozSerra', '$2y$10$qBFYJv9ffHJjpdlZH97x1elZYPPWmBERke.wu.e7l34AaV2dkUyU6', '', 1, '/vistaGlobal/imgPerfil/img674f443574170Fons Pau Muñoz Serra.png', 'cf5d80c17508a35e2c13a91551d26bc9323935b3034fdd5effe0abf8ccc11208', '2024-12-02 20:46:38'),
+('Pau', 'Munoz Serra ', 'munozserrap@gmail.com', 'PauMunozSerra', '$2y$10$qBFYJv9ffHJjpdlZH97x1elZYPPWmBERke.wu.e7l34AaV2dkUyU6', '', 1, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg', NULL, NULL),
 ('Pol', 'Roig', 'progi@gamil.com', 'proig', '$2y$10$MmJCvMDebg/m2LiCvWvaSeGrVaoocJGXumqZ22/DlWIjq9ohiOona', '', 0, '/vistaGlobal/imgPerfil/default.png', NULL, NULL),
 ('Pol', 'Roig', 'progi@gamil.comgr', 'proigr', '$2y$10$7jgeD9Qe8yLkZwq9AVtQIuPfTYdA0sugR4QFOXbLPOX7bh9WT201e', '', 0, '/vistaGlobal/imgPerfil/default.png', NULL, NULL),
 ('Pol', 'Roig', 'progi@gamil.comgrtg', 'proigrtg', '$2y$10$s0ZxRfidwVdQxDmU6.XIiOpCGUh4ZkRJ33puFHi6a/KIgQ1VNsQAy', '', 0, '/vistaGlobal/imgPerfil/default.png', NULL, NULL),
