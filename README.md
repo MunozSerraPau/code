@@ -1,5 +1,8 @@
 # Web - Pau Munoz Serra
 
+User: PauMunozSerra
+Password: P@ssword
+
 ## Descripció del Projecte
 
 Aquesta és una aplicació web que permet als usuaris registrar-se, iniciar sessió, i gestionar el seu perfil. Els usuaris poden crear, editar i eliminar campions de League of Legends. L'aplicació està dissenyada per facilitar l'administració d'usuaris i campions, proporcionant una interfície intuïtiva i funcionalitats robustes per a la gestió de dades. També es pot iniciar sessió amb el compte de Reddit.
