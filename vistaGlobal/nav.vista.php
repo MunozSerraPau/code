@@ -74,6 +74,9 @@
                 <a class="nav-link" href="<?php echo BASE_URL; ?>/vista/editarPerfil.vista.php">Editar Perfil</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="<?php echo BASE_URL; ?>/vista/crearEquip.vista.php">Crear Equip</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="<?php echo BASE_URL; ?>/vista/canviarContrasenya.vista.php">Canvair contasenya</a>
               </li>
               <?php if(!empty($admin)): ?>

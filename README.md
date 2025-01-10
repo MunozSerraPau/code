@@ -204,4 +204,102 @@ Les sessions les he utilitzat per gestionar la informació de l'usuari durant la
 
 ## HybridAuth
 
-EN el cas del HybridAuth, he fet servir el Reddit ja que era un dels mes facils a l'hora de implementar-ho en el meu programa, a més de que si faltaba algun dels parametres obligatori, li creaca un unic perque no hi hages de repetit, a més de que si ja estava loguejat iniccies seccion sense problemes.
+En el cas del HybridAuth, he fet servir el Reddit ja que era un dels mes facils a l'hora de implementar-ho en el meu programa, a més de que si faltaba algun dels parametres obligatori, li creaca un unic perque no hi hages de repetit, a més de que si ja estava loguejat iniccies seccion sense problemes.
+
+## Resum de QR, API i AJAX
+
+Aquí mostrem els campeons i seleccionem 5, mentres tant es va canviant la img dels 5 personatges, quan li donem a mostrar es desabilitan per canviar els campions i canviar el nom del equip, a més de apreixe el button de descarregar el qr i el qr en gran, a més de un button per tornar a l'inici
+
+### OPCIOANL
+
+Mirar si fer que en canvi de guardar l'equip a una base de dades es guardi a una API com aqeusta:
+
+``` json
+{
+    "data": {
+        "Full Tank": {
+            "Zac": {
+                "title": "la Espada de los Oscuros",
+                "blurb": "Aatrox y sus hermanos, otrora respetados defensores de Shurima contra el Vacío, acabarían convirtiéndose en una amenaza aún mayor para Runaterra y solo conocieron la derrota ante el uso astuto de hechizos mortales. No obstante, tras siglos de reclusión...",
+                "info": {
+                    "attack": 8,
+                    "defense": 4,
+                    "magic": 3,
+                    "difficulty": 4
+                },
+                "tags": [
+                    "Fighter"
+                ],
+                "partype": "Pozo sangriento"
+            },
+            "Ornn": {
+                "title": "Las Llamas de la Forja",
+                "blurb": "Ornn es el espíritu de Freljord de la forja y la artesanía. Trabaja en la soledad de una enorme forja esculpida en las cavernas de lava bajo el volcán de Dulcehogar. En ella modela objetos de calidad sin igual y depura menas en burbujeantes calderos de...",
+                "info": {
+                    "attack": 5,
+                    "defense": 9,
+                    "magic": 3,
+                    "difficulty": 5
+                },
+                "tags": [
+                    "Tank"
+                ],
+                "partype": "Maná"
+            },
+            "Nautilus": {
+                "title": "El Titán Abisal",
+                "blurb": "El gigante acorazado Nautilus, una leyenda solitaria tan antigua como los pecios de Aguas Estancadas, recorre las turbias aguas que rodean las costas de las Islas de la Llama Azul. Impulsado por una traición olvidada, ataca con su enorme ancla sin...",
+                "info": {
+                    "attack": 4,
+                    "defense": 6,
+                    "magic": 6,
+                    "difficulty": 6
+                },
+                "tags": [
+                    "Tank",
+                    "Support"
+                ],
+                "partype": "Maná"
+            },
+            "Sion": {
+                "title": "El Coloso no Muerto",
+                "blurb": "Sion fue un héroe de guerra en el pasado y los noxianos lo veneraban porque había arrebatado la vida de un rey demaciano con sus simples manos. No obstante, se le denegó su viaje al más allá, pues fue revivido para servir a su imperio incluso después de...",
+                "info": {
+                    "attack": 5,
+                    "defense": 9,
+                    "magic": 3,
+                    "difficulty": 5
+                },
+                 "tags": [
+                    "Tank",
+                    "Fighter"
+                ],
+                "partype": "Maná"
+            }
+        }
+    }
+}
+
+```
+
+### **QR**
+
+En aquest cas es generara un QR el qual guardara un equip amb 5 campeons que agafarem d'un llistat d'una API de campeons del LOL a més del nom del equip.
+
+Al escanejar-ho es mostraran en una pagina amb els 5 campeons en gran (gracies a la url i el nom del campeon) i un camp per 
+
+### **AJA**
+
+Es pot fer AJAX que quan tinguis els 5 campeons seleccioants es generi un QR i que cada com que canvis un champ es canvi el QR
+
+### **API**
+
+Aquí podem veure la API amb informació de tots els Campeons del Lol hi ha més de url per obtenir la img dels campeons
+
+**API Campeones:** <https://ddragon.leagueoflegends.com/cdn/15.1.1/data/es_ES/champion.json>
+
+**INFO API** <https://developer.riotgames.com/docs/lol>
+
+**URL FOTO GRAN:** <https://ddragon.leagueoflegends.com/cdn/img/champion/loading/nomChamp_0.jpg>
+
+**URL FOTO MINIATURA:** <https://ddragon.leagueoflegends.com/cdn/15.1.1/img/champion/nomChamp.png>
