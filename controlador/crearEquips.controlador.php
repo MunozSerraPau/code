@@ -20,24 +20,11 @@ $data = json_decode($jsonData, true);
 // Filtrar els campions per nom i tags
 $llistatChampions = array_map(function($champion) {
     return [
-        'name' => $champion['name'],
-        'tags' => $champion['tags']
+        'id' => $champion['name'],
+        'tags' => $champion['tags'][0],
+        'img' => $champion['image']['full']
+
     ];
 }, $data['data']);
-
-
-
-
-
-// Recorrer campeones y mostrar en el formulario
-foreach ($data['data'] as $champion) {
-    echo '<div class="champion">';
-    echo '<label>';
-    echo '<input type="checkbox" name="champions[]" value="' . htmlspecialchars($champion['id']) . '">';
-    echo '<strong>' . htmlspecialchars($champion['id']) . '</strong>';
-    echo ' - Roles: ' . implode(', ', $champion['tags']); // Mostrar roles
-    echo '</label>';
-    echo '</div>';
-}
 
 ?>
