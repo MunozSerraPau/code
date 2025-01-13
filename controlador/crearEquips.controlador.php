@@ -6,8 +6,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crearEquip'])) {
 
-} 
+}
 
+$selectedChampions = isset($_POST['champions']) ? $_POST['champions'] : [];
 $llistatChampions = [];
 
 // URL de l'API
@@ -20,7 +21,8 @@ $data = json_decode($jsonData, true);
 // Filtrar els campions per nom i tags
 $llistatChampions = array_map(function($champion) {
     return [
-        'id' => $champion['name'],
+        'id' => $champion['id'],
+        'name' => $champion['name'],
         'tags' => $champion['tags'][0],
         'img' => $champion['image']['full']
 

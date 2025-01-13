@@ -1,13 +1,14 @@
 
 
-:root {
+/* :root {
   --bs-primary: #343a40;
   --bs-secondary: #191B24;
   --bs-triary: #493185;
   --bs-backgroundCard: #EBF1FF;
   --bs-success: #28a745;
   --bs-dark: #191B24;
-}
+  --bs-lilaFluix: #B5ADE9;
+} */
 
 
 
@@ -65,4 +66,9 @@ body p{
 }
 .border-radius-10 {
   border-radius: 10px;
+}
+
+.btn-primary {
+  border-color: #B5ADE9 !important;
+  background-color: #B5ADE9 !important;
 }

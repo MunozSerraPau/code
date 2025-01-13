@@ -16,49 +16,42 @@
 
     <div class="containerr pt-0">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
-        
-        
 
 
         <div class="container d-flex justify-content-center min-vh-100" style="padding-top: 10rem; padding-bottom: 5rem;">
-            
-            <div class="shadow p-4 bg-light container" style="border-radius: 25px; border: 3px solid #454962;">
+            <div class="shadow p-4 container" style="backdrop-filter: blur(15px); border-radius: 25px; border: 3px solid #454962;">
+                <h1 class="text-center mb-4 text-light">Crear Equip</h1>    
 
-            
-                <h1 class="text-center mb-4">Crear Equip</h1>    
-                    
-                <form id="championForm" action="process.php" <?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="POST" class="d-flex flex-column align-items-center">
-                    <label for="nomEquip" class="form-label">Nom de l'equip: </label>
-                    <input type="text" id="nomEquip" name="nomEquip" class="form-control" required>
-                    
-                    <div class="row">
-                        <div class="col" id="champEscollit_1">
-                            
-                        </div>
-                        <div class="col" id="champEscollit_2">
-                            
-                        </div>
-                        <div class="col" id="champEscollit_3">
-                            
-                        </div>
-                        <div class="col" id="champEscollit_4">
-                            
-                        </div>
-                        <div class="col" id="champEscollit_5">
-                            
-                        </div>
-                    </div>
+                <div class="row">
+                    <div class="col px-0" id="champEscollit_1"><img src="" style="border: 2px solid black; min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
+                    <div class="col px-0" id="champEscollit_2"><img src="" style="border: 2px solid black; min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
+                    <div class="col px-0" id="champEscollit_3"><img src="" style="border: 2px solid black; min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
+                    <div class="col px-0" id="champEscollit_4"><img src="" style="border: 2px solid black; min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
+                    <div class="col px-0" id="champEscollit_5"><img src="" style="border: 2px solid black; min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
+                </div>
 
-                    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 ">
+                <form id="championForm" action="process.php" method="POST" class="d-flex flex-column align-items-center">
+                    <div class="py-5 w-50">
+                        <label for="nomEquip" class="form-label text-center w-100">
+                            <h3 class="text-light text-center">Nom de l'Equip</h3>
+                            <input type="text" id="nomEquip" name="nomEquip" class="form-control" placeholder="Escriu el nom del teu equip..." required>
+                        </label>
+                    </div>    
+
+                    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6">
                         <?php foreach ($llistatChampions as $champion) : ?>
                             <div class="col py-3">
-                                <div class="card">
-                                    <img src="https://ddragon.leagueoflegends.com/cdn/15.1.1/img/champion/<?php echo $champion['img']; ?>" class="card-img-top rounded-circle p-2" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><strong><?php echo htmlspecialchars($champion['id']); ?></strong></h5>
+                                <div class="card <?php echo in_array($champion['id'], $selectedChampions) ? 'bg-success' : 'bg-light'; ?> d-flex justify-content-center align-items-center">
+                                    <img src="https://ddragon.leagueoflegends.com/cdn/15.1.1/img/champion/<?php echo $champion['img']; ?>" 
+                                        style="height: 150px; width: 150px;" class="card-img-top rounded-circle p-2" alt="...">
+                                    <div class="card-body d-flex flex-column align-items-center w-100">
+                                        <h5 class="card-title"><strong><?php echo htmlspecialchars($champion['name']); ?></strong></h5>
+                                        <hr style="height: 3px;" class="w-100 bg-dark opacity-100 my-0" />
                                         <p class="card-text"><?php echo $champion['tags']; ?></p>
                                         <label>
-                                            <input type="checkbox" name="champions[]" value="<?php echo htmlspecialchars($champion['id']); ?>">
+                                            <input type="checkbox" name="champions[]" value="<?php echo htmlspecialchars($champion['id']); ?>" 
+                                                class="championCheckbox" 
+                                                data-id="<?php echo htmlspecialchars($champion['id']); ?>">
                                         </label>
                                     </div>
                                 </div>
@@ -73,8 +66,45 @@
             </div>
         </div>
 
+
         <?php include BASE_PATH . "/vistaGlobal/footer.vista.php" ?>
     </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const maxSelections = 5; // Maxim de Campions a seleccionar
+            const checkboxes = document.querySelectorAll('.championCheckbox');
+            const selectedDivs = [
+                document.getElementById('champEscollit_1'),
+                document.getElementById('champEscollit_2'),
+                document.getElementById('champEscollit_3'),
+                document.getElementById('champEscollit_4'),
+                document.getElementById('champEscollit_5'),
+            ];
+
+            // Control de esdeveniments per netajar seleccionats i actualitzar els divs
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const selected = Array.from(checkboxes).filter(cb => cb.checked);
+
+                    // Limitar el número de selecciones
+                    if (selected.length > maxSelections) {
+                        alert('Només pots seleccionar fins a 5 campions.');
+                        checkbox.checked = false;
+                        return;
+                    }
+
+                    // Actualizar los divs dinámicamente
+                    selectedDivs.forEach((div, index) => {
+                        div.innerHTML = selected[index] 
+                            ? `<img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${selected[index].dataset.id}_0.jpg" style="max-width: 100%;" class="px-0" alt="...">` 
+                            : '<img src="" style="border: 2px solid black; min-width: 100%; height: 460px" class="placeholder bg-dark">'; // Limpiar si no hay más selecciones
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>

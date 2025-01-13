@@ -286,7 +286,7 @@ Mirar si fer que en canvi de guardar l'equip a una base de dades es guardi a una
 
 En aquest cas es generara un QR el qual guardara un equip amb 5 campeons que agafarem d'un llistat d'una API de campeons del LOL a més del nom del equip.
 
-Al escanejar-ho es mostraran en una pagina amb els 5 campeons en gran (gracies a la url i el nom del campeon) i un camp per 
+Al escanejar-ho es mostraran en una pagina amb els 5 campeons en gran (gracies a la url i el nom del campeon) i un camp per.
 
 ### **AJA**
 

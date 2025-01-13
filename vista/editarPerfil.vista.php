@@ -29,7 +29,7 @@
         <div class="container d-flex justify-content-center align-items-center min-vh-100 mt-5 pb-5">
             <!-- Ventana flotante: usaremos un card de Bootstrap para simular el panel flotante -->
             <!-- Si volem el fosn difuminat hem de ficar en class="bg-transparent" -->
-            <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
+            <div class="shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
 
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
                     <h2 class="text-center text-primary mb-4">Editar Perfil</h2>

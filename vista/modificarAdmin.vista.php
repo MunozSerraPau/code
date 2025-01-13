@@ -40,10 +40,10 @@
             <!-- Ventana flotante: usaremos un card de Bootstrap para simular el panel flotante -->
             <!-- Si volem el fosn difuminat hem de ficar en class="bg-transparent" -->
             <div class="card shadow p-4 bg-light" style="max-width: auto; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid black;">
-                <h1 class="text-center mb-4">Iniciar sessió</h1>
+                <h1 class="text-center mb-4">Eliminar Usuaris</h1>
 
-                <div class="table-responsive">
-                    <table class="table table-bordered">
+                <div class="table-responsive text-center">
+                    <table class="table">
                         <thead class="table-light">
                             <tr>
                                 <th scope="col">Img Perfil</th>
@@ -57,12 +57,12 @@
                         <tbody>
                             <?php foreach ($llistaUsuaris as $usuari): ?>
                                 <tr>
-                                    <td><img src="<?php echo BASE_URL . $usuari['imgPerfil'] ?>" alt="Imagen de usuario" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;"></td>
-                                    <td><?php echo $usuari['nickname']; ?></td>
-                                    <td><?php echo $usuari['nom']; ?></td>
-                                    <td><?php echo $usuari['cognoms']; ?></td>
-                                    <td><?php echo $usuari['correu']; ?></td>
-                                    <td class="d-flex justify-content-center">
+                                    <td class="align-content-center"><img src="<?php echo BASE_URL . $usuari['imgPerfil'] ?>" alt="Imagen de usuario" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;"></td>
+                                    <td class="align-content-center"><?php echo $usuari['nickname']; ?></td>
+                                    <td class="align-content-center"><?php echo $usuari['nom']; ?></td>
+                                    <td class="align-content-center"><?php echo $usuari['cognoms']; ?></td>
+                                    <td class="align-content-center"><?php echo $usuari['correu']; ?></td>
+                                    <td class="align-content-center">
                                         <a href="<?php echo BASE_URL; ?>/controlador/eliminarUsuari.controlador.php?nickname=<?php echo $usuari['nickname'] ?>&action=delete" class="me-2 btn btn-danger" onclick="return confirmarEliminacion()">
                                             <i class="bi bi-trash3-fill"></i>
                                         </a>
