@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,13 @@
     <link rel="stylesheet" href="../style/style.css">
     <title>Crear Equip</title>
 </head>
+
 <body>
     <?php require_once '../env.php'; ?>
     <?php require BASE_PATH . '/controlador/crearEquips.controlador.php'; ?>
-    <?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
+    <?php if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    } ?>
 
     <div class="containerr pt-0">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
@@ -20,7 +24,7 @@
 
         <div class="container d-flex justify-content-center min-vh-100" style="padding-top: 10rem; padding-bottom: 5rem;">
             <div class="shadow p-4 container" style="backdrop-filter: blur(15px); border-radius: 25px; border: 3px solid #454962;">
-                <h1 class="text-center mb-4 text-light">Crear Equip</h1>    
+                <h1 class="text-center mb-4 text-light">Crear Equip</h1>
 
                 <div class="row">
                     <div class="col px-0" id="champEscollit_1"><img src="" style="border: 2px solid black; min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
@@ -36,21 +40,21 @@
                             <h3 class="text-light text-center">Nom de l'Equip</h3>
                             <input type="text" id="nomEquip" name="nomEquip" class="form-control" placeholder="Escriu el nom del teu equip..." required>
                         </label>
-                    </div>    
+                    </div>
 
                     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6">
                         <?php foreach ($llistatChampions as $champion) : ?>
                             <div class="col py-3">
-                                <div class="card <?php echo in_array($champion['id'], $selectedChampions) ? 'bg-success' : 'bg-light'; ?> d-flex justify-content-center align-items-center">
-                                    <img src="https://ddragon.leagueoflegends.com/cdn/15.1.1/img/champion/<?php echo $champion['img']; ?>" 
-                                        style="height: 150px; width: 150px;" class="card-img-top rounded-circle p-2" alt="...">
+                                <div class="card d-flex justify-content-center align-items-center champion-card" data-id="<?php echo htmlspecialchars($champion['id']); ?>">
+                                    <img src="https://ddragon.leagueoflegends.com/cdn/15.1.1/img/champion/<?php echo $champion['img']; ?>"
+                                    style="height: 150px; width: 150px;" class="rounded-circle p-2" alt="...">
                                     <div class="card-body d-flex flex-column align-items-center w-100">
                                         <h5 class="card-title"><strong><?php echo htmlspecialchars($champion['name']); ?></strong></h5>
                                         <hr style="height: 3px;" class="w-100 bg-dark opacity-100 my-0" />
                                         <p class="card-text"><?php echo $champion['tags']; ?></p>
                                         <label>
-                                            <input type="checkbox" name="champions[]" value="<?php echo htmlspecialchars($champion['id']); ?>" 
-                                                class="championCheckbox" 
+                                            <input type="checkbox" id="<?php echo htmlspecialchars($champion['id']); ?>" name="champions[]" value="<?php echo htmlspecialchars($champion['id']); ?>"
+                                                class="championCheckbox"
                                                 data-id="<?php echo htmlspecialchars($champion['id']); ?>">
                                         </label>
                                     </div>
@@ -84,27 +88,37 @@
                 document.getElementById('champEscollit_5'),
             ];
 
-            // Control de esdeveniments per netajar seleccionats i actualitzar els divs
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', () => {
+            document.querySelectorAll('.champion-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const checkbox = this.querySelector('.championCheckbox');
                     const selected = Array.from(checkboxes).filter(cb => cb.checked);
 
                     // Limitar el número de selecciones
-                    if (selected.length > maxSelections) {
+                    if (!checkbox.checked && selected.length >= maxSelections) {
                         alert('Només pots seleccionar fins a 5 campions.');
-                        checkbox.checked = false;
                         return;
                     }
 
+                    checkbox.checked = !checkbox.checked;
+                    if (checkbox.checked) {
+                        this.classList.remove('bg-light');
+                        this.classList.add('bg-success');
+                    } else {
+                        this.classList.remove('bg-success');
+                        this.classList.add('bg-light');
+                    }
+
                     // Actualizar los divs dinámicamente
+                    const updatedSelected = Array.from(checkboxes).filter(cb => cb.checked);
                     selectedDivs.forEach((div, index) => {
-                        div.innerHTML = selected[index] 
-                            ? `<img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${selected[index].dataset.id}_0.jpg" style="max-width: 100%;" class="px-0" alt="...">` 
-                            : '<img src="" style="border: 2px solid black; min-width: 100%; height: 460px" class="placeholder bg-dark">'; // Limpiar si no hay más selecciones
+                        div.innerHTML = updatedSelected[index] ?
+                            `<img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${updatedSelected[index].dataset.id}_0.jpg" style="max-width: 100%;" class="px-0" alt="...">` :
+                            '<img src="" style="border: 2px solid black; min-width: 100%; height: 460px" class="placeholder bg-dark">'; // Limpiar si no hay más selecciones
                     });
                 });
             });
         });
     </script>
 </body>
+
 </html>

@@ -44,11 +44,11 @@
                             <!-- en aqeust cas com estem logeats tenim dos buttons per poder editar i modificar els campions ja que nomes es mostren els qeu hem creat nosltres -->
                             
                             <div class="d-flex">
-                                <a href="<?php echo BASE_URL; ?>/controlador/eliminarChamp.controlador.php?id=<?php echo $champion['id'] ?>&action=delete" class="me-2 btn btn-danger" onclick="return confirmarEliminacion()">
+                                <a href="<?php echo BASE_URL; ?>/controlador/eliminarChamp.controlador.php?id=<?php echo $champion['id'] ?>&action=delete" class="me-2 btn btn-outline-danger" onclick="return confirmarEliminacion()">
                                     <i class="bi bi-trash3-fill"></i>
                                 </a>
 
-                                <a href="<?php echo BASE_URL; ?>/vista/editarChamp.vista.php?idChampEditar=<?php echo $champion['id'] ?>" class="me-2 btn btn-warning">
+                                <a href="<?php echo BASE_URL; ?>/vista/editarChamp.vista.php?idChampEditar=<?php echo $champion['id'] ?>" class="me-2 btn btn-outline-warning">
                                     <i class="bi bi-pen"></i>
                                 </a>
                             </div>
