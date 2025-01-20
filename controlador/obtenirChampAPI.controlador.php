@@ -3,16 +3,13 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crearEquip'])) {
-
-}
-
-$selectedChampions = isset($_POST['champions']) ? $_POST['champions'] : [];
-$llistatChampions = [];
-
 // URL de l'API
 $url = "https://ddragon.leagueoflegends.com/cdn/14.20.1/data/es_ES/champion.json";
+
+
+// $selectedChampions = isset($_POST['champions']) ? $_POST['champions'] : [];
+$llistatChampions = [];
+
 
 // Obtener llistat de array dels campeones
 $jsonData = file_get_contents($url);

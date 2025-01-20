@@ -73,3 +73,9 @@ body p{
   box-shadow: 0 0 10px rgb(75, 64, 64) !important;
   border: 2px solid var(--bs-lilaFluix) !important;
 }
+
+.holaquetal {
+  border: 2px solid black !important;
+  min-width: 100% !important;
+  height: 460px !important;
+}

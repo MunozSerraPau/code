@@ -8,12 +8,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <title>Crear Equip</title>
 </head>
 
 <body>
     <?php require_once '../env.php'; ?>
-    <?php require BASE_PATH . '/controlador/crearEquips.controlador.php'; ?>
+    <?php require BASE_PATH . '/controlador/obtenirChampAPI.controlador.php'; ?>
+    <?php require BASE_PATH . '/controlador/crearEquip.controlador.php'; ?>
     <?php if (session_status() === PHP_SESSION_NONE) {
         session_start();
     } ?>
@@ -27,14 +29,31 @@
                 <h1 class="text-center mb-4 text-light">Crear Equip</h1>
 
                 <div class="row">
-                    <div class="col px-0" id="champEscollit_1"><img src="" style="border: 2px solid black; min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
-                    <div class="col px-0" id="champEscollit_2"><img src="" style="border: 2px solid black; min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
-                    <div class="col px-0" id="champEscollit_3"><img src="" style="border: 2px solid black; min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
-                    <div class="col px-0" id="champEscollit_4"><img src="" style="border: 2px solid black; min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
-                    <div class="col px-0" id="champEscollit_5"><img src="" style="border: 2px solid black; min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
+                    <div class="col px-0" id="champEscollit_1"><img src="" style="border: 2px solid black ;min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
+                    <div class="col px-0" id="champEscollit_2"><img src="" style="border: 2px solid black ;min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
+                    <div class="col px-0" id="champEscollit_3"><img src="" style="border: 2px solid black ;min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
+                    <div class="col px-0" id="champEscollit_4"><img src="" style="border: 2px solid black ;min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
+                    <div class="col px-0" id="champEscollit_5"><img src="" style="border: 2px solid black ;min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
                 </div>
 
-                <form id="championForm" action="process.php" method="POST" class="d-flex flex-column align-items-center">
+                <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="qrModalLabel">Código QR del Equipo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Aquí es mostrarà el QR -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="championForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="d-flex flex-column align-items-center">
                     <div class="py-5 w-50">
                         <label for="nomEquip" class="form-label text-center w-100">
                             <h3 class="text-light text-center">Nom de l'Equip</h3>
@@ -53,12 +72,14 @@
                                         <hr style="height: 3px;" class="w-100 bg-dark opacity-100 my-0" />
                                         <p class="card-text"><?php echo $champion['tags']; ?></p>
                                         <label>
-                                            <input type="checkbox" id="<?php echo htmlspecialchars($champion['id']); ?>" name="champions[]" value="<?php echo htmlspecialchars($champion['id']); ?>"
+                                            <input type="checkbox" id="<?php echo htmlspecialchars($champion['id']); ?>" name="champions" value='<?php echo json_encode($champion); ?>'
                                                 class="championCheckbox"
-                                                data-id="<?php echo htmlspecialchars($champion['id']); ?>">
+                                                data-id="<?php echo htmlspecialchars($champion['id']); ?>"
+                                            />
                                         </label>
                                     </div>
                                 </div>
+                                <!-- <code style="display: none;"><//?= json_encode($champion) ?></code> -->
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -74,7 +95,49 @@
         <?php include BASE_PATH . "/vistaGlobal/footer.vista.php" ?>
     </div>
 
+    <script>
+        $(document).ready(function() {
+            $('#championForm').submit(function(e) {
+                e.preventDefault();
+                var formData = $(this).serializeArray(); // Obté l'array amb les dades serialitzades
+                console.log(formData);
+                var result = {}; // Objecte que emmagatzemarà les dades
+                result.champions = []; // Array per emmagatzemar els campions
 
+                formData.forEach(field => {
+                    if (field.name === "champions") {
+                        // Decodifica i converteix cada campió en un objecte
+                        const champion = JSON.parse(decodeURIComponent(field.value));
+                        result.champions.push(champion); // Afegeix l'objecte a l'array de campions
+                    } else {
+                        // Afegeix altres camps a l'objecte principal
+                        result[field.name] = field.value;
+                    }
+                });
+                console.log(result);
+
+                if (result.champions.length === 5 && result.nomEquip) {
+                    console.log('Tot correcte, enviant dades...');
+                    console.log('<?php echo BASE_URL; ?>/controlador/crearEquip.controlador.php');
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo BASE_URL; ?>/controlador/crearEquip.controlador.php',
+                        data: JSON.stringify(result),
+                        contentType: 'application/json',
+                        success: function (response) {
+                            alert('Equip creat correctament! Codi QR: ' + response['nomEquip']);
+                        },
+                        error: function () {
+                            alert('Error en la sol·licitud.');
+                        }
+                    });
+                } else {
+                    alert('Selecciona 5 campions i proporciona un nom d\'equip.');
+                }
+            });
+        });
+        
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -86,7 +149,7 @@
                 document.getElementById('champEscollit_3'),
                 document.getElementById('champEscollit_4'),
                 document.getElementById('champEscollit_5'),
-            ];
+            ];           
 
             document.querySelectorAll('.champion-card').forEach(card => {
                 card.addEventListener('click', function() {
@@ -113,7 +176,7 @@
                     selectedDivs.forEach((div, index) => {
                         div.innerHTML = updatedSelected[index] ?
                             `<img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${updatedSelected[index].dataset.id}_0.jpg" style="max-width: 100%;" class="px-0" alt="...">` :
-                            '<img src="" style="border: 2px solid black; min-width: 100%; height: 460px" class="placeholder bg-dark">'; // Limpiar si no hay más selecciones
+                            '<img src="" style="border: 2px solid black; min-width: 100%; height: 460px" class=" placeholder bg-dark">'; // Limpiar si no hay más selecciones
                     });
                 });
             });
