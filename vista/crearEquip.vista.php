@@ -79,7 +79,6 @@
                                         </label>
                                     </div>
                                 </div>
-                                <!-- <code style="display: none;"><//?= json_encode($champion) ?></code> -->
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -118,14 +117,14 @@
 
                 if (result.champions.length === 5 && result.nomEquip) {
                     console.log('Tot correcte, enviant dades...');
-                    console.log('<?php echo BASE_URL; ?>/controlador/crearEquip.controlador.php');
                     $.ajax({
                         type: 'POST',
                         url: '<?php echo BASE_URL; ?>/controlador/crearEquip.controlador.php',
                         data: JSON.stringify(result),
                         contentType: 'application/json',
-                        success: function (response) {
-                            alert('Equip creat correctament! Codi QR: ' + response['nomEquip']);
+                        success: function (resposta) {
+                            alert(resposta);
+                            // alert('Equip creat correctament! Codi QR: ' + resposta['nomEquip']);
                         },
                         error: function () {
                             alert('Error en la sol·licitud.');
