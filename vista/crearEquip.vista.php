@@ -28,6 +28,19 @@
             <div class="shadow p-4 container" style="backdrop-filter: blur(15px); border-radius: 25px; border: 3px solid #454962;">
                 <h1 class="text-center mb-4 text-light">Crear Equip</h1>
 
+                <div id="infoGenerarQr" class="d-flex justify-content-center w-100">
+                    <div id="divQrMostrar">
+                    </div>
+
+                    <button type="button" class="btn btn-primary">
+                        <icon class="bi bi-download fs-4 p-0"></icon>
+                    </button>
+
+                    <h3>
+
+                    </h3>
+                </div>
+
                 <div class="row">
                     <div class="col px-0" id="champEscollit_1"><img src="" style="border: 2px solid black ;min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
                     <div class="col px-0" id="champEscollit_2"><img src="" style="border: 2px solid black ;min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
@@ -36,22 +49,6 @@
                     <div class="col px-0" id="champEscollit_5"><img src="" style="border: 2px solid black ;min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
                 </div>
 
-                <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="qrModalLabel">Código QR del Equipo</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Aquí es mostrarà el QR -->
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
 
                 <form id="championForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="d-flex flex-column align-items-center">
                     <div class="py-5 w-50">
@@ -122,9 +119,14 @@
                         url: '<?php echo BASE_URL; ?>/controlador/crearEquip.controlador.php',
                         data: JSON.stringify(result),
                         contentType: 'application/json',
+                        
                         success: function (resposta) {
-                            alert(resposta);
-                            // alert('Equip creat correctament! Codi QR: ' + resposta['nomEquip']);
+                            alert (resposta);
+                            document.getElementById('championForm').remove();
+
+                            const divQrImage = document.getElementById('infoGenerarQr').querySelector('.divQrMostrar');
+                            divQrImage.innerHTML = resposta;
+                            
                         },
                         error: function () {
                             alert('Error en la sol·licitud.');

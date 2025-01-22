@@ -114,7 +114,7 @@ function actualizarQR($idEquip, $qrFileName) {
     try {
         global $connexio;
 
-        $sql = "UPDATE equips SET qr_image = :qrImage WHERE id = :idEquip";
+        $sql = "UPDATE equips SET qrImage = :qrImage WHERE id = :idEquip";
         $stmt = $connexio->prepare($sql);
         $stmt -> execute(
             array (
@@ -122,10 +122,11 @@ function actualizarQR($idEquip, $qrFileName) {
                 ':idEquip' => $idEquip
             )
         );
-    } catch(PDOException $e) {
-        return null;
-    }
 
+        return '1';
+    } catch(PDOException $e) {
+        return "ERROR: " . $e->getMessage();
+    }
 }
 
 ?>

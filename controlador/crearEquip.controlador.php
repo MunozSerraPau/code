@@ -49,23 +49,30 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && $data ) {
     }
     
     
-    
-    // 4. Generar el QR
+    // 4. Generar el QR //
+    // Url de la vista per editar l'equip
     $qrUrl = "http://localhost/code/vista/editarEquips.vista.php";
 
-    $qr = ($qrUrl . "?idEquip=" . urldecode($idEquip));
+    // Url amb el id passat per GET / para descodificar es urldecode($idEquip)
+    $qr = $qrUrl . "?idEquip=" . urlencode($idEquip);
+
+    // Generar el QR en format PNG
     $qrImg = (new QRCode)->render($qr);
-    $qrFileName = "qr_equip_$idEquip.png";
-    $qrFilePath = BASE_PATH . "/vista/qr/" . $qrFileName;
-    
-    // Guardar el nombre del QR en la tabla "equips"
-    if (actualizarQR($idEquip, $qrFileName) == null) {
-        echo ('Error en guardar el QR a la base de dades');
+
+    // Guardar el QR a la la taula "equips"
+    $comprovacio = actualizarQR($idEquip, $qr);
+
+    // Comprovem si s'ha guardat correctament o no
+    if (preg_match('/^\d+$/', $comprovacio)) {
+        echo "<img src=".$qrImg." >";
+        exit;
+    } else {
+        echo ('Error en guardar el QR a la base de dades: ' . $comprovacio);
         exit;
     }
-
+    
     // S'HA DE PROVAR
-    echo ("Equip creat i QR generat correctament  <br />  <img src=" . (new QRCode)->render($qr) . " />");
+    // echo ("Equip creat i QR generat correctament  <br />  <img src=" . (new QRCode)->render($qr) . " />");
 }
 
 ?>
