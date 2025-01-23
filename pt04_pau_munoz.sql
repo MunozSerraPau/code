@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-12-2024 a las 20:07:36
+-- Tiempo de generación: 23-01-2025 a las 15:32:24
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -63,7 +63,7 @@ INSERT INTO `campeones` (`id`, `name`, `description`, `resource`, `role`, `creat
 (19, 'Nautilus', '', 'Mana', '', 'PauMunozSerra'),
 (20, 'Rengar', 'Rengar es un asesino feroz que caza a sus presas saltando desde la maleza. Acumula ferocidad y puede volverse invisible con su definitiva, lo que lo convierte en una amenaza constante para los tiradores enemigos.', 'Ferocity', 'Assassin', 'PauMunozSerra'),
 (21, 'Anivia', 'Anivia es una maga especializada en controlar zonas y ralentizar enemigos. Su muro de hielo y su tormenta glacial hacen que sea una campeona excepcional para controlar el ritmo de las peleas en equipo.', 'Mana', 'Mage', 'PauMunozSerra'),
-(22, 'Ezreal', 'Ezreal es un tirador con gran movilidad y habilidades de poke. Su capacidad de moverse rápidamente y lanzar habilidades desde la distancia lo convierte en un campeón seguro pero altamente letal en peleas largas.', 'Mana', 'Marksman', 'PauMunozSerra'),
+(22, 'Ezreal', 'Ezreal es un tirador con gran movilidad y habilidades de poke. Su capacidad de moverse rápidamente y lanzar habilidades desde la distancia lo convierte en un campeón seguro pero altamente letal en peleas largas.', 'Mana', '', 'PauMunozSerra'),
 (23, 'Morgana', 'Morgana es una maga y support que destaca por su capacidad de controlar a los enemigos y proteger a sus aliados con su escudo antihechizos. Su definitiva puede ser devastadora en peleas en equipo bien coordinadas.', 'Mana', 'Mage', 'PauMunozSerra'),
 (24, 'Olaf', 'Olaf es un luchador que se vuelve imparable en medio de las peleas, capaz de lanzarse hacia los enemigos sin preocuparse por el control de masas. Su capacidad de curación y daño sostenido lo hacen muy resistente.', 'Mana', 'Fighter', 'PauMunozSerra'),
 (25, 'Cassiopeia', 'Cassiopeia es una maga especializada en infligir daño por segundo a sus enemigos. Su capacidad de envenenar y lanzar hechizos repetidamente la convierte en una amenaza constante, especialmente en peleas prolongadas.', 'Mana', '', 'PauMunozSerra'),
@@ -75,8 +75,164 @@ INSERT INTO `campeones` (`id`, `name`, `description`, `resource`, `role`, `creat
 (31, 'Zac', 'Zac es el resultado de un vertido tóxico que recorría una veta tecnoquímica y fue a parar a una profunda caverna apartada en el sumidero de Zaun. A pesar de sus humildes orígenes, Zac ha pasado de ser un flujo primitivo a un ser pensante que habita en las cañerías de la ciudad y que, de vez en cuando, abandona su morada para ayudar a los más desvalidos o reconstruir las infraestructuras destruidas de Zaun.', 'vida', 'Tank', 'PauMunozSerra'),
 (39, 'Zoei', 'Dona espacial', 'Mana', '', 'PauMunozSerra'),
 (50, 'yjhrtg', 'uytjrhge', 'Mana', 'Assassin', 'PauMunozSerra'),
-(51, '`-OPIÑLIK', '`-OPI.OUI', 'p`-OP.IO', 'Fighter', 'PauMunozSerra'),
+(51, '`-OPIÑLIK', '`-OPI.OUI', 'p`-OP.IO', 'Marksman', 'PauMunozSerra'),
 (52, 'fwe', 'fwe', 'fwe', 'Mage', 'LuisG');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `campeons_api`
+--
+
+DROP TABLE IF EXISTS `campeons_api`;
+CREATE TABLE `campeons_api` (
+  `id` int(11) NOT NULL COMMENT 'id del campio',
+  `nameCampio` varchar(50) NOT NULL COMMENT 'Nom del campio no es repetiran',
+  `tagsCampio` varchar(50) NOT NULL COMMENT 'Tipus que consumeixen',
+  `imgCampio` varchar(50) NOT NULL COMMENT 'Nom de la img'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `campeons_api`
+--
+
+INSERT INTO `campeons_api` (`id`, `nameCampio`, `tagsCampio`, `imgCampio`) VALUES
+(17, 'Fiddlesticks', 'Mage', 'Fiddlesticks.png'),
+(18, 'Hecarim', 'Fighter', 'Hecarim.png'),
+(19, 'Morgana', 'Mage', 'Morgana.png'),
+(20, 'Ornn', 'Tank', 'Ornn.png'),
+(21, 'Zac', 'Tank', 'Zac.png'),
+(22, 'Aatrox', 'Fighter', 'Aatrox.png'),
+(23, 'Ahri', 'Mage', 'Ahri.png'),
+(24, 'Akali', 'Assassin', 'Akali.png'),
+(25, 'Akshan', 'Marksman', 'Akshan.png'),
+(26, 'Alistar', 'Tank', 'Alistar.png'),
+(27, 'Amumu', 'Tank', 'Amumu.png'),
+(28, 'Aurelion Sol', 'Mage', 'AurelionSol.png'),
+(29, 'Annie', 'Mage', 'Annie.png'),
+(30, 'Aphelios', 'Marksman', 'Aphelios.png'),
+(31, 'Anivia', 'Mage', 'Anivia.png'),
+(32, 'Ashe', 'Marksman', 'Ashe.png'),
+(33, 'Aurora', 'Mage', 'Aurora.png'),
+(34, 'Blitzcrank', 'Tank', 'Blitzcrank.png'),
+(35, 'Brand', 'Mage', 'Brand.png'),
+(36, 'Braum', 'Tank', 'Braum.png'),
+(37, 'Ezreal', 'Marksman', 'Ezreal.png'),
+(38, 'Fiora', 'Fighter', 'Fiora.png'),
+(39, 'Fizz', 'Assassin', 'Fizz.png'),
+(40, 'Garen', 'Fighter', 'Garen.png'),
+(41, 'Gnar', 'Fighter', 'Gnar.png');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `equips`
+--
+
+DROP TABLE IF EXISTS `equips`;
+CREATE TABLE `equips` (
+  `id` int(255) NOT NULL COMMENT 'Id del equip',
+  `nom_equip` varchar(100) NOT NULL COMMENT 'Nom del equip no es pot repetir',
+  `creator` varchar(50) NOT NULL COMMENT 'Nom del creador (enllaçada amb el nickname del Usuari)',
+  `data_creacio` date NOT NULL COMMENT 'La data en el que s''ha creat',
+  `qrImage` varchar(255) DEFAULT NULL COMMENT 'URL del qr per poder-ho mostrar'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `equips`
+--
+
+INSERT INTO `equips` (`id`, `nom_equip`, `creator`, `data_creacio`, `qrImage`) VALUES
+(20, 'Main XinLu', 'PauMunozSerra', '2025-01-22', 'C:\\xampp\\htdocs\\code/vista/qr/qr_equip_20.png'),
+(21, 'asddasdasdasdasdasdasd', 'PauMunozSerra', '2025-01-22', NULL),
+(23, 'ssssssss', 'PauMunozSerra', '2025-01-22', NULL),
+(24, 'bpbpbpbpb', 'PauMunozSerra', '2025-01-22', NULL),
+(25, 'kgkgkgkg', 'PauMunozSerra', '2025-01-22', 'http://localhost/code/vista/editarEquips.vista.php?idEquip=25'),
+(26, 'ads', 'PauMunozSerra', '2025-01-22', 'http://localhost/code/vista/editarEquips.vista.php?idEquip=26'),
+(27, 'pepito ', 'PauMunozSerra', '2025-01-22', 'http://localhost/code/vista/editarEquips.vista.php?idEquip=27'),
+(28, 'pepitooo', 'PauMunozSerra', '2025-01-22', 'http://localhost/code/vista/editarEquips.vista.php?idEquip=28'),
+(29, 'joan', 'PauMunozSerra', '2025-01-22', 'http://localhost/code/vista/editarEquips.vista.php?idEquip=29'),
+(50, 'afdsadfafsa34y78', 'PauMunozSerra', '2025-01-22', 'http://localhost/code/vista/editarEquips.vista.php?idEquip=50'),
+(51, 'sup', 'PauMunozSerra', '2025-01-22', 'http://localhost/code/vista/editarEquips.vista.php?idEquip=51'),
+(52, 'adsasdasdasd', 'PauMunozSerra', '2025-01-22', 'http://localhost/code/vista/editarEquips.vista.php?idEquip=52');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `equip_campio`
+--
+
+DROP TABLE IF EXISTS `equip_campio`;
+CREATE TABLE `equip_campio` (
+  `idEquip` int(11) NOT NULL,
+  `idCampio` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `equip_campio`
+--
+
+INSERT INTO `equip_campio` (`idEquip`, `idCampio`) VALUES
+(20, 17),
+(20, 18),
+(20, 19),
+(20, 20),
+(20, 21),
+(21, 22),
+(21, 23),
+(21, 24),
+(21, 25),
+(21, 26),
+(23, 22),
+(23, 23),
+(23, 24),
+(23, 25),
+(23, 27),
+(24, 23),
+(24, 24),
+(24, 25),
+(24, 26),
+(24, 27),
+(25, 23),
+(25, 24),
+(25, 25),
+(25, 26),
+(25, 28),
+(26, 23),
+(26, 24),
+(26, 25),
+(26, 29),
+(26, 30),
+(27, 22),
+(27, 23),
+(27, 24),
+(27, 25),
+(27, 26),
+(28, 22),
+(28, 23),
+(28, 24),
+(28, 25),
+(28, 26),
+(29, 31),
+(29, 29),
+(29, 30),
+(29, 32),
+(29, 28),
+(50, 29),
+(50, 30),
+(50, 32),
+(50, 28),
+(50, 33),
+(51, 28),
+(51, 33),
+(51, 34),
+(51, 35),
+(51, 36),
+(52, 37),
+(52, 38),
+(52, 39),
+(52, 40),
+(52, 41);
 
 -- --------------------------------------------------------
 
@@ -114,7 +270,7 @@ INSERT INTO `usuaris` (`nom`, `cognoms`, `correu`, `nickname`, `contrasenya`, `x
 ('Pablo', 'Hernández Ruiz', 'pablo.hernandez@example.com', 'PabloH', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', '', 0, '/vistaGlobal/imgPerfil/default.png', NULL, NULL),
 ('Pau', 'Muñoz', 'p.muhh6h6hnoz3@sapalomera.cat', 'Pau', '$2y$10$1Vr4wmIxfy4X6NF023NuOOi8B9gB1LMcumCpYbRfJlJiQEA80bTfC', '', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg', NULL, NULL),
 ('Pau', 'Muñoz', 'paui@gmail.com', 'Pauii', '$2y$10$0CtOOe75TgLmc.IouHMX/uGWt3aglFlOUq7hFxkOQPJPidtAQVxyW', '', 0, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg', NULL, NULL),
-('Pau', 'Munoz Serra ', 'munozserrap@gmail.com', 'PauMunozSerra', '$2y$10$qBFYJv9ffHJjpdlZH97x1elZYPPWmBERke.wu.e7l34AaV2dkUyU6', '', 1, '/vistaGlobal/imgPerfil/img674740a5926bfbackground.jpg', NULL, NULL),
+('Pau', 'Munoz Serra ', 'munozserrap@gmail.com', 'PauMunozSerra', '$2y$10$z9TYENVT/PNWEhwckSYVWeRsoO7Jx9GHP/McsucQGNjBbQbGC7Btq', '', 1, '/vistaGlobal/imgPerfil/img676303258c41abackground.jpg', 'dad2122f7a286b2bcb7fcc35b8ff66a5ce7b095e889bd5330eed025e8e5c98ed', '2024-12-08 21:32:14'),
 ('Pol', 'Roig', 'progi@gamil.com', 'proig', '$2y$10$MmJCvMDebg/m2LiCvWvaSeGrVaoocJGXumqZ22/DlWIjq9ohiOona', '', 0, '/vistaGlobal/imgPerfil/default.png', NULL, NULL),
 ('Pol', 'Roig', 'progi@gamil.comgr', 'proigr', '$2y$10$7jgeD9Qe8yLkZwq9AVtQIuPfTYdA0sugR4QFOXbLPOX7bh9WT201e', '', 0, '/vistaGlobal/imgPerfil/default.png', NULL, NULL),
 ('Pol', 'Roig', 'progi@gamil.comgrtg', 'proigrtg', '$2y$10$s0ZxRfidwVdQxDmU6.XIiOpCGUh4ZkRJ33puFHi6a/KIgQ1VNsQAy', '', 0, '/vistaGlobal/imgPerfil/default.png', NULL, NULL),
@@ -131,6 +287,28 @@ ALTER TABLE `campeones`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`),
   ADD KEY `creator` (`creator`);
+
+--
+-- Indices de la tabla `campeons_api`
+--
+ALTER TABLE `campeons_api`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nameCampio` (`nameCampio`);
+
+--
+-- Indices de la tabla `equips`
+--
+ALTER TABLE `equips`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nom_equip` (`nom_equip`),
+  ADD KEY `creator` (`creator`);
+
+--
+-- Indices de la tabla `equip_campio`
+--
+ALTER TABLE `equip_campio`
+  ADD KEY `idEquip` (`idEquip`),
+  ADD KEY `idCampio` (`idCampio`);
 
 --
 -- Indices de la tabla `usuaris`
@@ -150,6 +328,18 @@ ALTER TABLE `campeones`
   MODIFY `id` int(1) NOT NULL AUTO_INCREMENT COMMENT 'Id del Campio', AUTO_INCREMENT=53;
 
 --
+-- AUTO_INCREMENT de la tabla `campeons_api`
+--
+ALTER TABLE `campeons_api`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id del campio', AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT de la tabla `equips`
+--
+ALTER TABLE `equips`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT COMMENT 'Id del equip', AUTO_INCREMENT=53;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -158,6 +348,19 @@ ALTER TABLE `campeones`
 --
 ALTER TABLE `campeones`
   ADD CONSTRAINT `campeones_ibfk_1` FOREIGN KEY (`creator`) REFERENCES `usuaris` (`nickname`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `equips`
+--
+ALTER TABLE `equips`
+  ADD CONSTRAINT `equips_ibfk_1` FOREIGN KEY (`creator`) REFERENCES `usuaris` (`nickname`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `equip_campio`
+--
+ALTER TABLE `equip_campio`
+  ADD CONSTRAINT `equip_campio_ibfk_1` FOREIGN KEY (`idEquip`) REFERENCES `equips` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `equip_campio_ibfk_2` FOREIGN KEY (`idCampio`) REFERENCES `campeons_api` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
