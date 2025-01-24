@@ -25,20 +25,19 @@
 
 
         <div class="container d-flex justify-content-center min-vh-100" style="padding-top: 10rem; padding-bottom: 5rem;">
+        
             <div class="shadow p-4 container" style="backdrop-filter: blur(15px); border-radius: 25px; border: 3px solid #454962;">
+            
                 <h1 class="text-center mb-4 text-light">Crear Equip</h1>
 
-                <div id="infoGenerarQr" class="d-flex justify-content-center w-100">
-                    <div id="divQrMostrar">
-                    </div>
+                <div id="infoGenerarQr" class="d-none py-4">
+                    <div id="divQrMostrar" class="d-flex justify-content-center"></div>
 
-                    <button type="button" class="btn btn-primary">
-                        <icon class="bi bi-download fs-4 p-0"></icon>
-                    </button>
+                    <a id="downloadLink" href="#" download="qr_code.png" class="btn btn-primary my-5">
+                        <i class="bi bi-download fs-4 p-0"></i>
+                    </a>
 
-                    <h3>
-
-                    </h3>
+                    <h3 class="text-light text-center text-uppercase fw-bold"></h3>
                 </div>
 
                 <div class="row">
@@ -48,7 +47,6 @@
                     <div class="col px-0" id="champEscollit_4"><img src="" style="border: 2px solid black ;min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
                     <div class="col px-0" id="champEscollit_5"><img src="" style="border: 2px solid black ;min-width: 100%; height: 460px;" class="placeholder bg-dark"></div>
                 </div>
-
 
                 <form id="championForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="d-flex flex-column align-items-center">
                     <div class="py-5 w-50">
@@ -84,6 +82,7 @@
                         Crear Equip
                     </button>
                 </form>
+
             </div>
         </div>
 
@@ -121,10 +120,15 @@
                         contentType: 'application/json',
                         
                         success: function (resposta) {
-                            alert (resposta);
+                            
+                            const teamName = document.getElementById('nomEquip').value;
+                            console.log('Equip creat amb nom: ' + teamName);
+                            document.getElementById('infoGenerarQr').classList.remove('d-none');
+                            document.getElementById('infoGenerarQr').classList.add('d-flex', 'flex-column', 'align-items-center');
+                            document.getElementById('infoGenerarQr').querySelector('h3').innerText = teamName;
                             document.getElementById('championForm').remove();
 
-                            const divQrImage = document.getElementById('infoGenerarQr').querySelector('.divQrMostrar');
+                            const divQrImage = document.getElementById('infoGenerarQr').querySelector('#divQrMostrar');
                             divQrImage.innerHTML = resposta;
                             
                         },
@@ -139,7 +143,19 @@
         });
         
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const downloadButton = document.getElementById('downloadLink');
+            downloadButton.addEventListener('click', function() {
+                const qrImage = document.querySelector('#divQrMostrar img');
+                if (qrImage) {
+                    downloadButton.href = qrImage.src;
+                } else {
+                    alert('No hi ha cap imatge QR per descarregar.');
+                }
+            });
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const maxSelections = 5; // Maxim de Campions a seleccionar
@@ -183,6 +199,7 @@
             });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -64,7 +64,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && $data ) {
 
     // Comprovem si s'ha guardat correctament o no
     if (preg_match('/^\d+$/', $comprovacio)) {
-        echo "<img src=".$qrImg." >";
+        echo "<img src=".$qrImg." width='250px' height='250px' />";
         exit;
     } else {
         echo ('Error en guardar el QR a la base de dades: ' . $comprovacio);

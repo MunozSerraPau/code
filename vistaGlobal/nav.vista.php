@@ -77,7 +77,10 @@
                 <a class="nav-link" href="<?php echo BASE_URL; ?>/vista/crearEquip.vista.php">Crear Equip</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="<?php echo BASE_URL; ?>/vista/canviarContrasenya.vista.php">Canvair contasenya</a>
+                <a class="nav-link" href="<?php echo BASE_URL; ?>/vista/llistatEquips.vista.php">Llistat Equips</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="<?php echo BASE_URL; ?>/vista/canviarContrasenya.vista.php">Canvair Contasenya</a>
               </li>
               <?php if(!empty($admin)): ?>
                 <li class="nav-item">
