@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../style/reset.css">
-    <link rel="stylesheet" href="../style/style.css">
+    
+    <link rel="stylesheet" href="./style/style.css">
     <title>EDITAR EQUIP</title>
 </head>
 <body>
@@ -21,7 +21,10 @@
         <div class="container d-flex justify-content-center align-items-center min-vh-100">       
             <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
                 
-                <h1 class="text-center">EDITAR EQUIP</h1>
+                <h1 class="text-center text-white">EDITAR EQUIP</h1>
+
+
+                
             </div>
         </div>
 

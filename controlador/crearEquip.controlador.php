@@ -71,8 +71,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && $data ) {
         exit;
     }
     
-    // S'HA DE PROVAR
-    // echo ("Equip creat i QR generat correctament  <br />  <img src=" . (new QRCode)->render($qr) . " />");
 }
 
 ?>

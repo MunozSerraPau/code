@@ -9,7 +9,10 @@
   --bs-lilaFluix: #B5ADE9;
 }
 
-
+.container-lg {
+  padding-top: 150px !important;
+  padding-bottom: 50px !important;
+}
 
 .containerr {
   background-image: url("./images/background.jpg");
@@ -17,6 +20,7 @@
   background-size: cover;
   background-attachment: fixed;
   width: 100%;
+  height: auto;
   padding-top: 5rem;
 }
 
@@ -53,6 +57,10 @@ body p{
   color: var(--bs-secondary) !important;
 }
 
+.text-triary {
+  color: #493185 !important;
+}
+
 .bg-card {
   background-color: var(--bs-backgroundCard) !important;
 }
@@ -67,15 +75,24 @@ body p{
   border-radius: 10px;
 }
 
+.btn-outline-primary {
+  border-color: var(--bs-lilaFluix) !important;
+  border: 2px solid var(--bs-lilaFluix) !important;
+  color: var(--bs-dark) !important;
+}
+
+.btn-outline-primary:hover {
+  border-color: var(--bs-lilaFluix) !important;
+  border: 2px solid var(--bs-lilaFluix) !important;
+  background-color: var(--bs-lilaFluix) !important;
+  color: white !important;
+}
+
 .btn-primary {
   border-color: var(--bs-lilaFluix) !important;
   background-color: var(--bs-lilaFluix) !important;
   box-shadow: 0 0 10px rgb(75, 64, 64) !important;
   border: 2px solid var(--bs-lilaFluix) !important;
+
 }
 
-.holaquetal {
-  border: 2px solid black !important;
-  min-width: 100% !important;
-  height: 460px !important;
-}

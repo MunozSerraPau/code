@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../style/reset.css">
-    <link rel="stylesheet" href="../style/style.css">
+    
+    <link rel="stylesheet" href="./style/style.css">
     <title>LOGIN</title>
 </head>
 <body>
@@ -27,7 +27,7 @@
     <div class="containerr">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
 
-        <div class="container d-flex justify-content-center align-items-center min-vh-100 my-5">
+        <div class="container d-flex justify-content-center align-items-center  my-5">
             <!-- Ventana flotante: usaremos un card de Bootstrap para simular el panel flotante -->
             <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
                 

@@ -24,8 +24,6 @@
         </div>
     </div>
 
-    <?php echo "------" . $paraulaBuscar . "------"; ?>
-
     <div class="row">
         <?php foreach ($campeons as $champion): ?>
             <div class="col-xs-12 col-md-6 col-lg-3 mb-4">
