@@ -12,11 +12,9 @@
     <?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
     <?php require_once './env.php'; ?>
 
-
-    
     <div class="containerr">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
-
+        
         <div class="container floating-panel">
             <h1 class="text-white text-center"> INDEX </h1>
             <?php include BASE_PATH . "/vistaGlobal/mostrarChamps.vista.php" ?>
@@ -24,8 +22,6 @@
 
         <?php include BASE_PATH . "/vistaGlobal/footer.vista.php" ?>
     </div>
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

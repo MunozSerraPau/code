@@ -61,10 +61,10 @@
         <div class="col-md-4">
             <form method="GET" >
                 <select class="form-control" name="champsPerPagina" onchange="this.form.submit()">
-                    <option value="8"  <?php if(isset($_COOKIE['champsPerPagina']) && $_COOKIE['champsPerPagina'] == 8) echo 'selected'; ?>>8</option>
-                    <option value="12" <?php if(isset($_COOKIE['champsPerPagina']) && $_COOKIE['champsPerPagina'] == 12) echo 'selected'; ?>>12</option>
-                    <option value="16" <?php if(isset($_COOKIE['champsPerPagina']) && $_COOKIE['champsPerPagina'] == 16) echo 'selected'; ?>>16</option>
-                    <option value="20" <?php if(isset($_COOKIE['champsPerPagina']) && $_COOKIE['champsPerPagina'] == 20) echo 'selected'; ?>>20</option>
+                    <option value="8"  <?php if(isset($_COOKIE['champsPerPaginaLogin']) && $_COOKIE['champsPerPaginaLogin'] == 8) echo 'selected'; ?>>8</option>
+                    <option value="12" <?php if(isset($_COOKIE['champsPerPaginaLogin']) && $_COOKIE['champsPerPaginaLogin'] == 12) echo 'selected'; ?>>12</option>
+                    <option value="16" <?php if(isset($_COOKIE['champsPerPaginaLogin']) && $_COOKIE['champsPerPaginaLogin'] == 16) echo 'selected'; ?>>16</option>
+                    <option value="20" <?php if(isset($_COOKIE['champsPerPaginaLogin']) && $_COOKIE['champsPerPaginaLogin'] == 20) echo 'selected'; ?>>20</option>
                 </select>
             </form>
         </div>
