@@ -12,7 +12,8 @@
 <body>
     <?php require_once '../env.php'; ?>
     <?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
-    
+    <?php //if (!isset($_SESSION['usuari'])) { header('Location: ' . BASE_URL . '/vista/login.vista.php'); } ?>
+    <?php require BASE_PATH . "/controlador/editarEquip.controlador.php"; ?>
 
     <div class="containerr pt-0">
         
@@ -21,7 +22,7 @@
         <div class="container d-flex justify-content-center align-items-center min-vh-100">       
             <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
                 
-                <h1 class="text-center text-white">EDITAR EQUIP</h1>
+                <h1 class="text-center text-DARK">EDITAR EQUIP</h1>
 
 
                 

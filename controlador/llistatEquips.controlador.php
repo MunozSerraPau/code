@@ -33,6 +33,5 @@ if (!empty($resutat)) {
 } else {
     $equipos = []; // Sin resultados, array vacío
 }
-    
 
 ?>

@@ -8,6 +8,7 @@ require_once BASE_PATH . "/lib/QR-lib/vendor/autoload.php";
 require_once BASE_PATH . "/model/crearEquip.model.php";
 
 use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
 
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
@@ -53,11 +54,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && $data ) {
     // Url de la vista per editar l'equip
     $qrUrl = "http://localhost/code/vista/editarEquips.vista.php";
 
+    $options = new QROptions( properties: [
+        'outputType' => QRCode::OUTPUT_IMAGE_PNG,
+    ]);
+
     // Url amb el id passat per GET / para descodificar es urldecode($idEquip)
     $qr = $qrUrl . "?idEquip=" . urlencode($idEquip);
 
     // Generar el QR en format PNG
-    $qrImg = (new QRCode)->render($qr);
+    $qrImg = (new QRCode(options: $options))->render($qr);
 
     // Guardar el QR a la la taula "equips"
     $comprovacio = actualizarQR($idEquip, $qr);

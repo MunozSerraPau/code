@@ -303,3 +303,8 @@ Aquí podem veure la API amb informació de tots els Campeons del Lol hi ha més
 **URL FOTO GRAN:** <https://ddragon.leagueoflegends.com/cdn/img/champion/loading/nomChamp_0.jpg>
 
 **URL FOTO MINIATURA:** <https://ddragon.leagueoflegends.com/cdn/15.1.1/img/champion/nomChamp.png>
+
+## Lectura QR
+
+Per fer la lectura del qr hem de descomentar la linea "extension=gd" de l'arxiu php.ini dins de xampp/php/
+A més de crear un arxiu dins del domini amb una linea que necessitem perque fagi la mateixa funcio.

@@ -119,16 +119,21 @@
                         contentType: 'application/json',
                         
                         success: function (resposta) {
-                            
-                            const teamName = document.getElementById('nomEquip').value;
-                            console.log('Equip creat amb nom: ' + teamName);
-                            document.getElementById('infoGenerarQr').classList.remove('d-none');
-                            document.getElementById('infoGenerarQr').classList.add('d-flex', 'flex-column', 'align-items-center');
-                            document.getElementById('infoGenerarQr').querySelector('h3').innerText = teamName;
-                            document.getElementById('championForm').remove();
 
-                            const divQrImage = document.getElementById('infoGenerarQr').querySelector('#divQrMostrar');
-                            divQrImage.innerHTML = resposta;
+                            if (resposta.startsWith('<img src=')) {
+                                const teamName = document.getElementById('nomEquip').value;
+                                console.log('Equip creat amb nom: ' + teamName);
+                                document.getElementById('infoGenerarQr').classList.remove('d-none');
+                                document.getElementById('infoGenerarQr').classList.add('d-flex', 'flex-column', 'align-items-center');
+                                document.getElementById('infoGenerarQr').querySelector('h3').innerText = teamName;
+                                document.getElementById('championForm').remove();
+    
+                                const divQrImage = document.getElementById('infoGenerarQr').querySelector('#divQrMostrar');
+                                divQrImage.innerHTML = resposta;
+                                
+                            } else {
+                                alert(resposta);
+                            }
                             
                         },
                         error: function () {

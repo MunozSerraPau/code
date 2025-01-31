@@ -11,8 +11,9 @@
 </head>
 <body>
     <?php require_once '../env.php'; ?>
-    <?php require BASE_PATH . "/controlador/editarChamp.controlador.php"; ?>
     <?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
+    <?php if (!isset($_SESSION['usuari'])) { header('Location: ' . BASE_URL . '/vista/login.vista.php'); } ?>
+    <?php require BASE_PATH . "/controlador/editarChamp.controlador.php"; ?>
     
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">

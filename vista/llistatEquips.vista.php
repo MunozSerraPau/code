@@ -13,11 +13,8 @@
 <body>
     <?php require_once '../env.php'; ?>
     <?php require_once BASE_PATH . '/controlador/llistatEquips.controlador.php'; ?>
-    <?php // require_once BASE_PATH . '/controlador/eliminarEquips.controlador.php'; 
-    ?>
-    <?php if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    } ?>
+    <?php // require_once BASE_PATH . '/controlador/eliminarEquips.controlador.php'; ?>
+    <?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
     <script>
         function confirmarEliminacion() {
             return confirm('Estas segur que vols eliminar aquest campió?');
@@ -34,6 +31,14 @@
 
                 <h1 class="text-center text-white">LLISTAT EQUIPS</h1>
 
+                <form action="<?php echo BASE_URL; ?>/controlador/comprovacioQr.controlador.php" method="post" enctype="multipart/form-data" class="mb-4 d-flex flex-column align-items-center">
+                    <div class="mb-3 d-flex flex-column align-items-center">
+                        <label for="archivoQR" class="form-label text-white">Lectura de Qr:</label>
+                        <input type="file" class="form-control w-50" id="archivoQR" name="archivoQR" required>
+                    </div>
+                    <button name="pujarQR" type="submit" class="btn btn-primary">Subir</button>
+                </form>
+                
                 <?php if (empty($equipos)): ?>
                     <p>No hay equipos disponibles.</p>
                 <?php else: ?>
