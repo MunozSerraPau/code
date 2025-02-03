@@ -100,6 +100,7 @@
 
                 formData.forEach(field => {
                     if (field.name === "champions") {
+                        console.log(field.value);
                         // Decodifica i converteix cada campió en un objecte
                         const champion = JSON.parse(decodeURIComponent(field.value));
                         result.champions.push(champion); // Afegeix l'objecte a l'array de campions
@@ -117,7 +118,6 @@
                         url: '<?php echo BASE_URL; ?>/controlador/crearEquip.controlador.php',
                         data: JSON.stringify(result),
                         contentType: 'application/json',
-                        
                         success: function (resposta) {
 
                             if (resposta.startsWith('<img src=')) {

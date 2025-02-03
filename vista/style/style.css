@@ -64,6 +64,9 @@ body p{
 .bg-card {
   background-color: var(--bs-backgroundCard) !important;
 }
+.bg-card-selecctet {
+  background-color: var(--bs-lilaFluix) !important;
+}
 
 
 

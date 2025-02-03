@@ -6,33 +6,46 @@ if (isset($_SESSION['usuari'])) { $nomUsuari = $_SESSION['usuari']; } else { hea
 require_once '../env.php';
 require_once BASE_PATH . "/lib/QR-lib/vendor/autoload.php";
 
-use chillerlan\QRCode\QRCode;
-use chillerlan\QRCode\Common\EccLevel;
 use chillerlan\QRCode\QROptions;
-// use chillerlan\QRCode\QRCodeReader;
+use chillerlan\QRCode\QRCode;
 
-// Verificar si se ha subido un archivo
-if (isset($_FILES['qrImage']) && $_FILES['qrImage']['error'] === UPLOAD_ERR_OK) {
-    
-    $fileTmpPath = $_FILES['qrImage']['tmp_name'];
+// Verificar que s'ha pujat una imgatge
+if (isset($_FILES['imatgeQR'])) {
+    $fileTmpPath = $_FILES['imatgeQR']['tmp_name'];
     $fileType = mime_content_type($fileTmpPath);
 
-    // Verificar que el archivo sea PNG
+    // Verificar que es PNG
     if ($fileType !== 'image/png') {
-        die("Error: Solo se permiten archivos PNG.");
+        die("❌ Error: Solo se permiten archivos PNG.");
     }
 
-    // Leer y decodificar el código QR
-    $qrcode = new QRCode();
-    $decodedText = $qrcode->render(file_get_contents($fileTmpPath));
+    $options = new QROptions();
 
-    if ($decodedText) {
-        echo "Contenido del QR: " . htmlspecialchars($decodedText);
+    // Llegeix el QR de la imatge
+    $qr = (new QRCode($options))->readFromFile($fileTmpPath);
+
+    if (!empty($qr)) {
+        // Verificar que el QR conté una URL amb el format desitjat
+        $comprovacioDomini = '/^https:\/\/www\.paumunoz\.cat\/vista\/editarEquips\.vista\.php\?idEquip=\d+$/';
+        $comprovacioLocalHost = '/^http:\/\/localhost\/code\/vista\/editarEquips\.vista\.php\?idEquip=\d+$/';
+
+        if (preg_match($comprovacioDomini, $qr) || preg_match($comprovacioLocalHost, $qr)) {
+            header('Location: ' . htmlspecialchars($qr));
+            exit();
+        } else {
+            echo "<script>alert('❌ Error: La URL del codi QR no te el format esperat.');</script>";
+            echo "<script>window.history.back();</script>";
+            exit();
+        }
     } else {
-        echo "Error: No se pudo leer el código QR.";
+        echo "<script>alert('❌ Error: No s'ha pogut llegir el QR.');</script>";
+        echo "<script>window.history.back();</script>";
+        exit();
     }
 } else {
-    echo "Error: No se subió ningún archivo.";
+    echo "<script>alert('⚠️ Error: No s'ha pujat cap arxiu.');</script>";
+    echo "<script>window.history.back();</script>";
+    exit();
 }
 
 ?>

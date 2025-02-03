@@ -33,8 +33,8 @@
 
                 <form action="<?php echo BASE_URL; ?>/controlador/comprovacioQr.controlador.php" method="post" enctype="multipart/form-data" class="mb-4 d-flex flex-column align-items-center">
                     <div class="mb-3 d-flex flex-column align-items-center">
-                        <label for="archivoQR" class="form-label text-white">Lectura de Qr:</label>
-                        <input type="file" class="form-control w-50" id="archivoQR" name="archivoQR" required>
+                        <label for="imatgeQR" class="form-label text-white">Lectura de Qr:</label>
+                        <input type="file" class="form-control w-50" id="imatgeQR" name="imatgeQR" required>
                     </div>
                     <button name="pujarQR" type="submit" class="btn btn-primary">Subir</button>
                 </form>
@@ -77,16 +77,9 @@
                                         </a>
                                     <?php endif; ?>
 
-                                    <a href="<?php echo BASE_URL; ?>/vista/editarChamp.vista.php?idChampEditar=<?php echo htmlspecialchars($datosEquipo['id']) ?>" class="me-2 btn btn-outline-primary mb-3 mb-md-0">
+                                    <a href="<?= htmlspecialchars($datosEquipo['qr']) ?>" download="qr_<?= htmlspecialchars($nombreEquipo) ?>.png" class="me-2 btn btn-outline-primary mb-3 mb-md-0">
                                         <i class="bi bi-download"></i>
                                     </a>
-                                    <script>
-                                        $('a[download]').each(function() {
-                                            var $a = $(this),
-                                                fileUrl = $a.attr('href');
-                                            $a.attr('href', 'data:application/octet-stream,' + encodeURIComponent(fileUrl));
-                                        });
-                                    </script>
 
                                 </div>
                             </div>
