@@ -60,7 +60,7 @@
                                                     <p class="mb-0"><?= htmlspecialchars($campeon['tags']) ?></p>
                                                 </div>
                                             <?php endforeach; ?>
-                                            <div class="col">
+                                            <div class="col" id="imgQr">
                                                 <img src="<?= htmlspecialchars($datosEquipo['qr']) ?>" alt="QR del equipo" style="max-width: 100%;">
                                             </div>
                                         </div>
@@ -77,10 +77,10 @@
                                         </a>
                                     <?php endif; ?>
 
+                                    <!-- Descarregar QR -->
                                     <a href="<?= htmlspecialchars($datosEquipo['qr']) ?>" download="qr_<?= htmlspecialchars($nombreEquipo) ?>.png" class="me-2 btn btn-outline-primary mb-3 mb-md-0">
                                         <i class="bi bi-download"></i>
                                     </a>
-
                                 </div>
                             </div>
                         </div>
@@ -94,6 +94,20 @@
         <?php include BASE_PATH . "/vistaGlobal/footer.vista.php" ?>
 
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const downloadButton = document.getElementById('downloadLink');
+            downloadButton.addEventListener('click', function() {
+                const qrImage = document.querySelector('#imgQr img');
+                if (qrImage) {
+                    downloadButton.href = qrImage.src;
+                } else {
+                    alert('No hi ha cap imatge QR per descarregar.');
+                }
+            });
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
