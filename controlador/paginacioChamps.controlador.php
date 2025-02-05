@@ -1,8 +1,5 @@
 <?php
 // Pau Muñoz Serra
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 require_once BASE_PATH . "/model/paginacioChamps.model.php";
 require_once BASE_PATH . "/model/buscarChamp.model.php";
@@ -53,8 +50,8 @@ function mostrarChampsLoguejat($paraula) {
     }
 
     // Si l'usuari canvia l'ordre mitjançant el formulari, actualitzem la cookie
-    if (isset($_POST['ordre'])) {
-        $ordre = $_POST['ordre'];
+    if (isset($_POST['ordreLogin'])) {
+        $ordre = $_POST['ordreLogin'];
         // Guardem la selecció a la cookie (expira en 30 dies)
         setcookie('ordreLogin', $ordre, time() + 3600, "/");
     }

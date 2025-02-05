@@ -98,7 +98,7 @@
         </div>
         <div class="col-md-4">
             <form  method="POST">
-                <select class="form-control" name="ordre" onchange="this.form.submit()">
+                <select class="form-control" name="ordreLogin" onchange="this.form.submit()">
                     <option value="Ascending" <?php if ($ordre == 'Ascending') echo 'selected'; ?>>Ascending</option>
                     <option value="Descending" <?php if ($ordre == 'Descending') echo 'selected'; ?>>Descending</option>
                 </select>

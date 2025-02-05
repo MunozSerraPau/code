@@ -5,7 +5,7 @@ Password: P@ssw0rd
 
 ## PASSOS PREVIS
 
-Per fer la lectura del qr hem de descomentar la linea "extension=gd" de l'arxiu php.ini dins de xampp/php/
+Per fer la lectura del qr hem de descomentar la linea "extension=gd" de l'arxiu xampp/php/php.ini
 
 ## Descripció del Projecte
 
@@ -210,15 +210,14 @@ Les sessions les he utilitzat per gestionar la informació de l'usuari durant la
 
 En el cas del HybridAuth, he fet servir el Reddit ja que era un dels mes facils a l'hora de implementar-ho en el meu programa, a més de que si faltaba algun dels parametres obligatori, li creaca un unic perque no hi hages de repetit, a més de que si ja estava loguejat iniccies seccion sense problemes.
 
-## Resum de QR, API i AJAX
+## RESUM de QR, API i AJAX
 
-Aquí mostrem els campeons i seleccionem 5, mentres tant es va canviant la img dels 5 personatges, quan li donem a mostrar es desabilitan per canviar els campions i canviar el nom del equip, a més de apreixe el button de descarregar el qr i el qr en gran. Posterior els Usuaris podran agafar un equip creeat i modificar-lo al seu gust.
+Mostrem els campeons i seleccionem 5, mentres tant es va canviant la img dels 5 personatges, quan li donem a mostrar es desabilitan per canviar els campions i canviar el nom del equip, a més de apreixe el button de descarregar el qr i el qr en gran. Posterior els Usuaris podran agafar un equip creeat i modificar-lo al seu gust.
 
 ### **QR**
 
 En aquest cas es generara un QR el qual guardara un equip amb 5 campeons que agafarem d'un llistat d'una API de campeons del LOL a més del nom del equip.
-
-Al escanejar-ho es mostraran en una pagina amb els 5 campeons en gran (gracies a la url i el nom del campeon) i un camp per poder assignar-li un nou nom.
+Al escanejar-ho es mostraran en una pagina amb els 5 campeons en gran (gracies al ID del equip) amb el seu nom, tag i la foto, i un camp per poder assignar-li un nou nom.
 
 ### **AJA**
 

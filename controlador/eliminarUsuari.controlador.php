@@ -28,14 +28,14 @@ if (isset($_GET["nickname"]) && isset($_GET["action"])) {
         } else {
             //  Sino ens envia directement al index despres de 3 segons
             echo '<script> alert("ERROR no s\'ha eliminar el Usuari"); </script>';
-            header("Location: " . BASE_URL . "/index.php");
+            header("Location: " . BASE_URL . "/vista/modificarAdmin.vista.php");
             exit();
 
         }
 
     } else {
         echo '<script> alert("Error 2"); </script>';
-        header("Location: " . BASE_URL . "/index.php");
+        header("Location: " . BASE_URL . "/vista/modificarAdmin.vista.php");
         exit();
     }
 

@@ -46,13 +46,13 @@
 
         } else {
             echo '<script> alert("Error al eliminar l\'Equip"); </script>';
-            header("Location: " . BASE_URL . "/index.php");
+            header("Location: " . BASE_URL . "/vista/llistatEquips.vista.php");
             exit();
         }
 
     } else {
         echo '<script> alert("Error al eliminar l\'Equip"); </script>';
-        header("Location: " . BASE_URL . "/index.php");
+        header("Location: " . BASE_URL . "/vista/llistatEquips.vista.php");
         exit();
     }
 
