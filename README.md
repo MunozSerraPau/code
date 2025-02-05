@@ -3,6 +3,10 @@
 User: PauMunozSerra
 Password: P@ssw0rd
 
+## PASSOS PREVIS
+
+Per fer la lectura del qr hem de descomentar la linea "extension=gd" de l'arxiu php.ini dins de xampp/php/
+
 ## Descripció del Projecte
 
 Aquesta és una aplicació web que permet als usuaris registrar-se, iniciar sessió, i gestionar el seu perfil. Els usuaris poden crear, editar i eliminar campions de League of Legends. L'aplicació està dissenyada per facilitar l'administració d'usuaris i campions, proporcionant una interfície intuïtiva i funcionalitats robustes per a la gestió de dades. També es pot iniciar sessió amb el compte de Reddit.
@@ -208,93 +212,23 @@ En el cas del HybridAuth, he fet servir el Reddit ja que era un dels mes facils 
 
 ## Resum de QR, API i AJAX
 
-Aquí mostrem els campeons i seleccionem 5, mentres tant es va canviant la img dels 5 personatges, quan li donem a mostrar es desabilitan per canviar els campions i canviar el nom del equip, a més de apreixe el button de descarregar el qr i el qr en gran, a més de un button per tornar a l'inici
-
-### OPCIOANL
-
-Mirar si fer que en canvi de guardar l'equip a una base de dades es guardi a una API com aqeusta:
-
-``` json
-{
-    "data": {
-        "Full Tank": {
-            "Zac": {
-                "title": "la Espada de los Oscuros",
-                "blurb": "Aatrox y sus hermanos, otrora respetados defensores de Shurima contra el Vacío, acabarían convirtiéndose en una amenaza aún mayor para Runaterra y solo conocieron la derrota ante el uso astuto de hechizos mortales. No obstante, tras siglos de reclusión...",
-                "info": {
-                    "attack": 8,
-                    "defense": 4,
-                    "magic": 3,
-                    "difficulty": 4
-                },
-                "tags": [
-                    "Fighter"
-                ],
-                "partype": "Pozo sangriento"
-            },
-            "Ornn": {
-                "title": "Las Llamas de la Forja",
-                "blurb": "Ornn es el espíritu de Freljord de la forja y la artesanía. Trabaja en la soledad de una enorme forja esculpida en las cavernas de lava bajo el volcán de Dulcehogar. En ella modela objetos de calidad sin igual y depura menas en burbujeantes calderos de...",
-                "info": {
-                    "attack": 5,
-                    "defense": 9,
-                    "magic": 3,
-                    "difficulty": 5
-                },
-                "tags": [
-                    "Tank"
-                ],
-                "partype": "Maná"
-            },
-            "Nautilus": {
-                "title": "El Titán Abisal",
-                "blurb": "El gigante acorazado Nautilus, una leyenda solitaria tan antigua como los pecios de Aguas Estancadas, recorre las turbias aguas que rodean las costas de las Islas de la Llama Azul. Impulsado por una traición olvidada, ataca con su enorme ancla sin...",
-                "info": {
-                    "attack": 4,
-                    "defense": 6,
-                    "magic": 6,
-                    "difficulty": 6
-                },
-                "tags": [
-                    "Tank",
-                    "Support"
-                ],
-                "partype": "Maná"
-            },
-            "Sion": {
-                "title": "El Coloso no Muerto",
-                "blurb": "Sion fue un héroe de guerra en el pasado y los noxianos lo veneraban porque había arrebatado la vida de un rey demaciano con sus simples manos. No obstante, se le denegó su viaje al más allá, pues fue revivido para servir a su imperio incluso después de...",
-                "info": {
-                    "attack": 5,
-                    "defense": 9,
-                    "magic": 3,
-                    "difficulty": 5
-                },
-                 "tags": [
-                    "Tank",
-                    "Fighter"
-                ],
-                "partype": "Maná"
-            }
-        }
-    }
-}
-
-```
+Aquí mostrem els campeons i seleccionem 5, mentres tant es va canviant la img dels 5 personatges, quan li donem a mostrar es desabilitan per canviar els campions i canviar el nom del equip, a més de apreixe el button de descarregar el qr i el qr en gran. Posterior els Usuaris podran agafar un equip creeat i modificar-lo al seu gust.
 
 ### **QR**
 
 En aquest cas es generara un QR el qual guardara un equip amb 5 campeons que agafarem d'un llistat d'una API de campeons del LOL a més del nom del equip.
 
-Al escanejar-ho es mostraran en una pagina amb els 5 campeons en gran (gracies a la url i el nom del campeon) i un camp per.
+Al escanejar-ho es mostraran en una pagina amb els 5 campeons en gran (gracies a la url i el nom del campeon) i un camp per poder assignar-li un nou nom.
 
 ### **AJA**
 
-Es pot fer AJAX que quan tinguis els 5 campeons seleccioants es generi un QR i que cada com que canvis un champ es canvi el QR
+Es pot fer AJAX que quan tinguis els 5 campeons seleccioants es generi un QR i que cada com que canvis un champ es canvi el QR.
+En la edició de equips un cop escanejat el QR cuan canviem de campio en el select ens canvia la img corresponent, a més de quan donem a crear, es genera el qr per AJAX.
 
 ### **API**
 
-Aquí podem veure la API amb informació de tots els Campeons del Lol hi ha més de url per obtenir la img dels campeons
+L'he fet servir per poder llistar tots els campions i poder crear els nostres equips del lol. A més a més en el cas de selccionar un campio nou que cap altre equip el tingues, ens el guarda en una taula especial per els campions de la api per el cas que si el borresin tindral guardat.
+Aquí podem veure la API amb informació de tots els Campeons del Lol hi ha més de url per obtenir la img dels campeons.
 
 **API Campeones:** <https://ddragon.leagueoflegends.com/cdn/15.1.1/data/es_ES/champion.json>
 
@@ -306,5 +240,6 @@ Aquí podem veure la API amb informació de tots els Campeons del Lol hi ha més
 
 ## Lectura QR
 
+En el meu cas he fet la lectura amb la lib de Chillerland, l'unic problema que tenia es que nómes llegeix QR en format '.png'. Per aixo havia de fer un filtratje i comprovacións per mirar que sofin .png i continguessin el link a la vista per poder editar l'Equip.
 Per fer la lectura del qr hem de descomentar la linea "extension=gd" de l'arxiu php.ini dins de xampp/php/
-A més de crear un arxiu dins del domini amb una linea que necessitem perque fagi la mateixa funcio.
+A més a més de crear un arxiu dins del domini amb una linea que necessitem perque fagi la mateixa funcio.

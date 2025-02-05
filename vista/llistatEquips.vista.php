@@ -78,7 +78,7 @@
                                     <?php endif; ?>
 
                                     <!-- Descarregar QR -->
-                                    <a href="<?= htmlspecialchars($datosEquipo['qr']) ?>" download="qr_<?= htmlspecialchars($nombreEquipo) ?>.png" class="me-2 btn btn-outline-primary mb-3 mb-md-0">
+                                    <a id="downloadLink" href="<?= htmlspecialchars($datosEquipo['qr']) ?>" download="qr_<?= htmlspecialchars($nombreEquipo) ?>.png" class="me-2 btn btn-outline-primary mb-3 mb-md-0">
                                         <i class="bi bi-download"></i>
                                     </a>
                                 </div>
