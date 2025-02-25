@@ -30,13 +30,14 @@
         </symbol>
     </svg>
 
+    <div class="position-absolute top-0 start-0" style="z-index: 9999;">
+        <a href="#main-content" class="btn btn-primary btn-Tabular fw-bold">Ir al contenido principal</a>
+    </div>
 
-
-    <!-- CODI DE LA WEB -->
 
     <div class="containerr">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
-        <div class="container d-flex justify-content-center align-items-center ">
+        <div class="container d-flex justify-content-center align-items-center" id="main-content">
             <!-- Ventana flotante: usaremos un card de Bootstrap para simular el panel flotante -->
             <!-- Si volem el fosn difuminat hem de ficar en class="bg-transparent" -->
             <div class="card shadow p-4 bg-light" style="max-width: auto; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid black;">
@@ -57,13 +58,13 @@
                         <tbody>
                             <?php foreach ($llistaUsuaris as $usuari): ?>
                                 <tr>
-                                    <td class="align-content-center"><img src="<?php echo BASE_URL . $usuari['imgPerfil'] ?>" alt="Imagen de usuario" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;"></td>
+                                    <td class="align-content-center"><img src="<?php echo BASE_URL . $usuari['imgPerfil'] ?>" alt="Img del usari: <?php echo $usuari['nickname'] ?>" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;"></td>
                                     <td class="align-content-center"><?php echo $usuari['nickname']; ?></td>
                                     <td class="align-content-center"><?php echo $usuari['nom']; ?></td>
                                     <td class="align-content-center"><?php echo $usuari['cognoms']; ?></td>
                                     <td class="align-content-center"><?php echo $usuari['correu']; ?></td>
                                     <td class="align-content-center">
-                                        <a href="<?php echo BASE_URL; ?>/controlador/eliminarUsuari.controlador.php?nickname=<?php echo $usuari['nickname'] ?>&action=delete" class="me-2 btn btn-danger" onclick="return confirmarEliminacion()">
+                                        <a href="<?php echo BASE_URL; ?>/controlador/eliminarUsuari.controlador.php?nickname=<?php echo $usuari['nickname'] ?>&action=delete" aria-label="Eliminar compte: <?= $usuari['nickname'] ?>" class="me-2 btn btn-danger" onclick="return confirmarEliminacion()">
                                             <i class="bi bi-trash3-fill"></i>
                                         </a>
                                     </td>

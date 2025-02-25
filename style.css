@@ -1,0 +1,25 @@
+:root {
+    --bs-primary: #343a40;
+    --bs-secondary: #191B24;
+    --bs-triary: #493185;
+    --bs-backgroundCard: #EBF1FF;
+    --bs-success: #28a745;
+    --bs-dark: #191B24;
+    --bs-lilaFluix: #B5ADE9;
+  }
+
+a.btn-Tabular {
+    margin-top: -100px !important;
+}
+
+a.btn-Tabular:focus,
+a.btn-Tabular:active {
+    margin-top: 80px !important;
+    margin-left: 10px !important;
+    border: 3px solid var(--bs-triary) !important;
+}
+
+.btn-primary:focus,
+.btn-primary:active {
+  border: 3px solid var(--bs-triary) !important;
+}

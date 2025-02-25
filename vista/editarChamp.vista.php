@@ -22,12 +22,15 @@
         </symbol>
     </svg>
 
+    <div class="position-absolute top-0 start-0" style="z-index: 9999;">
+        <a href="#main-content" class="btn btn-primary btn-Tabular fw-bold">Ir al contenido principal</a>
+    </div>
+
 
     <div class="containerr pt-0">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
-        <div class="container d-flex justify-content-center align-items-center min-vh-100">
 
-        
+        <div class="container d-flex justify-content-center align-items-center min-vh-100" id="main-content">        
             <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
                 <form <?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="POST" class="row g-3">
                     <div class="col-12">

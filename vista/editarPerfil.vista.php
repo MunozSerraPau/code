@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
-    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="style/style.css">
     <title>LOGIN</title>
 </head>
 <body>
@@ -23,16 +22,20 @@
         </symbol>
     </svg>
 
+    <div class="position-absolute top-0 start-0" style="z-index: 9999;">
+        <a href="#main-content" class="btn btn-primary btn-Tabular fw-bold">Ir al contenido principal</a>
+    </div>
 
     <div class="containerr">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
-        <div class="container d-flex justify-content-center align-items-center min-vh-100 mt-5 pb-5">
+        
+        <div class="container d-flex justify-content-center align-items-center min-vh-100 mt-5 pb-5" id="main-content">
             <!-- Ventana flotante: usaremos un card de Bootstrap para simular el panel flotante -->
             <!-- Si volem el fosn difuminat hem de ficar en class="bg-transparent" -->
             <div class="shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
 
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
-                    <h2 class="text-center text-primary mb-4">Editar Perfil</h2>
+                    <h1 class="text-center text-primary mb-4">Editar Perfil</h1>
 
                     <div class="d-flex justify-content-center mb-4">
                         <img src="<?php echo BASE_URL . $usuariInfo['imgPerfil']; ?>" alt="Imagen de perfil" class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover; border: 3px solid #454962;">
@@ -89,7 +92,7 @@
                     <?php endif; ?>
 
                     <div class="d-grid mb-3">
-                        <button type="submit" class="btn btn-primary" name="updateUsuari">EDITAR PERFIL</button>
+                        <button type="submit" class="btn btn-primary text-dark" name="updateUsuari">EDITAR PERFIL</button>
                     </div>
 
                 </form>
@@ -103,7 +106,11 @@
     </div>
 
 
-    <!-- Formulario de inicio de sesión -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("firstname").focus();
+        });
+    </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

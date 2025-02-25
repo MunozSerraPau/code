@@ -1,4 +1,3 @@
-
 :root {
   --bs-primary: #343a40;
   --bs-secondary: #191B24;
@@ -7,6 +6,17 @@
   --bs-success: #28a745;
   --bs-dark: #191B24;
   --bs-lilaFluix: #B5ADE9;
+}
+
+a.btn-Tabular {
+  margin-top: -100px !important;
+}
+
+a.btn-Tabular:focus,
+a.btn-Tabular:active {
+  margin-top: 80px !important;
+  margin-left: 10px !important;
+  border: 3px solid var(--bs-triary) !important;
 }
 
 .container-lg {
@@ -92,13 +102,29 @@ body p{
 }
 
 .btn-primary {
-  border-color: var(--bs-lilaFluix) !important;
+  border-color: var(--bs-lilaFluix);
   background-color: var(--bs-lilaFluix) !important;
   box-shadow: 0 0 10px rgb(75, 64, 64) !important;
-  border: 2px solid var(--bs-lilaFluix) !important;
-
 }
+
+button.btn-primary {
+  border-color: var(--bs-lilaFluix);
+  background-color: var(--bs-lilaFluix) !important;
+  box-shadow: 0 0 10px rgb(75, 64, 64) !important;
+}
+
+button.btn-primary:focus,
+button.btn-primary:active {
+  border: 3px solid var(--bs-dark) !important;
+}
+
+a.btn-reddit:focus,
+a.btn-reddit:active {
+  border: 3px solid var(--bs-dark) !important;
+}
+
 
 option {
   color: var(--bs-triary) !important;
 }
+

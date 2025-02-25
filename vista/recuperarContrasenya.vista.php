@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
     <link rel="stylesheet" href="./style/style.css">
     <title>RECUPERAR CONTRASENYA</title>
 </head>
@@ -13,8 +12,6 @@
     <?php require_once '../env.php'; ?>
     <?php require_once BASE_PATH . "/controlador/recuperarContrasenya.controlador.php" ?>
     <?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
-    
-
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
@@ -25,11 +22,13 @@
         </symbol>
     </svg>
 
+    <div class="position-absolute top-0 start-0" style="z-index: 9999;">
+        <a href="#main-content" class="btn btn-primary btn-Tabular fw-bold">Ir al contenido principal</a>
+    </div>
 
-
-    <div class="containerr">
+    <div class="containerr min-vh-100 d-flex flex-column justify-content-between">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
-        <div class="container d-flex justify-content-center align-items-center ">
+        <div class="container d-flex justify-content-center align-items-center " id="main-content">
             <!-- Ventana flotante: usaremos un card de Bootstrap para simular el panel flotante -->
             <!-- Si volem el fosn difuminat hem de ficar en class="bg-transparent" -->
             <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
@@ -76,8 +75,12 @@
     </div>
 
 
-    <!-- Formulario de inicio de sesión -->
     
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("correuRecuperacio").focus();
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

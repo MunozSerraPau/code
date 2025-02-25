@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="./style/style.css">
     <title>LOGIN</title>
 </head>
@@ -25,16 +24,18 @@
         </symbol>
     </svg>
 
-
+    <div class="position-absolute top-0 start-0" style="z-index: 9999;">
+        <a href="#main-content" class="btn btn-primary btn-Tabular fw-bold">Ir al contenido principal</a>
+    </div>
 
     <div class="containerr">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
         
 
-        <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="container d-flex justify-content-center align-items-center min-vh-100" id="main-content">
             <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
                 <form <?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?> method="POST" class="row g-3">
-                    <h2 class="text-center text-primary mb-4">Afegir Champion</h2>
+                    <h1 class="text-center text-primary mb-4">Afegir Champion</h1>
                     
                     <div class="col-12">
                         <label for="nomCampio" class="form-label">Nom del Champion</label>
@@ -94,7 +95,7 @@
                     <?php endif; ?>
                     
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary w-100" name="insert">Crear Champion</button>
+                        <button type="submit" class="btn btn-primary w-100 text-dark" name="insert">Crear Champion</button>
                     </div>
                 </form>
             </div>
@@ -105,6 +106,11 @@
     </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("nomCampio").focus();
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

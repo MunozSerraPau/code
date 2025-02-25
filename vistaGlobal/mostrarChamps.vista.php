@@ -13,14 +13,14 @@
             <form class="d-flex justify-content-center" method="POST">
                 <div class="input-group" style="max-width: 500px;">
                     <input type="text" class="form-control" name="paraulaBuscador" placeholder="Busca..." aria-label="Buscar" value="<?php echo $paraulaBuscar; ?>">
-                    <button class="btn btn-primary" type="submit" name="buscador"><i class="bi bi-search"></i></button>
+                    <button class="btn btn-primary" type="submit" name="buscador" aria-label="Buscar"><i class="bi bi-search"></i></button>
                 </div>
             </form>
         </div>
     </div>
     <div class="row my-4 justify-content-center">
         <div class="col-xs-12 col-md-6 col-lg-3 mb-4 justify-content-center d-flex">
-            <a style="height: 50px;" class="btn btn-primary w-25 align-content-center" href="<?php echo BASE_URL; ?>/vista/afegirChamp.vista.php" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
+            <a style="height: 50px;" class="btn btn-primary w-25 align-content-center" aria-label="Nou Campio" href="<?php echo BASE_URL; ?>/vista/afegirChamp.vista.php" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
         </div>
     </div>
 
@@ -28,9 +28,9 @@
         <?php foreach ($campeons as $champion): ?>
             <div class="col-xs-12 col-md-6 col-lg-3 mb-4">
                 <div class="card bg-card">
-                    <img src="" class="card-img-top m-2 w-auto h-auto" alt="...">
+                    <img src="" class="card-img-top m-2 w-auto h-auto" alt="Img de <?php echo $champion['name'] ?>">
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $champion['name']; ?></h5>
+                        <h2 class="h5 card-title"><?php echo $champion['name']; ?></h2>
                         <hr>
                         <p class="card-text"><?php echo $champion['description']; ?></p>
                         <div class="d-flex jus justify-content-between aling-items-center">
@@ -42,11 +42,11 @@
                             <!-- en aqeust cas com estem logeats tenim dos buttons per poder editar i modificar els campions ja que nomes es mostren els qeu hem creat nosltres -->
                             
                             <div class="d-flex">
-                                <a href="<?php echo BASE_URL; ?>/controlador/eliminarChamp.controlador.php?id=<?php echo $champion['id'] ?>&action=delete" class="me-2 btn btn-outline-danger" onclick="return confirmarEliminacion()">
+                                <a href="<?php echo BASE_URL; ?>/controlador/eliminarChamp.controlador.php?id=<?php echo $champion['id'] ?>&action=delete" aria-label="Eliminar Campio" class="me-2 btn btn-outline-danger" onclick="return confirmarEliminacion()">
                                     <i class="bi bi-trash3-fill"></i>
                                 </a>
 
-                                <a href="<?php echo BASE_URL; ?>/vista/editarChamp.vista.php?idChampEditar=<?php echo $champion['id'] ?>" class="me-2 btn btn-outline-warning">
+                                <a href="<?php echo BASE_URL; ?>/vista/editarChamp.vista.php?idChampEditar=<?php echo $champion['id'] ?>" aria-label="Editar Campio" class="me-2 btn btn-outline-warning">
                                     <i class="bi bi-pen"></i>
                                 </a>
                             </div>
@@ -111,7 +111,7 @@
             <form class="d-flex justify-content-center" method="POST">
                 <div class="input-group" style="max-width: 500px;">
                     <input type="text" class="form-control" name="paraulaBuscador" placeholder="Busca..." aria-label="Buscar" value="<?php echo $paraulaBuscar; ?>">
-                    <button class="btn btn-primary" type="submit" name="buscador"><i class="bi bi-search"></i></button>
+                    <button class="btn btn-primary" type="submit" name="buscador" aria-label="Buscar"><i class="bi bi-search"></i></button>
                 </div>
             </form>
         </div>
@@ -120,9 +120,9 @@
         <?php foreach ($campeons as $champion): ?>
             <div class="col-xs-12 col-md-6 col-lg-3 mb-4">
                 <div class="card bg-card">
-                    <img src="" class="card-img-top" alt="...">
+                    <img src="" class="card-img-top" alt="Img de <?php echo $champion['name'] ?>">
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $champion['name']; ?></h5>
+                        <h2 class=" h5 card-title"><?php echo $champion['name']; ?></h2>
                         <hr>
                         <p class="card-text"><?php echo $champion['description']; ?></p>
                         <div class="d-flex jus justify-content-between aling-items-center">

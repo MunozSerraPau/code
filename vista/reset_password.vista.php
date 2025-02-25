@@ -12,8 +12,6 @@
 <body>
     <?php require_once '../env.php'; ?>
     <?php require_once BASE_PATH . "/controlador/reset_password.controlador.php" ?>
-    
-
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
@@ -24,11 +22,14 @@
         </symbol>
     </svg>
 
+    <div class="position-absolute top-0 start-0" style="z-index: 9999;">
+        <a href="#main-content" class="btn btn-primary btn-Tabular fw-bold">Ir al contenido principal</a>
+    </div>
 
 
     <div class="containerr">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
-        <div class="container d-flex justify-content-center align-items-center ">
+        <div class="container d-flex justify-content-center align-items-center" id="main-content">
             <!-- Ventana flotante: usaremos un card de Bootstrap para simular el panel flotante -->
             <!-- Si volem el fosn difuminat hem de ficar en class="bg-transparent" -->
             <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">

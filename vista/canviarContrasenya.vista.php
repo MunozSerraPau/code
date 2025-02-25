@@ -25,16 +25,18 @@
         </symbol>
     </svg>
 
-
+    <div class="position-absolute top-0 start-0" style="z-index: 9999;">
+        <a href="#main-content" class="btn btn-primary btn-Tabular fw-bold">Ir al contenido principal</a>
+    </div>
 
     <div class="containerr">
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
-        <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="container d-flex justify-content-center align-items-center min-vh-100" id="main-content">
             <!-- Ventana flotante: usaremos un card de Bootstrap para simular el panel flotante -->
             <!-- Si volem el fosn difuminat hem de ficar en class="bg-transparent" -->
             <div class="card shadow p-4 bg-light" style="max-width: 400px; width: 100%; backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
                 <form <?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="POST" class="login-form">
-                    <h2>Canviar Contrasenya</h2>
+                    <h1 class="text-center">Canviar Contrasenya</h1>
                     <br>
                     <!-- Contrasenya Actual -->
                     <div class="mb-3">
@@ -81,7 +83,7 @@
 
                     <!-- Botó Actualitzar -->
                     <div class="form-group text-center">
-                        <button type="submit" class="btn btn-primary" name="canviContrasenya">Actualitzar Contrasenyas</button>
+                        <button type="submit" class="btn btn-primary text-dark" name="canviContrasenya">Actualitzar Contrasenyas</button>
                     </div>
                 </form>
             </div>
@@ -92,8 +94,12 @@
 
     </div>
 
-
-    <!-- Formulario de inicio de sesión -->
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("contrasenyaActual").focus();
+        });
+    </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

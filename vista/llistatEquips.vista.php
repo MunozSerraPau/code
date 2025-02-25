@@ -21,12 +21,15 @@
         }
     </script>
 
+    <div class="position-absolute top-0 start-0" style="z-index: 9999;">
+        <a href="#main-content" class="btn btn-primary btn-Tabular fw-bold">Ir al contenido principal</a>
+    </div>
 
     <div class="containerr pt-0">
 
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
 
-        <div class="container-lg d-flex justify-content-center align-items-center min-vh-100">
+        <div class="container-lg d-flex justify-content-center align-items-center min-vh-100" id="main-content">
             <div class="container shadow p-4 bg-transparent d-flex flex-column" style="backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
 
                 <h1 class="text-center text-white">LLISTAT EQUIPS</h1>
@@ -36,7 +39,7 @@
                         <label for="imatgeQR" class="form-label text-white">Lectura de Qr:</label>
                         <input type="file" class="form-control w-50" id="imatgeQR" name="imatgeQR" required>
                     </div>
-                    <button name="pujarQR" type="submit" class="btn btn-primary">Subir</button>
+                    <button name="pujarQR" type="submit" class="btn btn-primary text-dark" >Subir</button>
                 </form>
                 
                 <?php if (empty($equipos)): ?>
@@ -61,7 +64,7 @@
                                                 </div>
                                             <?php endforeach; ?>
                                             <div class="col" id="imgQr">
-                                                <img src="<?= htmlspecialchars($datosEquipo['qr']) ?>" alt="QR del equipo" style="max-width: 100%;">
+                                                <img src="<?= htmlspecialchars($datosEquipo['qr']) ?>" alt="QR del equip: <?= htmlspecialchars($nombreEquipo) ?>" style="max-width: 100%;">
                                             </div>
                                         </div>
                                     </div>
@@ -72,13 +75,13 @@
                             <div class="col-2 d-grid">
                                 <div class="d-flex flex-column flex-md-row align-items-center justify-content-center align-content-center">
                                     <?php if (isset($nomUsuari) && $nomUsuari === $datosEquipo['creator']): ?>
-                                        <a href="<?php echo BASE_URL; ?>/controlador/eliminarEquip.controlador.php?id=<?php echo htmlspecialchars($datosEquipo['id']) ?>&action=delete" class="me-2 btn btn-outline-danger mb-3 mb-md-0" onclick="return confirmarEliminacion()">
+                                        <a href="<?php echo BASE_URL; ?>/controlador/eliminarEquip.controlador.php?id=<?php echo htmlspecialchars($datosEquipo['id']) ?>&action=delete" aria-label="Eliminar equip: <?= $nombreEquipo ?>" class="me-2 btn btn-outline-danger mb-3 mb-md-0" onclick="return confirmarEliminacion()">
                                             <i class="bi bi-trash3-fill"></i>
                                         </a>
                                     <?php endif; ?>
 
                                     <!-- Descarregar QR -->
-                                    <a id="downloadLink" href="<?= htmlspecialchars($datosEquipo['qr']) ?>" download="qr_<?= htmlspecialchars($nombreEquipo) ?>.png" class="me-2 btn btn-outline-primary mb-3 mb-md-0">
+                                    <a id="downloadLink" aria-label="Descargar QR equip: <?= $nombreEquipo ?>" href="<?= htmlspecialchars($datosEquipo['qr']) ?>" download="qr_<?= htmlspecialchars($nombreEquipo) ?>.png" class="me-2 btn btn-outline-primary mb-3 mb-md-0">
                                         <i class="bi bi-download"></i>
                                     </a>
                                 </div>

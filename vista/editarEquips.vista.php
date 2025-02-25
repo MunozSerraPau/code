@@ -20,11 +20,15 @@
     <?php require BASE_PATH . "/controlador/editarEquip.controlador.php"; ?>
     <?php require BASE_PATH . "/controlador/obtenirChampAPI.controlador.php"; ?>
 
+    <div class="position-absolute top-0 start-0" style="z-index: 9999;">
+        <a href="#main-content" class="btn btn-primary btn-Tabular fw-bold">Ir al contenido principal</a>
+    </div>
+
     <div class="containerr pt-0">
 
         <?php include BASE_PATH . "/vistaGlobal/nav.vista.php" ?>
 
-        <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="container d-flex justify-content-center align-items-center min-vh-100" id="main-content">
             <div class="card shadow p-4 h-100 w-auto bg-transparent" style="backdrop-filter: blur(10px); border-radius: 25px; border: 3px solid #454962;">
 
                 <h1 class="text-center text-white">EDITAR EQUIP</h1>
@@ -32,11 +36,11 @@
                 <div id="infoGenerarQr" class="d-none py-4">
                     <div id="divQrMostrar" class="d-flex justify-content-center"></div>
 
-                    <a id="downloadLink" href="#" download="qr_code.png" class="btn btn-primary my-5">
+                    <a id="downloadLink" href="#" download="qr_code.png" class="btn btn-primary my-5" aria-label="Button per descarregar qr">
                         <i class="bi bi-download fs-4 p-0"></i>
                     </a>
 
-                    <h3 class="text-light text-center text-uppercase fw-bold"></h3>
+                    <h3 class="text-light text-center text-uppercase fw-bold">Nom del Equip</h3>
                 </div>
 
                 <?php if ($error !== "<br>") : ?>
